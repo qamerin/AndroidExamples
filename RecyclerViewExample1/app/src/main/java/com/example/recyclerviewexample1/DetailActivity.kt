@@ -1,41 +1,27 @@
 package com.example.recyclerviewexample1
 
-import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.recyclerviewexample1.databinding.ActivityDetailBinding
+import android.os.Bundle
+import android.provider.ContactsContract.Data
+import android.widget.ImageView
+import android.widget.TextView
+import com.example.recyclerviewkotlin.DataClass
 
 class DetailActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityDetailBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_detail)
 
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val getData = intent.getParcelableExtra<DataClass>("android")
+        if (getData != null) {
+            val detailTitle: TextView = findViewById(R.id.detailTitle)
+            val detailDesc: TextView = findViewById(R.id.detailDesc)
+            val detailImage: ImageView = findViewById(R.id.detailImage)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_detail)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+            detailTitle.text = getData.dataTitle
+            detailDesc.text = getData.dataDesc
+            detailImage.setImageResource(getData.dataDetailImage)
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_detail)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }
