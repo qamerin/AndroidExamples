@@ -1,5 +1,6 @@
 package com.example.realmnamelistapp
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,5 +23,11 @@ class RecyclerAdapter(realmResults:RealmResults<MyModel>):RecyclerView.Adapter<V
         val myModel = rResults[position]
         holder.oneTvName.text = myModel?.name.toString()
         holder.oneTvAge.text = myModel?.age.toString()
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context,EditActivity::class.java)
+            intent.putExtra("ID",myModel?.id)
+            it.context.startActivity(intent);
+        }
     }
 }
