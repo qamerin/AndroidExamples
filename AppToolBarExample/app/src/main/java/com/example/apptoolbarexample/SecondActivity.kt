@@ -24,14 +24,4 @@ class SecondActivity : AppCompatActivity() {
         }
 
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        item.
-
-        return super.onOptionsItemSelected(item)
-    }
 }
