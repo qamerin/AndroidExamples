@@ -2,6 +2,7 @@ package com.example.realmnamelistapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -26,6 +27,10 @@ class EditActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        // ツールバーに戻るボタンを設置
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val etName : TextView = findViewById(R.id.etName)
         val etAge : TextView = findViewById(R.id.etAge)
         val btnSave : Button = findViewById(R.id.btnSave)
@@ -83,6 +88,13 @@ class EditActivity : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
         //１）viewの取得
         val btnAdd:Button = findViewById(R.id.btnAdd)
         realm= Realm.getDefaultInstance()//７）realmのインスタンス生成
