@@ -3,7 +3,6 @@ package com.example.realmnamelistapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import io.realm.Realm
 import io.realm.kotlin.where
+import java.time.LocalDate
 
 class ListDetailActivity : AppCompatActivity() {
     private lateinit var realm: Realm
@@ -33,6 +33,7 @@ class ListDetailActivity : AppCompatActivity() {
         super.onStart()
                 val etName : TextView = findViewById(R.id.etName)
         val etAge : TextView = findViewById(R.id.etAge)
+        val etDay : TextView = findViewById(R.id.etDay)
         val btnModify: Button = findViewById(R.id.btnModify)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("ID",0L)
@@ -41,6 +42,10 @@ class ListDetailActivity : AppCompatActivity() {
                 .equalTo("id",getId).findFirst()
             etName.text = myModelResult?.name.toString()
             etAge.text = myModelResult?.age.toString()
+            etDay.text = myModelResult?.day?.year.toString()+
+                    "/"+  myModelResult?.day?.monthValue.toString() +
+                    "/" + myModelResult?.day?.dayOfMonth.toString()
+
 
             btnModify.setOnClickListener {
                 val intent = Intent(this,EditActivity::class.java)

@@ -1,11 +1,11 @@
 package com.example.realmnamelistapp
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,9 +15,12 @@ import androidx.core.view.WindowInsetsCompat
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
+import java.time.LocalDate
 
 class EditActivity : AppCompatActivity() {
     private lateinit var realm: Realm
+    private lateinit var registerDate:String
+    private var dbDate:LocalDate = LocalDate.now()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,10 +34,17 @@ class EditActivity : AppCompatActivity() {
         // ツールバーに戻るボタンを設置
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
         val etName : TextView = findViewById(R.id.etName)
         val etAge : TextView = findViewById(R.id.etAge)
+        val etDate : TextView = findViewById(R.id.etDate)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
+        val btnCal : Button = findViewById(R.id.button)
+
+        btnCal.setOnClickListener {
+            showDatePicker()
+        }
 
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("ID",0L)
@@ -43,6 +53,10 @@ class EditActivity : AppCompatActivity() {
                 .equalTo("id",getId).findFirst()
             etName.text = myModelResult?.name.toString()
             etAge.text = myModelResult?.age.toString()
+            etDate.text = myModelResult?.day?.year.toString()+
+                    "/"+  myModelResult?.day?.monthValue.toString() +
+                    "/" + myModelResult?.day?.dayOfMonth.toString()
+            dbDate = myModelResult?.day!!
             btnDel.visibility = View.VISIBLE
 
         }else{
@@ -64,6 +78,7 @@ class EditActivity : AppCompatActivity() {
                     val myModel = realm.createObject<MyModel>(nextId)
                     myModel.name = name
                     myModel.age = age
+                    myModel.day = LocalDate.parse(registerDate)
                 }
             }else{
                 realm.executeTransaction{
@@ -71,6 +86,7 @@ class EditActivity : AppCompatActivity() {
                         .equalTo("id",getId).findFirst()
                     myModel?.name = name
                     myModel?.age = age
+                    myModel?.day = LocalDate.parse(registerDate)
                 }
             }
 
@@ -95,6 +111,23 @@ class EditActivity : AppCompatActivity() {
             finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun showDatePicker() {
+        val tvCal : TextView = findViewById(R.id.etDate)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener() {view, year, month, dayOfMonth->
+                tvCal.text = "${year}/${month+1}/${dayOfMonth}"
+                var list =tvCal.text.split("/")
+                registerDate =list[0] +"-"  +list[1].padStart(2,'0') + "-" +  list[2].padStart(2,'0')
+            },
+            dbDate.year,
+            dbDate.monthValue-1,
+            dbDate.dayOfMonth)
+        datePickerDialog.show()
     }
 
     override fun onDestroy() {
