@@ -14,9 +14,15 @@
         android:theme="@style/Theme.RealmNameListApp"
         tools:targetApi="31">
         <activity
+            android:name=".goods.GoodsAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".goods.GoodsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".EditActivity"
             android:exported="false" />

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListDetailActivity">
+    tools:context=".goods.GoodsAddActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -16,8 +16,9 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
 
+
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvGoodsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,91 +28,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
-    <TextView
-        android:id="@+id/etName"
+    <EditText
+        android:id="@+id/etGoodsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="text"
+        android:inputType="text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
 
     <TextView
-        android:id="@+id/tvAge"
+        android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Age"
+        android:text="Category"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
+        app:layout_constraintTop_toBottomOf="@+id/etGoodsName" />
 
-    <TextView
-        android:id="@+id/etAge"
+    <EditText
+        android:id="@+id/etCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:hint="text"
         android:ems="10"
+        android:inputType="text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAge" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 
     <Button
-        android:id="@+id/btnModify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="164dp"
-        android:text="Modify"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAge" />
-
-    <TextView
-        android:id="@+id/tvDay"
+        android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Day"
-        android:textSize="20sp"
+        android:text="Save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAge" />
-
-    <TextView
-        android:id="@+id/etDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDay" />
-
-    <TextView
-        android:id="@+id/tvGoods"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Goods"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+        app:layout_constraintTop_toBottomOf="@+id/etCategory" />
 
     <Button
-        android:id="@+id/btGoods"
+        android:id="@+id/btnDel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Goods"
+        android:text="Del"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/etCategory" />
 </androidx.constraintlayout.widget.ConstraintLayout>

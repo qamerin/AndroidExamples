@@ -9,9 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.realmnamelistapp.goods.GoodsListActivity
 import io.realm.Realm
 import io.realm.kotlin.where
-import java.time.LocalDate
 
 class ListDetailActivity : AppCompatActivity() {
     private lateinit var realm: Realm
@@ -35,6 +35,7 @@ class ListDetailActivity : AppCompatActivity() {
         val etAge : TextView = findViewById(R.id.etAge)
         val etDay : TextView = findViewById(R.id.etDay)
         val btnModify: Button = findViewById(R.id.btnModify)
+        val btnGoods: Button = findViewById(R.id.btGoods)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("ID",0L)
         if(getId>0){
@@ -46,10 +47,14 @@ class ListDetailActivity : AppCompatActivity() {
                     "/"+  myModelResult?.day?.monthValue.toString() +
                     "/" + myModelResult?.day?.dayOfMonth.toString()
 
-
             btnModify.setOnClickListener {
                 val intent = Intent(this,EditActivity::class.java)
                 intent.putExtra("ID",myModelResult?.id)
+                startActivity(intent)
+            }
+            btnGoods.setOnClickListener {
+                val intent = Intent(this, GoodsListActivity::class.java)
+                intent.putExtra("campId",myModelResult?.id)
                 startActivity(intent)
             }
         }else{
