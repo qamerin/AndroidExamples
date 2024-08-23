@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where

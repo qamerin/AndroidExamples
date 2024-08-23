@@ -12,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.realmnamelistapp.model.MyModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where

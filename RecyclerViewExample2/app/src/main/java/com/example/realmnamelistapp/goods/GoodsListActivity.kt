@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.Sort
 

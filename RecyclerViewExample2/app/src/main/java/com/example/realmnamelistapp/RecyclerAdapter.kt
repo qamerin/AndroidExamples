@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.realmnamelistapp.model.MyModel
 import io.realm.RealmResults
 
 class RecyclerAdapter(realmResults:RealmResults<MyModel>):RecyclerView.Adapter<ViewHolderItem>() {

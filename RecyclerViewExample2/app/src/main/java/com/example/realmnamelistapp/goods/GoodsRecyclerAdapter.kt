@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.ViewHolderItem
+import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.RealmResults
 
 class GoodsRecyclerAdapter(realmResults:RealmResults<GoodsModel>):RecyclerView.Adapter<ViewHolderItem>() {
