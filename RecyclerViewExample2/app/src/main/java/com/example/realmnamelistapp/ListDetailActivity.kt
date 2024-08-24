@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.realmnamelistapp.goods.GoodsListActivity
+import com.example.realmnamelistapp.goodsMaster.GoodsMasterListActivity
 import com.example.realmnamelistapp.model.MyModel
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -54,7 +54,7 @@ class ListDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             btnGoods.setOnClickListener {
-                val intent = Intent(this, GoodsListActivity::class.java)
+                val intent = Intent(this, GoodsMasterListActivity::class.java)
                 intent.putExtra("campId",myModelResult?.id)
                 startActivity(intent)
             }
