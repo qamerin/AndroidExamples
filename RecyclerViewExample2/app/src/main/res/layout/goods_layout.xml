@@ -17,12 +17,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/oneTvAge"
+        android:id="@+id/oneTvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="年齢が表示される"
+        android:text="カテゴリーが表示される"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oneTvName" />
 
@@ -31,5 +31,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/oneTvAge" />
+        app:layout_constraintBottom_toBottomOf="@+id/oneTvCategory" />
 </androidx.constraintlayout.widget.ConstraintLayout>
