@@ -12,6 +12,7 @@ class CustomApplication: Application() {
         val config = RealmConfiguration.Builder()
             .allowWritesOnUiThread(true)
             .allowQueriesOnUiThread(true)
+            .assetFile("initial_data.realm")
             .build()
         Realm.setDefaultConfiguration(config)
 

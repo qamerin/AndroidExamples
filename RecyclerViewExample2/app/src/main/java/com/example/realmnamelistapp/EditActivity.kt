@@ -120,7 +120,7 @@ class EditActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener() {view, year, month, dayOfMonth->
+            DatePickerDialog.OnDateSetListener() {_ , year, month, dayOfMonth->
                 tvCal.text = "${year}/${month+1}/${dayOfMonth}"
                 var list =tvCal.text.split("/")
                 registerDate =list[0] +"-"  +list[1].padStart(2,'0') + "-" +  list[2].padStart(2,'0')

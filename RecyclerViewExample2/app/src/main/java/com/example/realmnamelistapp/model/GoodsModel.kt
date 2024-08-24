@@ -10,4 +10,5 @@ open class GoodsModel: RealmObject() {
     var campId : Long=0
     var name: String = ""
     var category: String = ""
+    var categoryId: Long=0
 }

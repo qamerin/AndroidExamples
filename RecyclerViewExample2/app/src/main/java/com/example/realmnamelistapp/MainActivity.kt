@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.model.MyModel
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import io.realm.Sort
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
