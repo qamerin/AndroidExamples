@@ -39,7 +39,6 @@ class GoodsMasterAddActivity : AppCompatActivity() {
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
-        val campId = intent.getLongExtra("campId",0L)
         val getId = intent.getLongExtra("goodsId",0L)
 
         // set the spinner contents
@@ -61,7 +60,7 @@ class GoodsMasterAddActivity : AppCompatActivity() {
                 .equalTo("categoryId",goodsModelResult?.categoryId).findFirst()
 
             if (categoryMasterModelResult !=null) {
-               spinner.setSelection(categoryMasterModelResult.categoryId.toInt() -1)
+                spinner.setSelection(categoryMasterModelResult.categoryId.toInt())
             }
 
             btnDel.visibility = View.VISIBLE
