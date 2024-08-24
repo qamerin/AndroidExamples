@@ -52,19 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etGoodsName" />
 
-    <EditText
-        android:id="@+id/etCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="text"
-        android:ems="10"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
-
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
@@ -73,7 +60,7 @@
         android:layout_marginTop="16dp"
         android:text="Save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/spnCategory" />
 
     <Button
         android:id="@+id/btnDel"
@@ -83,15 +70,16 @@
         android:layout_marginEnd="16dp"
         android:text="Del"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/spnCategory" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spnCategory"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:minHeight="48dp"
+        android:scrollbarSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,6 @@ class GoodsAddActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val etName : TextView = findViewById(R.id.etGoodsName)
-        val etCategory : TextView = findViewById(R.id.etCategory)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
@@ -49,14 +48,13 @@ class GoodsAddActivity : AppCompatActivity() {
         val list = ArrayList<CategoryMasterModel>()
         list.addAll(realm.copyFromRealm(result));
         val adapter = ArrayAdapter<CategoryMasterModel>(this, android.R.layout.simple_spinner_item, list)
-        val spinner = findViewById<Spinner>(R.id.spinner)
+        val spinner = findViewById<Spinner>(R.id.spnCategory)
         spinner.adapter = adapter
 
         if(getId>0){
             val goodsModelResult = realm.where<GoodsModel>()
                 .equalTo("id",getId).findFirst()
             etName.text = goodsModelResult?.name.toString()
-            etCategory.text = goodsModelResult?.category.toString()
 
             // get Category Name
             val categoryMasterModelResult = realm.where<CategoryMasterModel>()
@@ -79,9 +77,6 @@ class GoodsAddActivity : AppCompatActivity() {
             if (!etName.text.isNullOrEmpty()) {
                 name = etName.text.toString()
             }
-            if (!etCategory.text.isNullOrEmpty()) {
-                category = etCategory.text.toString()
-            }
             val item = spinner.selectedItem as CategoryMasterModel
             categoryId = item.categoryId
             if (getId == 0L) {
@@ -90,7 +85,6 @@ class GoodsAddActivity : AppCompatActivity() {
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
                     val myModel = realm.createObject<GoodsModel>(nextId)
                     myModel.name = name
-                    myModel.category = category
                     myModel.categoryId = categoryId
                     myModel.campId = campId
                 }
@@ -99,7 +93,6 @@ class GoodsAddActivity : AppCompatActivity() {
                     val myModel = realm.where<GoodsModel>()
                         .equalTo("id", getId).findFirst()
                     myModel?.name = name
-                    myModel?.category = category
                     myModel?.categoryId = categoryId
                     myModel?.campId = campId
                 }
