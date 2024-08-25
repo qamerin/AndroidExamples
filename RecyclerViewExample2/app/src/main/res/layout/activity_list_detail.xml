@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListDetailActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -93,6 +94,27 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDay" />
 
     <TextView
+        android:id="@+id/tvGoodsMaster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Goods Master"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+
+    <Button
+        android:id="@+id/btGoodsMaster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Goods Master"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+
+    <TextView
         android:id="@+id/tvGoods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,7 +123,8 @@
         android:text="Goods"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+        app:layout_constraintTop_toBottomOf="@+id/btGoodsMaster" />
+
 
     <Button
         android:id="@+id/btGoods"
@@ -111,7 +134,7 @@
         android:layout_marginEnd="16dp"
         android:text="Goods"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+        app:layout_constraintTop_toBottomOf="@+id/btGoodsMaster" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

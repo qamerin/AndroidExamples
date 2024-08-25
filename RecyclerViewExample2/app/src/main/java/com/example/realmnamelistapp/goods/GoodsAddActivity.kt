@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp.goodsMaster
+package com.example.realmnamelistapp.goods
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -15,17 +15,18 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.model.CategoryMasterModel
 import com.example.realmnamelistapp.model.GoodsMasterModel
+import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 
-class GoodsMasterAddActivity : AppCompatActivity() {
+class GoodsAddActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_goods_master_add)
+        setContentView(R.layout.activity_goods_add)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -42,7 +43,7 @@ class GoodsMasterAddActivity : AppCompatActivity() {
         val getId = intent.getLongExtra("goodsId",0L)
 
         // set the spinner contents
-        val result = realm.where(CategoryMasterModel::class.java)
+        val result = realm.where(/* clazz = */ CategoryMasterModel::class.java)
             .findAll().sort("categoryId", Sort.ASCENDING)//
         val list = ArrayList<CategoryMasterModel>()
         list.addAll(realm.copyFromRealm(result));
@@ -80,18 +81,18 @@ class GoodsMasterAddActivity : AppCompatActivity() {
             categoryId = item.categoryId
             if (getId == 0L) {
                 realm.executeTransaction {
-                    val currentId = realm.where<GoodsMasterModel>().max("id")
+                    val currentId = realm.where<GoodsModel>().max("id")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
-                    val myModel = realm.createObject<GoodsMasterModel>(nextId)
-                    myModel.name = name
+                    val myModel = realm.createObject<GoodsModel>(nextId)
+//                    myModel.name = name
                     myModel.categoryId = categoryId
 //                    myModel.campId = campId
                 }
             } else {
                 realm.executeTransaction {
-                    val myModel = realm.where<GoodsMasterModel>()
+                    val myModel = realm.where<GoodsModel>()
                         .equalTo("id", getId).findFirst()
-                    myModel?.name = name
+//                    myModel?.name = name
                     myModel?.categoryId = categoryId
 //                    myModel?.campId = campId
                 }

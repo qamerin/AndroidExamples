@@ -27,6 +27,12 @@
             android:name=".EditActivity"
             android:exported="false" />
         <activity
+            android:name=".goods.GoodsAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".goods.GoodsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

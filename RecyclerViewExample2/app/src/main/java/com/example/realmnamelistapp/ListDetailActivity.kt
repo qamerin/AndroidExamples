@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.realmnamelistapp.goods.GoodsListActivity
 import com.example.realmnamelistapp.goodsMaster.GoodsMasterListActivity
 import com.example.realmnamelistapp.model.MyModel
 import io.realm.Realm
@@ -36,6 +37,7 @@ class ListDetailActivity : AppCompatActivity() {
         val etAge : TextView = findViewById(R.id.etAge)
         val etDay : TextView = findViewById(R.id.etDay)
         val btnModify: Button = findViewById(R.id.btnModify)
+        val btnMasterGoods: Button = findViewById(R.id.btGoodsMaster)
         val btnGoods: Button = findViewById(R.id.btGoods)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("ID",0L)
@@ -53,11 +55,17 @@ class ListDetailActivity : AppCompatActivity() {
                 intent.putExtra("ID",myModelResult?.id)
                 startActivity(intent)
             }
-            btnGoods.setOnClickListener {
+            btnMasterGoods.setOnClickListener {
                 val intent = Intent(this, GoodsMasterListActivity::class.java)
+//                intent.putExtra("campId",myModelResult?.id)
+                startActivity(intent)
+            }
+            btnGoods.setOnClickListener {
+                val intent = Intent(this, GoodsListActivity::class.java)
                 intent.putExtra("campId",myModelResult?.id)
                 startActivity(intent)
             }
+
         }else{
             // TODO
         }
