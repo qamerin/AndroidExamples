@@ -61,7 +61,7 @@ class GoodsMasterListActivity : AppCompatActivity() {
         super.onStart()
         val realmResults = realm.where(GoodsMasterModel::class.java)
 //            .equalTo("campId" ,1L)
-            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+            .findAll().sort("goodsId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = GoodsMasterRecyclerAdapter(realmResults)

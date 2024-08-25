@@ -52,7 +52,7 @@ class GoodsMasterAddActivity : AppCompatActivity() {
 
         if(getId>0){
             val goodsModelResult = realm.where<GoodsMasterModel>()
-                .equalTo("id",getId).findFirst()
+                .equalTo("goodsId",getId).findFirst()
             etName.text = goodsModelResult?.name.toString()
 
             // get Category Name
@@ -80,7 +80,7 @@ class GoodsMasterAddActivity : AppCompatActivity() {
             categoryId = item.categoryId
             if (getId == 0L) {
                 realm.executeTransaction {
-                    val currentId = realm.where<GoodsMasterModel>().max("id")
+                    val currentId = realm.where<GoodsMasterModel>().max("goodsId")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
                     val myModel = realm.createObject<GoodsMasterModel>(nextId)
                     myModel.name = name
@@ -90,7 +90,7 @@ class GoodsMasterAddActivity : AppCompatActivity() {
             } else {
                 realm.executeTransaction {
                     val myModel = realm.where<GoodsMasterModel>()
-                        .equalTo("id", getId).findFirst()
+                        .equalTo("goodsId", getId).findFirst()
                     myModel?.name = name
                     myModel?.categoryId = categoryId
 //                    myModel?.campId = campId

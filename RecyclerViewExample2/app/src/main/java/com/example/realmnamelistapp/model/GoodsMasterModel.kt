@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey
 
 open class GoodsMasterModel: RealmObject() {
     @PrimaryKey
-    var id : Long=0
+    var goodsId : Long=0
     var name: String = ""
     var categoryId: Long=0
 }

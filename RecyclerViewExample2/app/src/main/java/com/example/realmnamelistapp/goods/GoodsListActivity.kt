@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.model.CategoryMasterModel
 import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.Sort
@@ -19,7 +20,7 @@ import io.realm.Sort
 class GoodsListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
-    private lateinit var recyclerAdapter: GoodsRecyclerAdapter
+    private lateinit var recyclerAdapter: CategoryRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,12 +62,13 @@ class GoodsListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val realmResults = realm.where(GoodsModel::class.java)
-//            .equalTo("campId" ,1L)
-            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+//        val realmResults = realm.where(GoodsModel::class.java)
+//            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+        val realmResults = realm.where(CategoryMasterModel::class.java)
+            .findAll().sort("categoryId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
-        recyclerAdapter = GoodsRecyclerAdapter(realmResults)
+        recyclerAdapter = CategoryRecyclerAdapter(realmResults)
         recyclerView.adapter = recyclerAdapter
 
         layoutManager = LinearLayoutManager(this)

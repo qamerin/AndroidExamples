@@ -38,7 +38,7 @@ class GoodsMasterRecyclerAdapter(realmResults:RealmResults<GoodsMasterModel>):Re
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, GoodsMasterAddActivity::class.java)
 //            intent.putExtra("campId",myModel?.campId)
-            intent.putExtra("goodsId",myModel?.id)
+            intent.putExtra("goodsId",myModel?.goodsId)
             it.context.startActivity(intent);
         }
     }
