@@ -28,7 +28,6 @@ class CategoryRecyclerAdapter(realmResults:RealmResults<CategoryMasterModel>):Re
 
     override fun onBindViewHolder(holder: CategoryViewHolderItem, position: Int) {
         val myModel = rResults[position]
-//        holder.oneTvName.text = myModel?.name.toString()
 
         // get Category Name
         realm = Realm.getDefaultInstance()
@@ -38,6 +37,7 @@ class CategoryRecyclerAdapter(realmResults:RealmResults<CategoryMasterModel>):Re
 
 
         val goodsResult = realm.where<GoodsModel>()
+            .equalTo("categoryId",myModel?.categoryId)
             .findAll()
         val goodsAdapter = GoodsRecyclerAdapter(goodsResult)
         holder.child_recycler_view.layoutManager =LinearLayoutManager(holder.itemView.context, LinearLayoutManager.VERTICAL,false)

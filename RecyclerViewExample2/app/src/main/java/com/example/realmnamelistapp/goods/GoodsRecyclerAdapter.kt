@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.model.CategoryMasterModel
+import com.example.realmnamelistapp.model.GoodsMasterModel
 import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.RealmResults
@@ -26,12 +27,16 @@ class GoodsRecyclerAdapter(realmResults:RealmResults<GoodsModel>):RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: GoodsViewHolderItem, position: Int) {
+        realm = Realm.getDefaultInstance()
         val myModel = rResults[position]
 //        holder.oneTvName.text = myModel?.name.toString()
 
-        holder.oneTvName.text ="hogehoge"
+        val goodsMasterModelResult = realm.where<GoodsMasterModel>()
+            .equalTo("goodsId",myModel?.goodsId).findFirst()
+        holder.oneTvName.text = goodsMasterModelResult?.name
+//        holder.oneTvName.text ="hogehoge"
+
         // get Category Name
-        realm = Realm.getDefaultInstance()
         val categoryMasterModelResult = realm.where<CategoryMasterModel>()
             .equalTo("categoryId",myModel?.categoryId).findFirst()
         holder.oneTvCategory.text = categoryMasterModelResult?.categoryName

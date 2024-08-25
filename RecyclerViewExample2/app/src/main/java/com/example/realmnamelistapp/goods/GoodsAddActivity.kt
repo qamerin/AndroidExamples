@@ -36,32 +36,45 @@ class GoodsAddActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val etName : TextView = findViewById(R.id.etGoodsName)
+//        val etName : TextView = findViewById(R.id.etGoodsName)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("goodsId",0L)
 
-        // set the spinner contents
-        val result = realm.where(/* clazz = */ CategoryMasterModel::class.java)
+        // set the spinner contents for Category
+        val goodsResult = realm.where(/* clazz = */ GoodsMasterModel::class.java)
+//            .equalTo("categoryId",goodsModelResult?.categoryId)
+            .findAll()
+            .sort("goodsId", Sort.ASCENDING)//
+        val goodsList = ArrayList<GoodsMasterModel>()
+        goodsList.addAll(realm.copyFromRealm(goodsResult));
+        val goodsAdapter = ArrayAdapter<GoodsMasterModel>(this, android.R.layout.simple_spinner_item, goodsList)
+        val goodsSpinner = findViewById<Spinner>(R.id.spnGoods)
+        goodsSpinner.adapter = goodsAdapter
+
+
+
+        // set the spinner contents for Category
+        val categoryResult = realm.where(/* clazz = */ CategoryMasterModel::class.java)
             .findAll().sort("categoryId", Sort.ASCENDING)//
-        val list = ArrayList<CategoryMasterModel>()
-        list.addAll(realm.copyFromRealm(result));
-        val adapter = ArrayAdapter<CategoryMasterModel>(this, android.R.layout.simple_spinner_item, list)
-        val spinner = findViewById<Spinner>(R.id.spnCategory)
-        spinner.adapter = adapter
+        val categoryList = ArrayList<CategoryMasterModel>()
+        categoryList.addAll(realm.copyFromRealm(categoryResult));
+        val categoryAdapter = ArrayAdapter<CategoryMasterModel>(this, android.R.layout.simple_spinner_item, categoryList)
+        val categorySpinner = findViewById<Spinner>(R.id.spnCategory)
+        categorySpinner.adapter = categoryAdapter
 
         if(getId>0){
             val goodsModelResult = realm.where<GoodsMasterModel>()
-                .equalTo("id",getId).findFirst()
-            etName.text = goodsModelResult?.name.toString()
+                .equalTo("goodsId",getId).findFirst()
+//            etName.text = goodsModelResult?.name.toString()
 
             // get Category Name
             val categoryMasterModelResult = realm.where<CategoryMasterModel>()
                 .equalTo("categoryId",goodsModelResult?.categoryId).findFirst()
 
             if (categoryMasterModelResult !=null) {
-                spinner.setSelection(categoryMasterModelResult.categoryId.toInt())
+                categorySpinner.setSelection(categoryMasterModelResult.categoryId.toInt())
             }
 
             btnDel.visibility = View.VISIBLE
@@ -73,28 +86,28 @@ class GoodsAddActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             var name: String = ""
             var category: String = ""
+
+           var goodsId = 0L
+            val goodsModel = goodsSpinner.selectedItem as GoodsMasterModel
+            goodsId = goodsModel.goodsId
+
             var categoryId: Long = 0L
-            if (!etName.text.isNullOrEmpty()) {
-                name = etName.text.toString()
-            }
-            val item = spinner.selectedItem as CategoryMasterModel
-            categoryId = item.categoryId
+            val categoryModel = categorySpinner.selectedItem as CategoryMasterModel
+            categoryId = categoryModel.categoryId
             if (getId == 0L) {
                 realm.executeTransaction {
                     val currentId = realm.where<GoodsModel>().max("id")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
                     val myModel = realm.createObject<GoodsModel>(nextId)
-//                    myModel.name = name
+                    myModel.goodsId = goodsId
                     myModel.categoryId = categoryId
-//                    myModel.campId = campId
                 }
             } else {
                 realm.executeTransaction {
                     val myModel = realm.where<GoodsModel>()
                         .equalTo("id", getId).findFirst()
-//                    myModel?.name = name
+                    myModel?.goodsId = goodsId
                     myModel?.categoryId = categoryId
-//                    myModel?.campId = campId
                 }
             }
 
