@@ -18,7 +18,7 @@ class GoodsRecyclerAdapter(realmResults:RealmResults<GoodsModel>):RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
-            .inflate(R.layout.one_goods_master_layout,parent,false)
+            .inflate(R.layout.one_goods_layout,parent,false)
         return GoodsViewHolderItem(oneXml)
     }
 
@@ -39,7 +39,6 @@ class GoodsRecyclerAdapter(realmResults:RealmResults<GoodsModel>):RecyclerView.A
         // get Category Name
         val categoryMasterModelResult = realm.where<CategoryMasterModel>()
             .equalTo("categoryId",myModel?.categoryId).findFirst()
-        holder.oneTvCategory.text = categoryMasterModelResult?.categoryName
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, GoodsAddActivity::class.java)
