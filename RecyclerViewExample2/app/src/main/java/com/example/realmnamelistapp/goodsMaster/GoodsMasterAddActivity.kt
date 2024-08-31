@@ -45,6 +45,11 @@ class GoodsMasterAddActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("goodsId",0L)
 
+        val productName = intent.getStringExtra("productName")
+        if(!productName.isNullOrEmpty()) {
+            etName.text = productName
+        }
+
         // set the spinner contents
         val result = realm.where(CategoryMasterModel::class.java)
             .findAll().sort("categoryId", Sort.ASCENDING)//
@@ -71,6 +76,11 @@ class GoodsMasterAddActivity : AppCompatActivity() {
 
         }else{
             btnDel.visibility = View.INVISIBLE
+        }
+
+        val categoryId = intent.getLongExtra("categoryId",0L)
+        if(categoryId>0) {
+            spinner.setSelection(categoryId.toInt())
         }
 
         btnSave.setOnClickListener {

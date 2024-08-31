@@ -1,9 +1,11 @@
 package com.example.realmnamelistapp.master.product
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.goodsMaster.GoodsMasterAddActivity
 import com.example.realmnamelistapp.model.CategoryMasterModel
 import com.example.realmnamelistapp.model.ProductMasterModel
 import io.realm.Realm
@@ -35,10 +37,12 @@ class ProductMasterRecyclerAdapter(realmResults:RealmResults<ProductMasterModel>
         holder.oneTvProductCategory.text = categoryMasterModelResult?.categoryName
 
         holder.itemView.setOnClickListener {
-//            val intent = Intent(it.context, GoodsMasterAddActivity::class.java)
-//            intent.putExtra("campId",myModel?.campId)
-//            intent.putExtra("goodsId",myModel?.goodsId)
-//            it.context.startActivity(intent);
+            val intent = Intent(it.context, GoodsMasterAddActivity::class.java)
+            intent.putExtra("productName",myModel?.productName)
+            intent.putExtra("categoryId",myModel?.categoryId)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            it.context.startActivity(intent);
         }
+
     }
 }
