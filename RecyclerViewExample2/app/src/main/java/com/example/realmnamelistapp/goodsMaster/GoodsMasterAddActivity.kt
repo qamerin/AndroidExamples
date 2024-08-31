@@ -1,10 +1,12 @@
 package com.example.realmnamelistapp.goodsMaster
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.master.product.ProductActivity
 import com.example.realmnamelistapp.model.CategoryMasterModel
 import com.example.realmnamelistapp.model.GoodsMasterModel
 import io.realm.Realm
@@ -38,6 +41,7 @@ class GoodsMasterAddActivity : AppCompatActivity() {
         val etName : TextView = findViewById(R.id.etGoodsName)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
+        val btnSearch : ImageView = findViewById(R.id.btnSearch)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("goodsId",0L)
 
@@ -99,6 +103,11 @@ class GoodsMasterAddActivity : AppCompatActivity() {
 
             Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
             finish()
+        }
+
+        btnSearch.setOnClickListener {
+            val intent = Intent(this, ProductActivity::class.java)
+            startActivity(intent)
         }
     }
 

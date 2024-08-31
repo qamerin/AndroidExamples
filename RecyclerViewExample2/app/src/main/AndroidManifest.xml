@@ -14,6 +14,9 @@
         android:theme="@style/Theme.RealmNameListApp"
         tools:targetApi="31">
         <activity
+            android:name=".master.product.ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".goodsMaster.GoodsMasterAddActivity"
             android:exported="false" />
         <activity
