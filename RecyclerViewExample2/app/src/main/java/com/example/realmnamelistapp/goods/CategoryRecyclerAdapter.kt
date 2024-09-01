@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.common.MyApp
 import com.example.realmnamelistapp.model.CategoryMasterModel
 import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
@@ -36,8 +37,10 @@ class CategoryRecyclerAdapter(realmResults:RealmResults<CategoryMasterModel>):Re
         holder.oneTvCategory.text = categoryMasterModelResult?.categoryName
 
 
+        val campId = MyApp.getInstance().campId
         val goodsResult = realm.where<GoodsModel>()
             .equalTo("categoryId",myModel?.categoryId)
+            .equalTo("campId",campId)
             .findAll()
         val goodsAdapter = GoodsRecyclerAdapter(goodsResult)
         holder.child_recycler_view.layoutManager =LinearLayoutManager(holder.itemView.context, LinearLayoutManager.VERTICAL,false)

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,9 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.goods.GoodsListActivity
 import com.example.realmnamelistapp.model.GoodsMasterModel
+import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.Sort
+import io.realm.kotlin.createObject
+import io.realm.kotlin.where
 
 class GoodsBulkRegisterListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -39,17 +44,39 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
         realm= Realm.getDefaultInstance()
 
         //１）viewの取得
-        val btnGoodsAdd: Button = findViewById(R.id.btnGoodsAdd)
+        val btnGoodsAdd: Button = findViewById(R.id.btnRegister)
 
         //６）btnAddを押したらintent
         val campId = intent.getLongExtra("campId",0L)
         btnGoodsAdd.setOnClickListener {
-//            val intent = Intent(this, GoodsMasterAddActivity::class.java)
-//            intent.putExtra("campId",campId)
-//            startActivity(intent)
+            var checkedTeachers = recyclerAdapter.selectedGoodsId
+
+            // if checkedTeachers does not contains goods, remove from goods.
+            val deleteGoodsResult = realm.where<GoodsModel>()
+                .equalTo("campId",campId).findAll()
+            realm.executeTransaction {
+                deleteGoodsResult.deleteAllFromRealm()
+            }
+            for(i in checkedTeachers){
+                val goodsMasterResult = realm.where(/* clazz = */ GoodsMasterModel::class.java)
+                    .equalTo("goodsId",i).findFirst()
+
+                realm.executeTransaction {
+                    val currentId = realm.where<GoodsModel>().max("id")
+                    val nextId = (currentId?.toLong() ?: 0L) + 1L
+                    val myModel = realm.createObject<GoodsModel>(nextId)
+                    myModel.goodsId = i
+                    myModel.campId = campId
+                    myModel.categoryId = goodsMasterResult!!.categoryId
+                }
+            }
+            val intent = Intent(this, GoodsListActivity::class.java)
+            intent.putExtra("campId",campId)
+            startActivity(intent)
+
         }
 
-        
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -62,11 +89,10 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val realmResults = realm.where(GoodsMasterModel::class.java)
-//            .equalTo("campId" ,1L)
             .findAll().sort("goodsId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
-        recyclerAdapter = GoodsBulkRegisterRecyclerAdapter(realmResults)
+        recyclerAdapter = GoodsBulkRegisterRecyclerAdapter(this, realmResults, false )
         recyclerView.adapter = recyclerAdapter
 
         layoutManager = LinearLayoutManager(this)
