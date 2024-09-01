@@ -71,12 +71,9 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
                 }
             }
             val intent = Intent(this, GoodsListActivity::class.java)
-            intent.putExtra("campId",campId)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-
         }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
