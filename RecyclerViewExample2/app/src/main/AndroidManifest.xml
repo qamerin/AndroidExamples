@@ -23,6 +23,9 @@
             android:name=".goodsMaster.GoodsMasterListActivity"
             android:exported="false" />
         <activity
+            android:name=".goods.bulkregister.GoodsBulkRegisterListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListDetailActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
