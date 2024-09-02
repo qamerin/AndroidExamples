@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp
+package com.example.realmnamelistapp.camp
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.goods.GoodsListActivity
 import com.example.realmnamelistapp.goodsMaster.GoodsMasterListActivity
-import com.example.realmnamelistapp.model.MyModel
+import com.example.realmnamelistapp.model.CampModel
 import io.realm.Realm
 import io.realm.kotlin.where
 
-class ListDetailActivity : AppCompatActivity() {
+class CampListDetailActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,26 +34,26 @@ class ListDetailActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-                val etName : TextView = findViewById(R.id.etName)
-        val etAge : TextView = findViewById(R.id.etAge)
-        val etDay : TextView = findViewById(R.id.etDay)
+                val etName : TextView = findViewById(R.id.etCampName)
+//        val etAge : TextView = findViewById(R.id.etAge)
+        val etDay : TextView = findViewById(R.id.etStartDate)
         val btnModify: Button = findViewById(R.id.btnModify)
         val btnMasterGoods: Button = findViewById(R.id.btGoodsMaster)
         val btnGoods: Button = findViewById(R.id.btGoods)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("ID",0L)
         if(getId>0){
-            val myModelResult = realm.where<MyModel>()
-                .equalTo("id",getId).findFirst()
-            etName.text = myModelResult?.name.toString()
-            etAge.text = myModelResult?.age.toString()
-            etDay.text = myModelResult?.day?.year.toString()+
-                    "/"+  myModelResult?.day?.monthValue.toString() +
-                    "/" + myModelResult?.day?.dayOfMonth.toString()
+            val campModelResult = realm.where<CampModel>()
+                .equalTo("campId",getId).findFirst()
+            etName.text = campModelResult?.campName.toString()
+//            etAge.text = campModelResult?.age.toString()
+            etDay.text = campModelResult?.startDate?.year.toString()+
+                    "/"+  campModelResult?.startDate?.monthValue.toString() +
+                    "/" + campModelResult?.startDate?.dayOfMonth.toString()
 
             btnModify.setOnClickListener {
-                val intent = Intent(this,EditActivity::class.java)
-                intent.putExtra("ID",myModelResult?.id)
+                val intent = Intent(this, CampEditActivity::class.java)
+                intent.putExtra("ID",campModelResult?.campId)
                 startActivity(intent)
             }
             btnMasterGoods.setOnClickListener {
@@ -62,7 +63,7 @@ class ListDetailActivity : AppCompatActivity() {
             }
             btnGoods.setOnClickListener {
                 val intent = Intent(this, GoodsListActivity::class.java)
-                intent.putExtra("campId",myModelResult?.id)
+                intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
 

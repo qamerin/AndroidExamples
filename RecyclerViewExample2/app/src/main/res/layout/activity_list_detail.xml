@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListDetailActivity">
+    tools:context=".camp.CampListDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -18,7 +18,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvCampName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <TextView
-        android:id="@+id/etName"
+        android:id="@+id/etCampName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -37,21 +37,21 @@
         android:ems="10"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCampName" />
 
     <TextView
-        android:id="@+id/tvAge"
+        android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Age"
+        android:text="Adress"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
+        app:layout_constraintTop_toBottomOf="@+id/etCampName" />
 
     <TextView
-        android:id="@+id/etAge"
+        android:id="@+id/etAdress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -59,39 +59,53 @@
         android:ems="10"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAge" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
 
     <Button
         android:id="@+id/btnModify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="16dp"
         android:text="Modify"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAge" />
+        app:layout_constraintTop_toBottomOf="@+id/etEndDate" />
 
     <TextView
-        android:id="@+id/tvDay"
+        android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Day"
+        android:text="Date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAge" />
+        app:layout_constraintTop_toBottomOf="@+id/etAdress" />
 
     <TextView
-        android:id="@+id/etDay"
+        android:id="@+id/etStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:textSize="20sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDay" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+
+    <TextView
+        android:id="@+id/etEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/etStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+
+
 
     <TextView
         android:id="@+id/tvGoodsMaster"

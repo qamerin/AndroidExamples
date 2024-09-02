@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp
+package com.example.realmnamelistapp.camp
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -12,16 +12,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.realmnamelistapp.model.MyModel
+import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.model.CampModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import java.time.LocalDate
 
-class EditActivity : AppCompatActivity() {
+class CampEditActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     private lateinit var registerDate:String
-    private var dbDate:LocalDate = LocalDate.now()
+    private var startDbDate:LocalDate = LocalDate.now()
+    private var endDbDate:LocalDate = LocalDate.now()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,28 +38,36 @@ class EditActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        val etName : TextView = findViewById(R.id.etName)
-        val etAge : TextView = findViewById(R.id.etAge)
-        val etDate : TextView = findViewById(R.id.etDate)
+        val etCampName : TextView = findViewById(R.id.etCampName)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
-        val btnCal : Button = findViewById(R.id.button)
-
-        btnCal.setOnClickListener {
-            showDatePicker()
+        val etStartDate : TextView = findViewById(R.id.etStartDate)
+        val btnStartDateCal : Button = findViewById(R.id.startDateButton)
+        val etEndDate : TextView = findViewById(R.id.etEndDate)
+        val btnEndDateCal : Button = findViewById(R.id.endDateButton)
+        btnStartDateCal.setOnClickListener {
+            showDatePicker(etStartDate)
+        }
+        btnEndDateCal.setOnClickListener {
+            showDatePicker(etEndDate)
         }
 
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("ID",0L)
         if(getId>0){
-            val myModelResult = realm.where<MyModel>()
-                .equalTo("id",getId).findFirst()
-            etName.text = myModelResult?.name.toString()
-            etAge.text = myModelResult?.age.toString()
-            etDate.text = myModelResult?.day?.year.toString()+
-                    "/"+  myModelResult?.day?.monthValue.toString() +
-                    "/" + myModelResult?.day?.dayOfMonth.toString()
-            dbDate = myModelResult?.day!!
+            val campModelResult = realm.where<CampModel>()
+                .equalTo("campId",getId).findFirst()
+            etCampName.text = campModelResult?.campName.toString()
+            etStartDate.text = campModelResult?.startDate?.year.toString()+
+                    "/"+  campModelResult?.startDate?.monthValue.toString() +
+                    "/" + campModelResult?.startDate?.dayOfMonth.toString()
+            startDbDate = campModelResult?.startDate!!
+
+            etEndDate.text = campModelResult?.endDate?.year.toString()+
+                    "/"+  campModelResult?.endDate?.monthValue.toString() +
+                    "/" + campModelResult?.endDate?.dayOfMonth.toString()
+            endDbDate = campModelResult?.endDate!!
+
             btnDel.visibility = View.VISIBLE
 
         }else{
@@ -65,29 +75,23 @@ class EditActivity : AppCompatActivity() {
         }
         btnSave.setOnClickListener {
             var name:String = ""
-            var age:Long = 0
-            if(!etName.text.isNullOrEmpty()){
-                name = etName.text.toString()
-            }
-            if(!etAge.text.isNullOrEmpty()){
-                age = etAge.text.toString().toLong()
+            if(!etCampName.text.isNullOrEmpty()){
+                name = etCampName.text.toString()
             }
             if(getId == 0L){
                 realm.executeTransaction {
-                    val currentId = realm.where<MyModel>().max("id")
+                    val currentId = realm.where<CampModel>().max("campId")
                     val nextId = (currentId?.toLong()?:0L) + 1L
-                    val myModel = realm.createObject<MyModel>(nextId)
-                    myModel.name = name
-                    myModel.age = age
-                    myModel.day = LocalDate.parse(registerDate)
+                    val campModel = realm.createObject<CampModel>(nextId)
+                    campModel.campName = name
+                    campModel.startDate = LocalDate.parse(registerDate)
                 }
             }else{
                 realm.executeTransaction{
-                    val myModel = realm.where<MyModel>()
-                        .equalTo("id",getId).findFirst()
-                    myModel?.name = name
-                    myModel?.age = age
-                    myModel?.day = LocalDate.parse(registerDate)
+                    val campModel = realm.where<CampModel>()
+                        .equalTo("campId",getId).findFirst()
+                    campModel?.campName = name
+                    campModel?.startDate = LocalDate.parse(registerDate)
                 }
             }
 
@@ -97,12 +101,12 @@ class EditActivity : AppCompatActivity() {
 
         btnDel.setOnClickListener {
             realm.executeTransaction{
-               realm.where<MyModel>()
+               realm.where<CampModel>()
                     .equalTo("id",getId).findFirst()?.deleteFromRealm()
             }
             Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
             finish()
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, CampMainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -115,9 +119,7 @@ class EditActivity : AppCompatActivity() {
     }
 
 
-    private fun showDatePicker() {
-        val tvCal : TextView = findViewById(R.id.etDate)
-
+    private fun showDatePicker(tvCal:TextView) {
         val datePickerDialog = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener() {_ , year, month, dayOfMonth->
@@ -125,9 +127,9 @@ class EditActivity : AppCompatActivity() {
                 var list =tvCal.text.split("/")
                 registerDate =list[0] +"-"  +list[1].padStart(2,'0') + "-" +  list[2].padStart(2,'0')
             },
-            dbDate.year,
-            dbDate.monthValue-1,
-            dbDate.dayOfMonth)
+            startDbDate.year,
+            startDbDate.monthValue-1,
+            startDbDate.dayOfMonth)
         datePickerDialog.show()
     }
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".CustomApplication"
+        android:name=".common.CustomApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -26,11 +26,11 @@
             android:name=".goods.bulkregister.GoodsBulkRegisterListActivity"
             android:exported="false" />
         <activity
-            android:name=".ListDetailActivity"
+            android:name=".camp.CampListDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".camp.CampMainActivity" />
         <activity
-            android:name=".EditActivity"
+            android:name=".camp.CampEditActivity"
             android:exported="false" />
         <activity
             android:name=".goods.GoodsAddActivity"
@@ -39,7 +39,7 @@
             android:name=".goods.GoodsListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".camp.CampMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

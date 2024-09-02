@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp
+package com.example.realmnamelistapp.camp
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,17 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.example.realmnamelistapp.model.MyModel
+import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.model.CampModel
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import io.realm.Sort
-import java.io.File
 
 
-class MainActivity : AppCompatActivity() {
+class CampMainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
-    private lateinit var recyclerAdapter:RecyclerAdapter
+    private lateinit var campRecyclerAdapter: CampRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         //６）btnAddを押したらintent
         btnAdd.setOnClickListener {
-            val intent = Intent(this,EditActivity::class.java)
+            val intent = Intent(this, CampEditActivity::class.java)
             startActivity(intent)
         }
     }
@@ -38,12 +37,12 @@ class MainActivity : AppCompatActivity() {
 
 override fun onStart() {
     super.onStart()
-    val realmResults = realm.where(MyModel::class.java)
-        .findAll().sort("id",Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+    val realmResults = realm.where(CampModel::class.java)
+        .findAll().sort("campId",Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
     recyclerView = findViewById(R.id.rv)//ここでまずは中身recyclerViewにを入れる
-    recyclerAdapter = RecyclerAdapter(realmResults)
-    recyclerView.adapter = recyclerAdapter
+    campRecyclerAdapter = CampRecyclerAdapter(realmResults)
+    recyclerView.adapter = campRecyclerAdapter
 
     layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
