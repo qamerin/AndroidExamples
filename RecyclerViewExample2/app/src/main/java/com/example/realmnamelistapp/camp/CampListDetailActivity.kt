@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.goods.GoodsListActivity
-import com.example.realmnamelistapp.goodsMaster.GoodsMasterListActivity
+import com.example.realmnamelistapp.mygear.MyGearListActivity
 import com.example.realmnamelistapp.model.CampModel
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -21,7 +21,7 @@ class CampListDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_list_detail)
+        setContentView(R.layout.activity_camp_list_detail)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,7 +36,8 @@ class CampListDetailActivity : AppCompatActivity() {
         super.onStart()
                 val etName : TextView = findViewById(R.id.etCampName)
 //        val etAge : TextView = findViewById(R.id.etAge)
-        val etDay : TextView = findViewById(R.id.etStartDate)
+        val etStartDate : TextView = findViewById(R.id.etStartDate)
+        val etEndDate : TextView = findViewById(R.id.etEndDate)
         val btnModify: Button = findViewById(R.id.btnModify)
         val btnMasterGoods: Button = findViewById(R.id.btGoodsMaster)
         val btnGoods: Button = findViewById(R.id.btGoods)
@@ -47,9 +48,12 @@ class CampListDetailActivity : AppCompatActivity() {
                 .equalTo("campId",getId).findFirst()
             etName.text = campModelResult?.campName.toString()
 //            etAge.text = campModelResult?.age.toString()
-            etDay.text = campModelResult?.startDate?.year.toString()+
+            etStartDate.text = campModelResult?.startDate?.year.toString()+
                     "/"+  campModelResult?.startDate?.monthValue.toString() +
                     "/" + campModelResult?.startDate?.dayOfMonth.toString()
+            etEndDate.text = campModelResult?.endDate?.year.toString()+
+                    "/"+  campModelResult?.endDate?.monthValue.toString() +
+                    "/" + campModelResult?.endDate?.dayOfMonth.toString()
 
             btnModify.setOnClickListener {
                 val intent = Intent(this, CampEditActivity::class.java)
@@ -57,7 +61,7 @@ class CampListDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             btnMasterGoods.setOnClickListener {
-                val intent = Intent(this, GoodsMasterListActivity::class.java)
+                val intent = Intent(this, MyGearListActivity::class.java)
 //                intent.putExtra("campId",myModelResult?.id)
                 startActivity(intent)
             }

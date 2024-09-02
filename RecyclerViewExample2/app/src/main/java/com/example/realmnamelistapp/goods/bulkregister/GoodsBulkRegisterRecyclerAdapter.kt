@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.common.MyApp
 import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.GoodsMasterModel
+import com.example.realmnamelistapp.model.MyModelModel
 import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResults:RealmResults<GoodsMasterModel>,
+class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResults:RealmResults<MyModelModel>,
                                        private val isAlwaysSelectable: Boolean ):RecyclerView.Adapter<GoodsBulkRegisterViewHolderItem>() {
     private lateinit var realm: Realm
-    private val rResults:RealmResults<GoodsMasterModel> = realmResults
+    private val rResults:RealmResults<MyModelModel> = realmResults
     var selectedGoodsId = ArrayList<Long>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsBulkRegisterViewHolderItem {

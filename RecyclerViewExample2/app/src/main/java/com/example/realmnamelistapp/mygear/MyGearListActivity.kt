@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp.goodsMaster
+package com.example.realmnamelistapp.mygear
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,20 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.GoodsMasterModel
+import com.example.realmnamelistapp.model.MyModelModel
 import io.realm.Realm
 import io.realm.Sort
 
-class GoodsMasterListActivity : AppCompatActivity() {
+class MyGearListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
-    private lateinit var recyclerAdapter: GoodsMasterRecyclerAdapter
+    private lateinit var recyclerAdapter: MyGearRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_goods_master_list)
+        setContentView(R.layout.activity_mygear_list)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -44,7 +44,7 @@ class GoodsMasterListActivity : AppCompatActivity() {
         //６）btnAddを押したらintent
         val campId = intent.getLongExtra("campId",0L)
         btnGoodsAdd.setOnClickListener {
-            val intent = Intent(this, GoodsMasterAddActivity::class.java)
+            val intent = Intent(this, MyGearAddActivity::class.java)
             intent.putExtra("campId",campId)
             startActivity(intent)
         }
@@ -59,12 +59,12 @@ class GoodsMasterListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val realmResults = realm.where(GoodsMasterModel::class.java)
+        val realmResults = realm.where(MyModelModel::class.java)
 //            .equalTo("campId" ,1L)
             .findAll().sort("goodsId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
-        recyclerAdapter = GoodsMasterRecyclerAdapter(realmResults)
+        recyclerAdapter = MyGearRecyclerAdapter(realmResults)
         recyclerView.adapter = recyclerAdapter
 
         layoutManager = LinearLayoutManager(this)

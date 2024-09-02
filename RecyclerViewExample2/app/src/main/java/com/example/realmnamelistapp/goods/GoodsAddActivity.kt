@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.GoodsMasterModel
+import com.example.realmnamelistapp.model.MyModelModel
 import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.Sort
@@ -43,13 +42,13 @@ class GoodsAddActivity : AppCompatActivity() {
         val getId = intent.getLongExtra("goodsId",0L)
 
         // set the spinner contents for Category
-        val goodsResult = realm.where(/* clazz = */ GoodsMasterModel::class.java)
+        val goodsResult = realm.where(/* clazz = */ MyModelModel::class.java)
 //            .equalTo("categoryId",goodsModelResult?.categoryId)
             .findAll()
             .sort("goodsId", Sort.ASCENDING)//
-        val goodsList = ArrayList<GoodsMasterModel>()
+        val goodsList = ArrayList<MyModelModel>()
         goodsList.addAll(realm.copyFromRealm(goodsResult));
-        val goodsAdapter = ArrayAdapter<GoodsMasterModel>(this, android.R.layout.simple_spinner_item, goodsList)
+        val goodsAdapter = ArrayAdapter<MyModelModel>(this, android.R.layout.simple_spinner_item, goodsList)
         val goodsSpinner = findViewById<Spinner>(R.id.spnGoods)
         goodsSpinner.adapter = goodsAdapter
 
@@ -65,7 +64,7 @@ class GoodsAddActivity : AppCompatActivity() {
         categorySpinner.adapter = categoryAdapter
 
         if(getId>0){
-            val goodsModelResult = realm.where<GoodsMasterModel>()
+            val goodsModelResult = realm.where<MyModelModel>()
                 .equalTo("goodsId",getId).findFirst()
 //            etName.text = goodsModelResult?.name.toString()
 
@@ -88,7 +87,7 @@ class GoodsAddActivity : AppCompatActivity() {
             var category: String = ""
 
            var goodsId = 0L
-            val goodsModel = goodsSpinner.selectedItem as GoodsMasterModel
+            val goodsModel = goodsSpinner.selectedItem as MyModelModel
             goodsId = goodsModel.goodsId
 
             var categoryId: Long = 0L

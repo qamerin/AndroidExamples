@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.goods.GoodsListActivity
-import com.example.realmnamelistapp.model.GoodsMasterModel
+import com.example.realmnamelistapp.model.MyModelModel
 import com.example.realmnamelistapp.model.GoodsModel
 import io.realm.Realm
 import io.realm.Sort
@@ -58,7 +57,7 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
                 deleteGoodsResult.deleteAllFromRealm()
             }
             for(i in checkedTeachers){
-                val goodsMasterResult = realm.where(/* clazz = */ GoodsMasterModel::class.java)
+                val goodsMasterResult = realm.where(/* clazz = */ MyModelModel::class.java)
                     .equalTo("goodsId",i).findFirst()
 
                 realm.executeTransaction {
@@ -85,7 +84,7 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val realmResults = realm.where(GoodsMasterModel::class.java)
+        val realmResults = realm.where(MyModelModel::class.java)
             .findAll().sort("goodsId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる

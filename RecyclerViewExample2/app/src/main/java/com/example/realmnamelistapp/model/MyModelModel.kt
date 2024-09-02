@@ -5,7 +5,7 @@ import io.realm.annotations.PrimaryKey
 
 
 //open class GoodsMasterModel: RealmObject() {
-open class GoodsMasterModel: RealmObject() {
+open class MyModelModel: RealmObject() {
     @PrimaryKey
     var goodsId : Long=0
     var name: String = ""

@@ -17,10 +17,10 @@
             android:name=".master.product.ProductActivity"
             android:exported="false" />
         <activity
-            android:name=".goodsMaster.GoodsMasterAddActivity"
+            android:name=".mygear.MyGearAddActivity"
             android:exported="false" />
         <activity
-            android:name=".goodsMaster.GoodsMasterListActivity"
+            android:name=".mygear.MyGearListActivity"
             android:exported="false" />
         <activity
             android:name=".goods.bulkregister.GoodsBulkRegisterListActivity"

@@ -21,7 +21,7 @@ class CampMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_camp_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
         //１）viewの取得
         val btnAdd:Button = findViewById(R.id.btnAdd)

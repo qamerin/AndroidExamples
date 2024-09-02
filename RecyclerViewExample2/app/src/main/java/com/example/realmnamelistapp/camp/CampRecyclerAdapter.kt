@@ -14,7 +14,7 @@ class CampRecyclerAdapter(realmResults:RealmResults<CampModel>):RecyclerView.Ada
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
-            .inflate(R.layout.one_layout,parent,false)
+            .inflate(R.layout.one_camp_layout,parent,false)
         return CampViewHolderItem(oneXml)
     }
 
