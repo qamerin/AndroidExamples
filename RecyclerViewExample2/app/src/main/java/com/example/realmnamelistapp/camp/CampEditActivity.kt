@@ -21,7 +21,6 @@ import java.time.LocalDate
 
 class CampEditActivity : AppCompatActivity() {
     private lateinit var realm: Realm
-    private lateinit var registerDate:String
     private var startDbDate:LocalDate = LocalDate.now()
     private var endDbDate:LocalDate = LocalDate.now()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,14 +83,20 @@ class CampEditActivity : AppCompatActivity() {
                     val nextId = (currentId?.toLong()?:0L) + 1L
                     val campModel = realm.createObject<CampModel>(nextId)
                     campModel.campName = name
-                    campModel.startDate = LocalDate.parse(registerDate)
+                    val listStartDate = etStartDate.text.toString().split("/")
+                    campModel.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
+                    val listEndDate = etEndDate.text.toString().split("/")
+                    campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
                 }
             }else{
                 realm.executeTransaction{
                     val campModel = realm.where<CampModel>()
                         .equalTo("campId",getId).findFirst()
                     campModel?.campName = name
-                    campModel?.startDate = LocalDate.parse(registerDate)
+                    val listStartDate = etStartDate.text.toString().split("/")
+                    campModel?.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
+                    val listEndDate = etEndDate.text.toString().split("/")
+                    campModel?.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
                 }
             }
 
@@ -124,8 +129,6 @@ class CampEditActivity : AppCompatActivity() {
             this,
             DatePickerDialog.OnDateSetListener() {_ , year, month, dayOfMonth->
                 tvCal.text = "${year}/${month+1}/${dayOfMonth}"
-                var list =tvCal.text.split("/")
-                registerDate =list[0] +"-"  +list[1].padStart(2,'0') + "-" +  list[2].padStart(2,'0')
             },
             startDbDate.year,
             startDbDate.monthValue-1,
