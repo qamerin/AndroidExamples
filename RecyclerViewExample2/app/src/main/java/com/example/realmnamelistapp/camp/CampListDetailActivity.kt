@@ -34,8 +34,8 @@ class CampListDetailActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-                val etName : TextView = findViewById(R.id.etCampName)
-//        val etAge : TextView = findViewById(R.id.etAge)
+        val etName : TextView = findViewById(R.id.etCampName)
+        val etAddress : TextView = findViewById(R.id.etAdress)
         val etStartDate : TextView = findViewById(R.id.etStartDate)
         val etEndDate : TextView = findViewById(R.id.etEndDate)
         val btnModify: Button = findViewById(R.id.btnModify)
@@ -47,7 +47,7 @@ class CampListDetailActivity : AppCompatActivity() {
             val campModelResult = realm.where<CampModel>()
                 .equalTo("campId",getId).findFirst()
             etName.text = campModelResult?.campName.toString()
-//            etAge.text = campModelResult?.age.toString()
+            etAddress.text = campModelResult?.address.toString()
             etStartDate.text = campModelResult?.startDate?.year.toString()+
                     "/"+  campModelResult?.startDate?.monthValue.toString() +
                     "/" + campModelResult?.startDate?.dayOfMonth.toString()

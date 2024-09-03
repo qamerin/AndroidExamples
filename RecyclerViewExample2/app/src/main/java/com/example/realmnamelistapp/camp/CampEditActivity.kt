@@ -38,6 +38,7 @@ class CampEditActivity : AppCompatActivity() {
 
 
         val etCampName : TextView = findViewById(R.id.etCampName)
+        val etAddress : TextView = findViewById(R.id.etAdress)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         val etStartDate : TextView = findViewById(R.id.etStartDate)
@@ -57,6 +58,7 @@ class CampEditActivity : AppCompatActivity() {
             val campModelResult = realm.where<CampModel>()
                 .equalTo("campId",getId).findFirst()
             etCampName.text = campModelResult?.campName.toString()
+            etAddress.text = campModelResult?.address.toString()
             etStartDate.text = campModelResult?.startDate?.year.toString()+
                     "/"+  campModelResult?.startDate?.monthValue.toString() +
                     "/" + campModelResult?.startDate?.dayOfMonth.toString()
@@ -73,16 +75,22 @@ class CampEditActivity : AppCompatActivity() {
             btnDel.visibility = View.INVISIBLE
         }
         btnSave.setOnClickListener {
-            var name:String = ""
+            var campName:String = ""
+            var address:String = ""
             if(!etCampName.text.isNullOrEmpty()){
-                name = etCampName.text.toString()
+                campName = etCampName.text.toString()
             }
+            if(!etAddress.text.isNullOrEmpty()){
+                address = etAddress.text.toString()
+            }
+
             if(getId == 0L){
                 realm.executeTransaction {
                     val currentId = realm.where<CampModel>().max("campId")
                     val nextId = (currentId?.toLong()?:0L) + 1L
                     val campModel = realm.createObject<CampModel>(nextId)
-                    campModel.campName = name
+                    campModel.campName = campName
+                    campModel.address = address
                     val listStartDate = etStartDate.text.toString().split("/")
                     campModel.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
                     val listEndDate = etEndDate.text.toString().split("/")
@@ -92,7 +100,8 @@ class CampEditActivity : AppCompatActivity() {
                 realm.executeTransaction{
                     val campModel = realm.where<CampModel>()
                         .equalTo("campId",getId).findFirst()
-                    campModel?.campName = name
+                    campModel?.campName = campName
+                    campModel?.address = address
                     val listStartDate = etStartDate.text.toString().split("/")
                     campModel?.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
                     val listEndDate = etEndDate.text.toString().split("/")
