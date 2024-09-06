@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "productName": "リビロン",
+    "brandName": "Snowpeak",
+    "categoryId": 0
+  },
+  {
+    "id": 1,
+    "productName": "Gloke12 TC",
+    "brandName": "Ogawa",
+    "categoryId": 0
+  },
+  {
+    "id": 2,
+    "productName": "リラックスチェア",
+    "brandName": "Ogawa",
+    "categoryId": 2
+  },
+  {
+    "id": 3,
+    "productName": "ローチェア３０",
+    "brandName": "Snowpeak",
+    "categoryId": 2
+  }
+]

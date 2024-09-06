@@ -1,0 +1,14 @@
+[
+  {
+    "categoryId": 0,
+    "categoryName": "テント"
+  },
+  {
+    "categoryId": 1,
+    "categoryName": "タープ"
+  },
+  {
+    "categoryId": 2,
+    "categoryName": "椅子"
+  }
+]
