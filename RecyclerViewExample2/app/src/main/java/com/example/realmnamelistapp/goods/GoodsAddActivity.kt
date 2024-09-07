@@ -39,7 +39,7 @@ class GoodsAddActivity : AppCompatActivity() {
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
-        val getId = intent.getLongExtra("goodsId",0L)
+        val id = intent.getLongExtra("id",0L)
 
         // set the spinner contents for Category
         val goodsResult = realm.where(/* clazz = */ MyModelModel::class.java)
@@ -52,8 +52,6 @@ class GoodsAddActivity : AppCompatActivity() {
         val goodsSpinner = findViewById<Spinner>(R.id.spnGoods)
         goodsSpinner.adapter = goodsAdapter
 
-
-
         // set the spinner contents for Category
         val categoryResult = realm.where(/* clazz = */ CategoryMasterModel::class.java)
             .findAll().sort("categoryId", Sort.ASCENDING)//
@@ -63,14 +61,13 @@ class GoodsAddActivity : AppCompatActivity() {
         val categorySpinner = findViewById<Spinner>(R.id.spnCategory)
         categorySpinner.adapter = categoryAdapter
 
-        if(getId>0){
-            val goodsModelResult = realm.where<MyModelModel>()
-                .equalTo("goodsId",getId).findFirst()
-//            etName.text = goodsModelResult?.name.toString()
+        if(id>0){
+            val myModelResult = realm.where<GoodsModel>()
+                .equalTo("id",id).findFirst()
 
             // get Category Name
             val categoryMasterModelResult = realm.where<CategoryMasterModel>()
-                .equalTo("categoryId",goodsModelResult?.categoryId).findFirst()
+                .equalTo("categoryId",myModelResult?.categoryId).findFirst()
 
             if (categoryMasterModelResult !=null) {
                 categorySpinner.setSelection(categoryMasterModelResult.categoryId.toInt())
@@ -93,7 +90,7 @@ class GoodsAddActivity : AppCompatActivity() {
             var categoryId: Long = 0L
             val categoryModel = categorySpinner.selectedItem as CategoryMasterModel
             categoryId = categoryModel.categoryId
-            if (getId == 0L) {
+            if (goodsId == 0L) {
                 realm.executeTransaction {
                     val currentId = realm.where<GoodsModel>().max("id")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
@@ -104,7 +101,7 @@ class GoodsAddActivity : AppCompatActivity() {
             } else {
                 realm.executeTransaction {
                     val myModel = realm.where<GoodsModel>()
-                        .equalTo("id", getId).findFirst()
+                        .equalTo("id", goodsId).findFirst()
                     myModel?.goodsId = goodsId
                     myModel?.categoryId = categoryId
                 }

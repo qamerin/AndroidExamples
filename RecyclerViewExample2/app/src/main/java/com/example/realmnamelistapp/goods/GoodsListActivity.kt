@@ -72,7 +72,7 @@ class GoodsListActivity : AppCompatActivity() {
 //        val realmResults = realm.where(GoodsModel::class.java)
 //            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
         val realmResults = realm.where(CategoryMasterModel::class.java)
-            .findAll().sort("categoryId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+            .findAll().sort("categoryId", Sort.ASCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = CategoryRecyclerAdapter(realmResults)
