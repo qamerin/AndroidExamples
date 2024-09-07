@@ -1,0 +1,14 @@
+[
+  {
+    "campGearId": 0,
+    "campGearName": "テント"
+  },
+  {
+    "campGearId": 1,
+    "campGearName": "タープ"
+  },
+  {
+    "campGearId": 2,
+    "campGearName": "椅子"
+  }
+]
