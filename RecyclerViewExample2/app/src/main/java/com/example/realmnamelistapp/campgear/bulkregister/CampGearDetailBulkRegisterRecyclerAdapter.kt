@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp.goods.bulkregister
+package com.example.realmnamelistapp.campgear.bulkregister
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,23 +15,23 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResults:RealmResults<MyGearModel>,
-                                       private val isAlwaysSelectable: Boolean ):RecyclerView.Adapter<GoodsBulkRegisterViewHolderItem>() {
+class CampGearDetailBulkRegisterRecyclerAdapter(private val context: Context, realmResults:RealmResults<MyGearModel>,
+                                                private val isAlwaysSelectable: Boolean ):RecyclerView.Adapter<CampGearDetailBulkRegisterViewHolderItem>() {
     private lateinit var realm: Realm
     private val rResults:RealmResults<MyGearModel> = realmResults
     var selectedGoodsId = ArrayList<Long>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsBulkRegisterViewHolderItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampGearDetailBulkRegisterViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
-            .inflate(R.layout.one_goods_bulkregister_layout,parent,false)
-        return GoodsBulkRegisterViewHolderItem(oneXml)
+            .inflate(R.layout.one_campgeardetail_bulkregister_layout,parent,false)
+        return CampGearDetailBulkRegisterViewHolderItem(oneXml)
     }
 
     override fun getItemCount(): Int {
         return rResults.size
     }
 
-    override fun onBindViewHolder(holder: GoodsBulkRegisterViewHolderItem, position: Int) {
+    override fun onBindViewHolder(holder: CampGearDetailBulkRegisterViewHolderItem, position: Int) {
         realm = Realm.getDefaultInstance()
         val myModel = rResults[position]
         holder.oneTvName.text = myModel?.gearName.toString()
@@ -54,7 +54,7 @@ class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResult
             .equalTo("campGearId",myModel?.campGearId).findFirst()
         holder.oneTvCategory.text = campGearModelResult?.campGearName
 
-        holder.setItemClickListener(object: GoodsBulkRegisterViewHolderItem.ItemClickListener {
+        holder.setItemClickListener(object: CampGearDetailBulkRegisterViewHolderItem.ItemClickListener {
             override fun onItemClick(v: View, pos: Int) {
                 val myCheckBox = v as CheckBox
                 if (myCheckBox.isChecked) {

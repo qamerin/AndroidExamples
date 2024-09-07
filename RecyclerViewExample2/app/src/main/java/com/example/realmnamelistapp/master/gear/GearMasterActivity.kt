@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp.master.product
+package com.example.realmnamelistapp.master.gear
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -18,13 +18,13 @@ import io.realm.Sort
 class ProductActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
-    private lateinit var recyclerAdapter: ProductMasterRecyclerAdapter
+    private lateinit var recyclerAdapter: GearMasterRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_porduct)
+        setContentView(R.layout.activity_gearmaster)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -45,12 +45,12 @@ class ProductActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 val realmResults = realm.where(GearMasterModel::class.java)
-                    .contains("productName",newText)
+                    .contains("gearName",newText)
                     .findAll()
                     .sort("gearMasterId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
                 recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-                recyclerAdapter = ProductMasterRecyclerAdapter(realmResults)
+                recyclerAdapter = GearMasterRecyclerAdapter(realmResults)
                 recyclerView.adapter = recyclerAdapter
                 recyclerView.layoutManager = layoutManager
 
@@ -73,7 +73,7 @@ class ProductActivity : AppCompatActivity() {
             .findAll().sort("gearMasterId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-        recyclerAdapter = ProductMasterRecyclerAdapter(realmResults)
+        recyclerAdapter = GearMasterRecyclerAdapter(realmResults)
         recyclerView.adapter = recyclerAdapter
 
         layoutManager = LinearLayoutManager(this)

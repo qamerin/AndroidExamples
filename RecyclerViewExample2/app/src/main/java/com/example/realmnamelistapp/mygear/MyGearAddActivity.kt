@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.master.product.ProductActivity
+import com.example.realmnamelistapp.master.gear.ProductActivity
 import com.example.realmnamelistapp.model.CampGearModel
 import com.example.realmnamelistapp.model.MyGearModel
 import io.realm.Realm

@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp.goods
+package com.example.realmnamelistapp.campgear
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -14,21 +14,21 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class CategoryRecyclerAdapter(realmResults:RealmResults<CampGearModel>):RecyclerView.Adapter<CategoryViewHolderItem>() {
+class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):RecyclerView.Adapter<CampGearViewHolderItem>() {
     private lateinit var realm: Realm
     private val rResults:RealmResults<CampGearModel> = realmResults
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolderItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampGearViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
-            .inflate(R.layout.one_category_layout,parent,false)
-        return CategoryViewHolderItem(oneXml)
+            .inflate(R.layout.one_campgear_layout,parent,false)
+        return CampGearViewHolderItem(oneXml)
     }
 
     override fun getItemCount(): Int {
         return rResults.size
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolderItem, position: Int) {
+    override fun onBindViewHolder(holder: CampGearViewHolderItem, position: Int) {
         val myModel = rResults[position]
 
         // get Category Name
@@ -43,12 +43,12 @@ class CategoryRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
             .equalTo("campGearId",myModel?.campGearId)
             .equalTo("campId",campId)
             .findAll()
-        val goodsAdapter = GoodsRecyclerAdapter(goodsResult)
+        val goodsAdapter = CampGearDetailRecyclerAdapter(goodsResult)
         holder.child_recycler_view.layoutManager =LinearLayoutManager(holder.itemView.context, LinearLayoutManager.VERTICAL,false)
         holder.child_recycler_view.adapter = goodsAdapter
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, GoodsAddActivity::class.java)
+            val intent = Intent(it.context, CampGearDetailAddActivity::class.java)
 //            intent.putExtra("campId",myModel?.campId)
 //            intent.putExtra("myGearId",myModel?.id)
             it.context.startActivity(intent);

@@ -1,4 +1,4 @@
-package com.example.realmnamelistapp.master.product
+package com.example.realmnamelistapp.master.gear
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,21 +12,21 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class ProductMasterRecyclerAdapter(realmResults:RealmResults<GearMasterModel>):RecyclerView.Adapter<ProductMasterViewHolderItem>() {
+class GearMasterRecyclerAdapter(realmResults:RealmResults<GearMasterModel>):RecyclerView.Adapter<GearMasterViewHolderItem>() {
     private lateinit var realm: Realm
     private val rResults:RealmResults<GearMasterModel> = realmResults
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductMasterViewHolderItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GearMasterViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
-            .inflate(R.layout.one_product_master_layout,parent,false)
-        return ProductMasterViewHolderItem(oneXml)
+            .inflate(R.layout.one_gear_master_layout,parent,false)
+        return GearMasterViewHolderItem(oneXml)
     }
 
     override fun getItemCount(): Int {
         return rResults.size
     }
 
-    override fun onBindViewHolder(holder: ProductMasterViewHolderItem, position: Int) {
+    override fun onBindViewHolder(holder: GearMasterViewHolderItem, position: Int) {
         val myModel = rResults[position]
         holder.oneTvProductName.text = myModel?.gearName.toString()
 

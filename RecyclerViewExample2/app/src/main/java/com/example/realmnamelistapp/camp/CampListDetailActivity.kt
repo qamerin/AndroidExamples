@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.goods.GoodsListActivity
+import com.example.realmnamelistapp.campgear.CampGearDetailListActivity
 import com.example.realmnamelistapp.mygear.MyGearListActivity
 import com.example.realmnamelistapp.model.CampModel
 import io.realm.Realm
@@ -66,7 +66,7 @@ class CampListDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             btnGoods.setOnClickListener {
-                val intent = Intent(this, GoodsListActivity::class.java)
+                val intent = Intent(this, CampGearDetailListActivity::class.java)
                 intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }

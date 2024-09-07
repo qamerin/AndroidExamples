@@ -14,7 +14,7 @@
         android:theme="@style/Theme.RealmNameListApp"
         tools:targetApi="31">
         <activity
-            android:name=".master.product.ProductActivity"
+            android:name=".master.gear.ProductActivity"
             android:exported="false" />
         <activity
             android:name=".mygear.MyGearAddActivity"
@@ -23,7 +23,7 @@
             android:name=".mygear.MyGearListActivity"
             android:exported="false" />
         <activity
-            android:name=".goods.bulkregister.GoodsBulkRegisterListActivity"
+            android:name=".campgear.bulkregister.CampGearDetailBulkRegisterListActivity"
             android:exported="false" />
         <activity
             android:name=".camp.CampListDetailActivity"
@@ -33,10 +33,10 @@
             android:name=".camp.CampEditActivity"
             android:exported="false" />
         <activity
-            android:name=".goods.GoodsAddActivity"
+            android:name=".campgear.CampGearDetailAddActivity"
             android:exported="false" />
         <activity
-            android:name=".goods.GoodsListActivity"
+            android:name=".campgear.CampGearDetailListActivity"
             android:exported="false" />
         <activity
             android:name=".camp.CampMainActivity"
