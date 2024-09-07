@@ -115,50 +115,95 @@
         app:layout_constraintStart_toEndOf="@+id/tvStartEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
+
+
     <TextView
-        android:id="@+id/tvGoodsMaster"
+        android:id="@+id/tvCampGear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Goods Master"
+        android:layout_marginTop="24dp"
+        android:text="Camp Gear"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnModify" />
 
+
     <Button
-        android:id="@+id/btGoodsMaster"
+        android:id="@+id/btCampGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Camp Gear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvCampGear"
+        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+
+    <TextView
+        android:id="@+id/tvRegularGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Regular Gear"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btCampGear" />
+
+    <Button
+        android:id="@+id/btRegularGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Regular Gear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvCampGear"
+        app:layout_constraintTop_toBottomOf="@+id/btCampGear" />
+
+    <TextView
+        android:id="@+id/tvMyGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="My Gear"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btRegularGear" />
+
+    <Button
+        android:id="@+id/btMyGear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Goods Master"
+        android:text="My Gear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvStartEnd"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+        app:layout_constraintStart_toEndOf="@+id/tvCampGear"
+        app:layout_constraintTop_toBottomOf="@+id/btRegularGear" />
 
     <TextView
-        android:id="@+id/tvGoods"
+        android:id="@+id/tvGearMaster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Regular Gear"
+        android:layout_marginTop="24dp"
+        android:text="Gear Master"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btGoodsMaster" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btMyGear" />
 
     <Button
-        android:id="@+id/btGoods"
+        android:id="@+id/btGearMaster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Regular Gear"
+        android:layout_marginEnd="16dp"
+        android:text="Gear Master"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvGoods"
-        app:layout_constraintTop_toBottomOf="@+id/btGoodsMaster" />
-
+        app:layout_constraintStart_toEndOf="@+id/tvCampGear"
+        app:layout_constraintTop_toBottomOf="@+id/btMyGear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

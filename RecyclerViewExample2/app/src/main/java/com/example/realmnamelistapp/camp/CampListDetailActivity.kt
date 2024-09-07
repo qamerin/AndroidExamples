@@ -11,8 +11,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.campgear.CampGearDetailListActivity
+import com.example.realmnamelistapp.master.gear.GearMasterActivity
 import com.example.realmnamelistapp.mygear.MyGearListActivity
 import com.example.realmnamelistapp.model.CampModel
+import com.example.realmnamelistapp.regulargear.RegularGearDetailListActivity
 import io.realm.Realm
 import io.realm.kotlin.where
 
@@ -39,8 +41,10 @@ class CampListDetailActivity : AppCompatActivity() {
         val etStartDate : TextView = findViewById(R.id.etStartDate)
         val etEndDate : TextView = findViewById(R.id.etEndDate)
         val btnModify: Button = findViewById(R.id.btnModify)
-        val btnMasterGoods: Button = findViewById(R.id.btGoodsMaster)
-        val btnGoods: Button = findViewById(R.id.btGoods)
+        val btnCampGear: Button = findViewById(R.id.btCampGear)
+        val btnRegularGear: Button = findViewById(R.id.btRegularGear)
+        val btnMyGear: Button = findViewById(R.id.btMyGear)
+        val btnGearMaster: Button = findViewById(R.id.btGearMaster)
         realm = Realm.getDefaultInstance()
         val getId = intent.getLongExtra("campId",0L)
         if(getId>0){
@@ -60,16 +64,25 @@ class CampListDetailActivity : AppCompatActivity() {
                 intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
-            btnMasterGoods.setOnClickListener {
-                val intent = Intent(this, MyGearListActivity::class.java)
-//                intent.putExtra("campId",myModelResult?.id)
-                startActivity(intent)
-            }
-            btnGoods.setOnClickListener {
+            btnCampGear.setOnClickListener {
                 val intent = Intent(this, CampGearDetailListActivity::class.java)
                 intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
+            btnRegularGear.setOnClickListener {
+                val intent = Intent(this, RegularGearDetailListActivity::class.java)
+                startActivity(intent)
+            }
+            btnMyGear.setOnClickListener {
+                val intent = Intent(this, MyGearListActivity::class.java)
+                startActivity(intent)
+            }
+            btnGearMaster.setOnClickListener {
+                val intent = Intent(this, GearMasterActivity::class.java)
+                startActivity(intent)
+            }
+
+
 
         }else{
             // TODO

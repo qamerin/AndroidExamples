@@ -1,34 +1,31 @@
-package com.example.realmnamelistapp.mygear
+package com.example.realmnamelistapp.regulargear
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.master.gear.GearMasterActivity
 import com.example.realmnamelistapp.model.CampGearModel
 import com.example.realmnamelistapp.model.MyGearModel
+import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 
-class MyGearAddActivity : AppCompatActivity() {
+class RegularGearDetailAddActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_mygear_add)
+        setContentView(R.layout.activity_campgeardetail_add)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,38 +35,42 @@ class MyGearAddActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val etName : TextView = findViewById(R.id.etGoodsName)
+//        val etName : TextView = findViewById(R.id.etGoodsName)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
-        val btnSearch : ImageView = findViewById(R.id.btnSearch)
         realm = Realm.getDefaultInstance()
-        val getId = intent.getLongExtra("myGearId",0L)
+        val id = intent.getLongExtra("campId",0L)
 
-        val gearName = intent.getStringExtra("gearName")
-        if(!gearName.isNullOrEmpty()) {
-            etName.text = gearName
-        }
+        // set the spinner contents for Category
+        val goodsResult = realm.where(/* clazz = */ MyGearModel::class.java)
+//            .equalTo("campGearId",goodsModelResult?.campGearId)
+            .findAll()
+            .sort("myGearId", Sort.ASCENDING)//
+        val goodsList = ArrayList<MyGearModel>()
+        goodsList.addAll(realm.copyFromRealm(goodsResult));
+        val goodsAdapter = ArrayAdapter<MyGearModel>(this, android.R.layout.simple_spinner_item, goodsList)
+        val goodsSpinner = findViewById<Spinner>(R.id.spnGoods)
+        goodsSpinner.adapter = goodsAdapter
 
-        // set the spinner contents
-        val result = realm.where(CampGearModel::class.java)
+        // set the spinner contents for Category
+        val categoryResult = realm.where(/* clazz = */ CampGearModel::class.java)
             .findAll().sort("campGearId", Sort.ASCENDING)//
-        val list = ArrayList<CampGearModel>()
-        list.addAll(realm.copyFromRealm(result));
-        val adapter = ArrayAdapter<CampGearModel>(this, android.R.layout.simple_spinner_item, list)
-        val spinner = findViewById<Spinner>(R.id.spnCategory)
-        spinner.adapter = adapter
+        val categoryList = ArrayList<CampGearModel>()
+        categoryList.addAll(realm.copyFromRealm(categoryResult));
+        val categoryAdapter = ArrayAdapter<CampGearModel>(this, android.R.layout.simple_spinner_item, categoryList)
+        val categorySpinner = findViewById<Spinner>(R.id.spnCategory)
+        categorySpinner.adapter = categoryAdapter
 
-        if(getId>0){
-            val goodsModelResult = realm.where<MyGearModel>()
-                .equalTo("myGearId",getId).findFirst()
-            etName.text = goodsModelResult?.gearName.toString()
+        if(id>0){
+            val myModelResult = realm.where<CampGearDetailModel>()
+                .equalTo("campGearDetailId",id).findFirst()
 
             // get Category Name
             val campGearModelResult = realm.where<CampGearModel>()
-                .equalTo("campGearId",goodsModelResult?.campGearId).findFirst()
+                .equalTo("campGearId",myModelResult?.campGearId).findFirst()
 
             if (campGearModelResult !=null) {
-                spinner.setSelection(campGearModelResult.campGearId.toInt())
+                categorySpinner.setSelection(campGearModelResult.campGearId.toInt())
             }
 
             btnDel.visibility = View.VISIBLE
@@ -78,46 +79,36 @@ class MyGearAddActivity : AppCompatActivity() {
             btnDel.visibility = View.INVISIBLE
         }
 
-        val categoryId = intent.getLongExtra("campGearId",0L)
-        if(categoryId>0) {
-            spinner.setSelection(categoryId.toInt())
-        }
-
         btnSave.setOnClickListener {
             var name: String = ""
             var category: String = ""
+
+           var goodsId = 0L
+            val goodsModel = goodsSpinner.selectedItem as MyGearModel
+            goodsId = goodsModel.myGearId
+
             var categoryId: Long = 0L
-            if (!etName.text.isNullOrEmpty()) {
-                name = etName.text.toString()
-            }
-            val item = spinner.selectedItem as CampGearModel
-            categoryId = item.campGearId
-            if (getId == 0L) {
+            val categoryModel = categorySpinner.selectedItem as CampGearModel
+            categoryId = categoryModel.campGearId
+            if (goodsId == 0L) {
                 realm.executeTransaction {
-                    val currentId = realm.where<MyGearModel>().max("myGearId")
+                    val currentId = realm.where<CampGearDetailModel>().max("campGearDetailId")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
-                    val myModel = realm.createObject<MyGearModel>(nextId)
-                    myModel.gearName = name
+                    val myModel = realm.createObject<CampGearDetailModel>(nextId)
+                    myModel.goodsId = goodsId
                     myModel.campGearId = categoryId
-//                    myModel.campId = campId
                 }
             } else {
                 realm.executeTransaction {
-                    val myModel = realm.where<MyGearModel>()
-                        .equalTo("myGearId", getId).findFirst()
-                    myModel?.gearName = name
+                    val myModel = realm.where<CampGearDetailModel>()
+                        .equalTo("campGearDetailId", goodsId).findFirst()
+                    myModel?.goodsId = goodsId
                     myModel?.campGearId = categoryId
-//                    myModel?.campId = campId
                 }
             }
 
             Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
             finish()
-        }
-
-        btnSearch.setOnClickListener {
-            val intent = Intent(this, GearMasterActivity::class.java)
-            startActivity(intent)
         }
     }
 

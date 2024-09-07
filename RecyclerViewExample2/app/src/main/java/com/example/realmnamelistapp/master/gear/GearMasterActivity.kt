@@ -15,7 +15,7 @@ import com.example.realmnamelistapp.model.GearMasterModel
 import io.realm.Realm
 import io.realm.Sort
 
-class ProductActivity : AppCompatActivity() {
+class GearMasterActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
     private lateinit var recyclerAdapter: GearMasterRecyclerAdapter
