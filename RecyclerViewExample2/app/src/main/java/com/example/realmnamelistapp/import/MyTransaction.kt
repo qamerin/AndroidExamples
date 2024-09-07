@@ -3,6 +3,7 @@ package com.example.realmnamelistapp.import
 import com.example.realmnamelistapp.common.CustomApplication
 import com.example.realmnamelistapp.model.CampGearModel
 import com.example.realmnamelistapp.model.GearMasterModel
+import com.example.realmnamelistapp.model.RegularGearModel
 import io.realm.Realm
 
 class MyTransaction : Realm.Transaction {
@@ -12,6 +13,7 @@ class MyTransaction : Realm.Transaction {
                 source ->
                 it.createAllFromJson(CampGearModel::class.java, source.resources.assets.open("camp_gear_data.json"))
                 it.createAllFromJson(GearMasterModel::class.java, source.resources.assets.open("gear_master_data.json"))
+                it.createAllFromJson(RegularGearModel::class.java, source.resources.assets.open("regular_gear_data.json"))
             }
         }
     }

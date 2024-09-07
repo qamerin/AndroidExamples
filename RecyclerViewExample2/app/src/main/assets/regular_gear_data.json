@@ -1,0 +1,26 @@
+[
+  {
+    "regularGearId": 0,
+    "gearName": "テント"
+  },
+  {
+    "regularGearId": 1,
+    "gearName": "タープ"
+  },
+  {
+    "regularGearId": 2,
+    "gearName": "椅子"
+  },
+  {
+    "regularGearId": 3,
+    "gearName": "寝袋"
+  },
+  {
+    "regularGearId": 4,
+    "gearName": "焚き火台"
+  },
+  {
+    "regularGearId": 5,
+    "gearName": "ランタン"
+  }
+]

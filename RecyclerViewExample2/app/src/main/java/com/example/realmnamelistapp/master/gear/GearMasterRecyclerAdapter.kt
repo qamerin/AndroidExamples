@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.common.MyApp
 import com.example.realmnamelistapp.mygear.MyGearAddActivity
 import com.example.realmnamelistapp.model.CampGearModel
 import com.example.realmnamelistapp.model.GearMasterModel
+import com.example.realmnamelistapp.regulargear.RegularGearDetailAddActivity
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
@@ -37,11 +39,30 @@ class GearMasterRecyclerAdapter(realmResults:RealmResults<GearMasterModel>):Recy
         holder.oneTvProductCategory.text = campGearModelResult?.campGearName
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, MyGearAddActivity::class.java)
-            intent.putExtra("gearName",myModel?.gearName)
-            intent.putExtra("campGearId",myModel?.campGearId)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            it.context.startActivity(intent);
+
+            // TODO
+            val prevPage = MyApp.getInstance().prevPage
+            if(prevPage == "REGULAR_GEAR_DETAIL"){
+                val intent = Intent(it.context, RegularGearDetailAddActivity::class.java)
+                intent.putExtra("gearName",myModel?.gearName)
+                intent.putExtra("campGearId",myModel?.campGearId)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                it.context.startActivity(intent);
+            }else{
+                val intent = Intent(it.context, MyGearAddActivity::class.java)
+                intent.putExtra("gearName",myModel?.gearName)
+                intent.putExtra("campGearId",myModel?.campGearId)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                it.context.startActivity(intent);
+            }
+
+
+
+//            val intent = Intent(it.context, MyGearAddActivity::class.java)
+//            intent.putExtra("gearName",myModel?.gearName)
+//            intent.putExtra("campGearId",myModel?.campGearId)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            it.context.startActivity(intent);
         }
 
     }

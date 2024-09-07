@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.common.MyApp
 import com.example.realmnamelistapp.model.RegularGearModel
 import io.realm.Realm
 import io.realm.Sort
@@ -44,6 +45,10 @@ class RegularGearDetailListActivity : AppCompatActivity() {
         //６）btnAddを押したらintent
         val campId = intent.getLongExtra("campId",0L)
         btnGoodsAdd.setOnClickListener {
+            // set zero to distinguish transition from add button
+            val myApp = MyApp.getInstance()
+            myApp.regularGearDetailId =0L
+
             val intent = Intent(this, RegularGearDetailAddActivity::class.java)
             intent.putExtra("campId",campId)
             startActivity(intent)

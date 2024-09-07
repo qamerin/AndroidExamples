@@ -28,15 +28,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
+    <EditText
+        android:id="@+id/etGoodsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="text"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
+
+    <ImageView
+        android:id="@+id/btnSearch"
+        android:layout_width="52dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/baseline_search_24"
+        app:layout_constraintStart_toEndOf="@+id/etGoodsName"
+        app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
+
     <TextView
         android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Category"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnGoods" />
+        app:layout_constraintTop_toBottomOf="@+id/etGoodsName" />
 
     <Button
         android:id="@+id/btnSave"
@@ -68,16 +92,4 @@
         android:scrollbarSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
-
-    <Spinner
-        android:id="@+id/spnGoods"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:minHeight="48dp"
-        android:scrollbarSize="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGoodsName" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

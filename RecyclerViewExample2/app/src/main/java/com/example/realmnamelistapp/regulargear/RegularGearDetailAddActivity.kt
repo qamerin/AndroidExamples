@@ -1,23 +1,28 @@
 package com.example.realmnamelistapp.regulargear
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.CampGearModel
-import com.example.realmnamelistapp.model.MyGearModel
-import com.example.realmnamelistapp.model.CampGearDetailModel
+import com.example.realmnamelistapp.common.MyApp
+import com.example.realmnamelistapp.master.gear.GearMasterActivity
+import com.example.realmnamelistapp.model.RegularGearDetailModel
+import com.example.realmnamelistapp.model.RegularGearModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.createObject
+import io.realm.kotlin.delete
 import io.realm.kotlin.where
 
 class RegularGearDetailAddActivity : AppCompatActivity() {
@@ -25,7 +30,7 @@ class RegularGearDetailAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_campgeardetail_add)
+        setContentView(R.layout.activity_regulargeardetail_add)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -34,43 +39,44 @@ class RegularGearDetailAddActivity : AppCompatActivity() {
         // ツールバーの表示
         setSupportActionBar(findViewById(R.id.my_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-//        val etName : TextView = findViewById(R.id.etGoodsName)
+        val etName : TextView = findViewById(R.id.etGoodsName)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
+        val btnSearch : ImageView = findViewById(R.id.btnSearch)
         realm = Realm.getDefaultInstance()
-        val id = intent.getLongExtra("campId",0L)
+
+        val myApp = MyApp.getInstance()
+        val regularGearDetailId = myApp.regularGearDetailId
+
+        val gearName = intent.getStringExtra("gearName")
+        if(!gearName.isNullOrEmpty()) {
+            etName.text = gearName
+        }
 
         // set the spinner contents for Category
-        val goodsResult = realm.where(/* clazz = */ MyGearModel::class.java)
-//            .equalTo("campGearId",goodsModelResult?.campGearId)
-            .findAll()
-            .sort("myGearId", Sort.ASCENDING)//
-        val goodsList = ArrayList<MyGearModel>()
-        goodsList.addAll(realm.copyFromRealm(goodsResult));
-        val goodsAdapter = ArrayAdapter<MyGearModel>(this, android.R.layout.simple_spinner_item, goodsList)
-        val goodsSpinner = findViewById<Spinner>(R.id.spnGoods)
-        goodsSpinner.adapter = goodsAdapter
+        val regularGearResult = realm.where(/* clazz = */ RegularGearModel::class.java)
+            .findAll().sort("regularGearId", Sort.ASCENDING)//
+        val regularGearList = ArrayList<RegularGearModel>()
+        regularGearList.addAll(realm.copyFromRealm(regularGearResult));
+        val regularGearAdapter = ArrayAdapter<RegularGearModel>(this, android.R.layout.simple_spinner_item, regularGearList)
+        val regularGearSpinner = findViewById<Spinner>(R.id.spnCategory)
+        regularGearSpinner.adapter = regularGearAdapter
 
-        // set the spinner contents for Category
-        val categoryResult = realm.where(/* clazz = */ CampGearModel::class.java)
-            .findAll().sort("campGearId", Sort.ASCENDING)//
-        val categoryList = ArrayList<CampGearModel>()
-        categoryList.addAll(realm.copyFromRealm(categoryResult));
-        val categoryAdapter = ArrayAdapter<CampGearModel>(this, android.R.layout.simple_spinner_item, categoryList)
-        val categorySpinner = findViewById<Spinner>(R.id.spnCategory)
-        categorySpinner.adapter = categoryAdapter
+        if(regularGearDetailId>0){
+            val regularGearDetailModelResult = realm.where<RegularGearDetailModel>()
+                .equalTo("regularGearDetailId",regularGearDetailId).findFirst()
 
-        if(id>0){
-            val myModelResult = realm.where<CampGearDetailModel>()
-                .equalTo("campGearDetailId",id).findFirst()
+
+            if(etName.text.isNullOrEmpty()){
+                etName.text = regularGearDetailModelResult?.gearName
+            }
 
             // get Category Name
-            val campGearModelResult = realm.where<CampGearModel>()
-                .equalTo("campGearId",myModelResult?.campGearId).findFirst()
+            val regularGearModelResult = realm.where<RegularGearModel>()
+                .equalTo("regularGearId",regularGearDetailModelResult?.regularGearId).findFirst()
 
-            if (campGearModelResult !=null) {
-                categorySpinner.setSelection(campGearModelResult.campGearId.toInt())
+            if (regularGearModelResult !=null) {
+                regularGearSpinner.setSelection(regularGearModelResult.regularGearId.toInt())
             }
 
             btnDel.visibility = View.VISIBLE
@@ -79,35 +85,44 @@ class RegularGearDetailAddActivity : AppCompatActivity() {
             btnDel.visibility = View.INVISIBLE
         }
 
+        btnSearch.setOnClickListener {
+            val intent = Intent(this, GearMasterActivity::class.java)
+            myApp.prevPage = "REGULAR_GEAR_DETAIL"
+            startActivity(intent)
+        }
         btnSave.setOnClickListener {
-            var name: String = ""
-            var category: String = ""
-
-           var goodsId = 0L
-            val goodsModel = goodsSpinner.selectedItem as MyGearModel
-            goodsId = goodsModel.myGearId
-
-            var categoryId: Long = 0L
-            val categoryModel = categorySpinner.selectedItem as CampGearModel
-            categoryId = categoryModel.campGearId
-            if (goodsId == 0L) {
+            var regularGearId: Long = 0L
+            val categoryModel = regularGearSpinner.selectedItem as RegularGearModel
+            regularGearId = categoryModel.regularGearId
+            if (regularGearDetailId == 0L) {
                 realm.executeTransaction {
-                    val currentId = realm.where<CampGearDetailModel>().max("campGearDetailId")
+                    val currentId = realm.where<RegularGearDetailModel>().max("regularGearDetailId")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
-                    val myModel = realm.createObject<CampGearDetailModel>(nextId)
-                    myModel.goodsId = goodsId
-                    myModel.campGearId = categoryId
+                    val myModel = realm.createObject<RegularGearDetailModel>(nextId)
+                    myModel.regularGearId = regularGearId
+                    myModel.gearName = etName.text.toString()
+                    myModel.isRegular = true
                 }
             } else {
                 realm.executeTransaction {
-                    val myModel = realm.where<CampGearDetailModel>()
-                        .equalTo("campGearDetailId", goodsId).findFirst()
-                    myModel?.goodsId = goodsId
-                    myModel?.campGearId = categoryId
+                    val myModel = realm.where<RegularGearDetailModel>()
+                        .equalTo("regularGearDetailId", regularGearDetailId).findFirst()
+                    myModel?.regularGearId = regularGearId
+                    myModel?.gearName = etName.text.toString()
+                    myModel?.isRegular = true
                 }
             }
 
             Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        btnDel.setOnClickListener {
+            realm.executeTransaction {
+                val myModel = realm.where<RegularGearDetailModel>()
+                    .equalTo("regularGearDetailId", regularGearDetailId).findFirst()
+                myModel?.deleteFromRealm()
+            }
+            Toast.makeText(applicationContext, "削除しました", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
