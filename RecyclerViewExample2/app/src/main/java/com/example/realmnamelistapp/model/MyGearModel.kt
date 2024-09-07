@@ -5,15 +5,15 @@ import io.realm.annotations.PrimaryKey
 
 
 //open class GoodsMasterModel: RealmObject() {
-open class MyModelModel: RealmObject() {
+open class MyGearModel: RealmObject() {
     @PrimaryKey
-    var goodsId : Long=0
-    var name: String = ""
-    var categoryId: Long=0
+    var myGearId : Long=0
+    var gearName: String = ""
+    var campGearId: Long=0
     var isSelected = false
 
     override fun toString(): String {
-        return name
+        return gearName
     }
 
 

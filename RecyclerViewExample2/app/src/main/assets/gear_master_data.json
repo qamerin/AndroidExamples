@@ -1,26 +1,26 @@
 [
   {
-    "id": 0,
-    "productName": "リビロン",
+    "gearMasterId": 0,
+    "gearName": "リビロン",
     "brandName": "Snowpeak",
-    "categoryId": 0
+    "campGearId": 0
   },
   {
-    "id": 1,
-    "productName": "Gloke12 TC",
+    "gearMasterId": 1,
+    "gearName": "Gloke12 TC",
     "brandName": "Ogawa",
-    "categoryId": 0
+    "campGearId": 0
   },
   {
-    "id": 2,
-    "productName": "リラックスチェア",
+    "gearMasterId": 2,
+    "gearName": "リラックスチェア",
     "brandName": "Ogawa",
-    "categoryId": 2
+    "campGearId": 2
   },
   {
-    "id": 3,
-    "productName": "ローチェア３０",
+    "gearMasterId": 3,
+    "gearName": "ローチェア３０",
     "brandName": "Snowpeak",
-    "categoryId": 2
+    "campGearId": 2
   }
 ]

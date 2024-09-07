@@ -2,13 +2,12 @@ package com.example.realmnamelistapp.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import java.time.LocalDate
 
 
-open class ProductMasterModel: RealmObject() {
+open class GearMasterModel: RealmObject() {
     @PrimaryKey
-    var id : Long=0
-    var productName: String = ""
+    var gearMasterId : Long=0
+    var gearName: String = ""
     var brandName: String = ""
-    var categoryId: Long=0
+    var campGearId: Long=0
 }

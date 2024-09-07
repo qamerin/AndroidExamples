@@ -8,17 +8,17 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.common.MyApp
-import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.MyModelModel
-import com.example.realmnamelistapp.model.GoodsModel
+import com.example.realmnamelistapp.model.CampGearModel
+import com.example.realmnamelistapp.model.MyGearModel
+import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResults:RealmResults<MyModelModel>,
+class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResults:RealmResults<MyGearModel>,
                                        private val isAlwaysSelectable: Boolean ):RecyclerView.Adapter<GoodsBulkRegisterViewHolderItem>() {
     private lateinit var realm: Realm
-    private val rResults:RealmResults<MyModelModel> = realmResults
+    private val rResults:RealmResults<MyGearModel> = realmResults
     var selectedGoodsId = ArrayList<Long>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsBulkRegisterViewHolderItem {
@@ -34,14 +34,14 @@ class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResult
     override fun onBindViewHolder(holder: GoodsBulkRegisterViewHolderItem, position: Int) {
         realm = Realm.getDefaultInstance()
         val myModel = rResults[position]
-        holder.oneTvName.text = myModel?.name.toString()
+        holder.oneTvName.text = myModel?.gearName.toString()
 
         val campId = MyApp.getInstance().campId
-        val goodsResult = realm.where<GoodsModel>()
+        val goodsResult = realm.where<CampGearDetailModel>()
             .equalTo("campId",campId).findAll()
 
         for(i in goodsResult){
-            if(i.goodsId == myModel!!.goodsId){
+            if(i.goodsId == myModel!!.myGearId){
                 holder.myCheckBox.isChecked = true
                 selectedGoodsId.add(i.goodsId)
             }
@@ -50,18 +50,18 @@ class GoodsBulkRegisterRecyclerAdapter(private val context: Context, realmResult
         val teacher = rResults[position]
 
         // get Category Name
-        val categoryMasterModelResult = realm.where<CategoryMasterModel>()
-            .equalTo("categoryId",myModel?.categoryId).findFirst()
-        holder.oneTvCategory.text = categoryMasterModelResult?.categoryName
+        val campGearModelResult = realm.where<CampGearModel>()
+            .equalTo("campGearId",myModel?.campGearId).findFirst()
+        holder.oneTvCategory.text = campGearModelResult?.campGearName
 
         holder.setItemClickListener(object: GoodsBulkRegisterViewHolderItem.ItemClickListener {
             override fun onItemClick(v: View, pos: Int) {
                 val myCheckBox = v as CheckBox
                 if (myCheckBox.isChecked) {
-                    selectedGoodsId.add(myModel!!.goodsId)
+                    selectedGoodsId.add(myModel!!.myGearId)
 
                 } else if (!myCheckBox.isChecked) {
-                    selectedGoodsId.remove(myModel!!.goodsId)
+                    selectedGoodsId.remove(myModel!!.myGearId)
                 }
             }
         })

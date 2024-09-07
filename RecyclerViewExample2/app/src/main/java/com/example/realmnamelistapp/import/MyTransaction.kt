@@ -1,8 +1,8 @@
 package com.example.realmnamelistapp.import
 
 import com.example.realmnamelistapp.common.CustomApplication
-import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.ProductMasterModel
+import com.example.realmnamelistapp.model.CampGearModel
+import com.example.realmnamelistapp.model.GearMasterModel
 import io.realm.Realm
 
 class MyTransaction : Realm.Transaction {
@@ -10,8 +10,8 @@ class MyTransaction : Realm.Transaction {
         realm?.let {
             CustomApplication.instance?.let {
                 source ->
-                it.createAllFromJson(CategoryMasterModel::class.java, source.resources.assets.open("item_data.json"))
-                it.createAllFromJson(ProductMasterModel::class.java, source.resources.assets.open("product_master_data.json"))
+                it.createAllFromJson(CampGearModel::class.java, source.resources.assets.open("camp_gear_data.json"))
+                it.createAllFromJson(GearMasterModel::class.java, source.resources.assets.open("gear_master_data.json"))
             }
         }
     }

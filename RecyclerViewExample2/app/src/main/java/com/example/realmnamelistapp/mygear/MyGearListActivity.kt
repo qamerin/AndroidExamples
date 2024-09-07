@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.MyModelModel
+import com.example.realmnamelistapp.model.MyGearModel
 import io.realm.Realm
 import io.realm.Sort
 
@@ -59,9 +59,9 @@ class MyGearListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val realmResults = realm.where(MyModelModel::class.java)
+        val realmResults = realm.where(MyGearModel::class.java)
 //            .equalTo("campId" ,1L)
-            .findAll().sort("goodsId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+            .findAll().sort("myGearId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = MyGearRecyclerAdapter(realmResults)

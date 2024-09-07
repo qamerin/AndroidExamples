@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.MyModelModel
-import com.example.realmnamelistapp.model.GoodsModel
+import com.example.realmnamelistapp.model.CampGearModel
+import com.example.realmnamelistapp.model.MyGearModel
+import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.createObject
@@ -39,38 +39,38 @@ class GoodsAddActivity : AppCompatActivity() {
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
-        val id = intent.getLongExtra("id",0L)
+        val id = intent.getLongExtra("campId",0L)
 
         // set the spinner contents for Category
-        val goodsResult = realm.where(/* clazz = */ MyModelModel::class.java)
-//            .equalTo("categoryId",goodsModelResult?.categoryId)
+        val goodsResult = realm.where(/* clazz = */ MyGearModel::class.java)
+//            .equalTo("campGearId",goodsModelResult?.campGearId)
             .findAll()
-            .sort("goodsId", Sort.ASCENDING)//
-        val goodsList = ArrayList<MyModelModel>()
+            .sort("myGearId", Sort.ASCENDING)//
+        val goodsList = ArrayList<MyGearModel>()
         goodsList.addAll(realm.copyFromRealm(goodsResult));
-        val goodsAdapter = ArrayAdapter<MyModelModel>(this, android.R.layout.simple_spinner_item, goodsList)
+        val goodsAdapter = ArrayAdapter<MyGearModel>(this, android.R.layout.simple_spinner_item, goodsList)
         val goodsSpinner = findViewById<Spinner>(R.id.spnGoods)
         goodsSpinner.adapter = goodsAdapter
 
         // set the spinner contents for Category
-        val categoryResult = realm.where(/* clazz = */ CategoryMasterModel::class.java)
-            .findAll().sort("categoryId", Sort.ASCENDING)//
-        val categoryList = ArrayList<CategoryMasterModel>()
+        val categoryResult = realm.where(/* clazz = */ CampGearModel::class.java)
+            .findAll().sort("campGearId", Sort.ASCENDING)//
+        val categoryList = ArrayList<CampGearModel>()
         categoryList.addAll(realm.copyFromRealm(categoryResult));
-        val categoryAdapter = ArrayAdapter<CategoryMasterModel>(this, android.R.layout.simple_spinner_item, categoryList)
+        val categoryAdapter = ArrayAdapter<CampGearModel>(this, android.R.layout.simple_spinner_item, categoryList)
         val categorySpinner = findViewById<Spinner>(R.id.spnCategory)
         categorySpinner.adapter = categoryAdapter
 
         if(id>0){
-            val myModelResult = realm.where<GoodsModel>()
-                .equalTo("id",id).findFirst()
+            val myModelResult = realm.where<CampGearDetailModel>()
+                .equalTo("campGearDetailId",id).findFirst()
 
             // get Category Name
-            val categoryMasterModelResult = realm.where<CategoryMasterModel>()
-                .equalTo("categoryId",myModelResult?.categoryId).findFirst()
+            val campGearModelResult = realm.where<CampGearModel>()
+                .equalTo("campGearId",myModelResult?.campGearId).findFirst()
 
-            if (categoryMasterModelResult !=null) {
-                categorySpinner.setSelection(categoryMasterModelResult.categoryId.toInt())
+            if (campGearModelResult !=null) {
+                categorySpinner.setSelection(campGearModelResult.campGearId.toInt())
             }
 
             btnDel.visibility = View.VISIBLE
@@ -84,26 +84,26 @@ class GoodsAddActivity : AppCompatActivity() {
             var category: String = ""
 
            var goodsId = 0L
-            val goodsModel = goodsSpinner.selectedItem as MyModelModel
-            goodsId = goodsModel.goodsId
+            val goodsModel = goodsSpinner.selectedItem as MyGearModel
+            goodsId = goodsModel.myGearId
 
             var categoryId: Long = 0L
-            val categoryModel = categorySpinner.selectedItem as CategoryMasterModel
-            categoryId = categoryModel.categoryId
+            val categoryModel = categorySpinner.selectedItem as CampGearModel
+            categoryId = categoryModel.campGearId
             if (goodsId == 0L) {
                 realm.executeTransaction {
-                    val currentId = realm.where<GoodsModel>().max("id")
+                    val currentId = realm.where<CampGearDetailModel>().max("campGearDetailId")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
-                    val myModel = realm.createObject<GoodsModel>(nextId)
+                    val myModel = realm.createObject<CampGearDetailModel>(nextId)
                     myModel.goodsId = goodsId
-                    myModel.categoryId = categoryId
+                    myModel.campGearId = categoryId
                 }
             } else {
                 realm.executeTransaction {
-                    val myModel = realm.where<GoodsModel>()
-                        .equalTo("id", goodsId).findFirst()
+                    val myModel = realm.where<CampGearDetailModel>()
+                        .equalTo("campGearDetailId", goodsId).findFirst()
                     myModel?.goodsId = goodsId
-                    myModel?.categoryId = categoryId
+                    myModel?.campGearId = categoryId
                 }
             }
 

@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.goods.bulkregister.GoodsBulkRegisterListActivity
-import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.GoodsModel
+import com.example.realmnamelistapp.model.CampGearModel
 import io.realm.Realm
 import io.realm.Sort
 
@@ -71,8 +70,8 @@ class GoodsListActivity : AppCompatActivity() {
         super.onStart()
 //        val realmResults = realm.where(GoodsModel::class.java)
 //            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
-        val realmResults = realm.where(CategoryMasterModel::class.java)
-            .findAll().sort("categoryId", Sort.ASCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+        val realmResults = realm.where(CampGearModel::class.java)
+            .findAll().sort("campGearId", Sort.ASCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = CategoryRecyclerAdapter(realmResults)

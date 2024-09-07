@@ -53,7 +53,7 @@ class CampEditActivity : AppCompatActivity() {
         }
 
         realm = Realm.getDefaultInstance()
-        val getId = intent.getLongExtra("ID",0L)
+        val getId = intent.getLongExtra("campId",0L)
         if(getId>0){
             val campModelResult = realm.where<CampModel>()
                 .equalTo("campId",getId).findFirst()
@@ -116,7 +116,7 @@ class CampEditActivity : AppCompatActivity() {
         btnDel.setOnClickListener {
             realm.executeTransaction{
                realm.where<CampModel>()
-                    .equalTo("id",getId).findFirst()?.deleteFromRealm()
+                    .equalTo("campId",getId).findFirst()?.deleteFromRealm()
             }
             Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
             finish()

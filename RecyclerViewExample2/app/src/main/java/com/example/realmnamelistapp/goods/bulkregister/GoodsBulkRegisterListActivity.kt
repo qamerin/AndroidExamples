@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.goods.GoodsListActivity
-import com.example.realmnamelistapp.model.MyModelModel
-import com.example.realmnamelistapp.model.GoodsModel
+import com.example.realmnamelistapp.model.MyGearModel
+import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.createObject
@@ -51,22 +51,22 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
             var checkedTeachers = recyclerAdapter.selectedGoodsId
 
             // if checkedTeachers does not contains goods, remove from goods.
-            val deleteGoodsResult = realm.where<GoodsModel>()
+            val deleteGoodsResult = realm.where<CampGearDetailModel>()
                 .equalTo("campId",campId).findAll()
             realm.executeTransaction {
                 deleteGoodsResult.deleteAllFromRealm()
             }
             for(i in checkedTeachers){
-                val goodsMasterResult = realm.where(/* clazz = */ MyModelModel::class.java)
-                    .equalTo("goodsId",i).findFirst()
+                val goodsMasterResult = realm.where(/* clazz = */ MyGearModel::class.java)
+                    .equalTo("myGearId",i).findFirst()
 
                 realm.executeTransaction {
-                    val currentId = realm.where<GoodsModel>().max("id")
+                    val currentId = realm.where<CampGearDetailModel>().max("campGearDetailId")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
-                    val myModel = realm.createObject<GoodsModel>(nextId)
+                    val myModel = realm.createObject<CampGearDetailModel>(nextId)
                     myModel.goodsId = i
                     myModel.campId = campId
-                    myModel.categoryId = goodsMasterResult!!.categoryId
+                    myModel.campGearId = goodsMasterResult!!.campGearId
                 }
             }
             val intent = Intent(this, GoodsListActivity::class.java)
@@ -84,8 +84,8 @@ class GoodsBulkRegisterListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val realmResults = realm.where(MyModelModel::class.java)
-            .findAll().sort("goodsId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+        val realmResults = realm.where(MyGearModel::class.java)
+            .findAll().sort("myGearId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = GoodsBulkRegisterRecyclerAdapter(this, realmResults, false )

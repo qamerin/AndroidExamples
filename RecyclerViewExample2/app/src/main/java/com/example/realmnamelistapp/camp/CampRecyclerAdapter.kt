@@ -29,7 +29,7 @@ class CampRecyclerAdapter(realmResults:RealmResults<CampModel>):RecyclerView.Ada
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, CampListDetailActivity::class.java)
-            intent.putExtra("ID",myModel?.campId)
+            intent.putExtra("campId",myModel?.campId)
             val myApp = MyApp.getInstance()
             myApp.campId = myModel!!.campId
             it.context.startActivity(intent);

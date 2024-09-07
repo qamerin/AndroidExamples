@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.common.MyApp
-import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.GoodsModel
+//import com.example.realmnamelistapp.model.CategoryMasterModel
+import com.example.realmnamelistapp.model.CampGearModel
+import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class CategoryRecyclerAdapter(realmResults:RealmResults<CategoryMasterModel>):RecyclerView.Adapter<CategoryViewHolderItem>() {
+class CategoryRecyclerAdapter(realmResults:RealmResults<CampGearModel>):RecyclerView.Adapter<CategoryViewHolderItem>() {
     private lateinit var realm: Realm
-    private val rResults:RealmResults<CategoryMasterModel> = realmResults
+    private val rResults:RealmResults<CampGearModel> = realmResults
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
@@ -32,14 +33,14 @@ class CategoryRecyclerAdapter(realmResults:RealmResults<CategoryMasterModel>):Re
 
         // get Category Name
         realm = Realm.getDefaultInstance()
-        val categoryMasterModelResult = realm.where<CategoryMasterModel>()
-            .equalTo("categoryId",myModel?.categoryId).findFirst()
-        holder.oneTvCategory.text = categoryMasterModelResult?.categoryName
+        val categoryMasterModelResult = realm.where<CampGearModel>()
+            .equalTo("campGearId",myModel?.campGearId).findFirst()
+        holder.oneTvCategory.text = categoryMasterModelResult?.campGearName
 
 
         val campId = MyApp.getInstance().campId
-        val goodsResult = realm.where<GoodsModel>()
-            .equalTo("categoryId",myModel?.categoryId)
+        val goodsResult = realm.where<CampGearDetailModel>()
+            .equalTo("campGearId",myModel?.campGearId)
             .equalTo("campId",campId)
             .findAll()
         val goodsAdapter = GoodsRecyclerAdapter(goodsResult)
@@ -49,7 +50,7 @@ class CategoryRecyclerAdapter(realmResults:RealmResults<CategoryMasterModel>):Re
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, GoodsAddActivity::class.java)
 //            intent.putExtra("campId",myModel?.campId)
-//            intent.putExtra("goodsId",myModel?.id)
+//            intent.putExtra("myGearId",myModel?.id)
             it.context.startActivity(intent);
         }
     }

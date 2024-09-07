@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.CategoryMasterModel
-import com.example.realmnamelistapp.model.MyModelModel
-import com.example.realmnamelistapp.model.GoodsModel
+import com.example.realmnamelistapp.model.CampGearModel
+import com.example.realmnamelistapp.model.MyGearModel
+import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 
-class GoodsRecyclerAdapter(realmResults:RealmResults<GoodsModel>):RecyclerView.Adapter<GoodsViewHolderItem>() {
+class GoodsRecyclerAdapter(realmResults:RealmResults<CampGearDetailModel>):RecyclerView.Adapter<GoodsViewHolderItem>() {
     private lateinit var realm: Realm
-    private val rResults:RealmResults<GoodsModel> = realmResults
+    private val rResults:RealmResults<CampGearDetailModel> = realmResults
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
@@ -31,19 +31,19 @@ class GoodsRecyclerAdapter(realmResults:RealmResults<GoodsModel>):RecyclerView.A
         val myModel = rResults[position]
 //        holder.oneTvName.text = myModel?.name.toString()
 
-        val myModelModelResult = realm.where<MyModelModel>()
-            .equalTo("goodsId",myModel?.goodsId).findFirst()
-        holder.oneTvName.text = myModelModelResult?.name
+        val myGearModelResult = realm.where<MyGearModel>()
+            .equalTo("myGearId",myModel?.goodsId).findFirst()
+        holder.oneTvName.text = myGearModelResult?.gearName
 //        holder.oneTvName.text ="hogehoge"
 
         // get Category Name
-        val categoryMasterModelResult = realm.where<CategoryMasterModel>()
-            .equalTo("categoryId",myModel?.categoryId).findFirst()
+        val campGearModelResult = realm.where<CampGearModel>()
+            .equalTo("campGearId",myModel?.campGearId).findFirst()
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, GoodsAddActivity::class.java)
 //            intent.putExtra("campId",myModel?.campId)
-            intent.putExtra("id",myModel?.id)
+            intent.putExtra("campGearDetailId",myModel?.campGearDetailId)
             it.context.startActivity(intent);
         }
     }

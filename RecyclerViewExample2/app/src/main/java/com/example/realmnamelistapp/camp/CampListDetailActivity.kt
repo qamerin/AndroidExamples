@@ -42,7 +42,7 @@ class CampListDetailActivity : AppCompatActivity() {
         val btnMasterGoods: Button = findViewById(R.id.btGoodsMaster)
         val btnGoods: Button = findViewById(R.id.btGoods)
         realm = Realm.getDefaultInstance()
-        val getId = intent.getLongExtra("ID",0L)
+        val getId = intent.getLongExtra("campId",0L)
         if(getId>0){
             val campModelResult = realm.where<CampModel>()
                 .equalTo("campId",getId).findFirst()
@@ -57,7 +57,7 @@ class CampListDetailActivity : AppCompatActivity() {
 
             btnModify.setOnClickListener {
                 val intent = Intent(this, CampEditActivity::class.java)
-                intent.putExtra("ID",campModelResult?.campId)
+                intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
             btnMasterGoods.setOnClickListener {

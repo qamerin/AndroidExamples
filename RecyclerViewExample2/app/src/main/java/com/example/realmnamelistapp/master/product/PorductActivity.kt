@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.ProductMasterModel
+import com.example.realmnamelistapp.model.GearMasterModel
 import io.realm.Realm
 import io.realm.Sort
 
@@ -44,10 +44,10 @@ class ProductActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val realmResults = realm.where(ProductMasterModel::class.java)
+                val realmResults = realm.where(GearMasterModel::class.java)
                     .contains("productName",newText)
                     .findAll()
-                    .sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+                    .sort("gearMasterId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
                 recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
                 recyclerAdapter = ProductMasterRecyclerAdapter(realmResults)
@@ -69,8 +69,8 @@ class ProductActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val realmResults = realm.where(ProductMasterModel::class.java)
-            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+        val realmResults = realm.where(GearMasterModel::class.java)
+            .findAll().sort("gearMasterId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = ProductMasterRecyclerAdapter(realmResults)
