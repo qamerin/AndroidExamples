@@ -33,12 +33,13 @@ class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
 
         // get Category Name
         realm = Realm.getDefaultInstance()
+        val campId = MyApp.getInstance().campId
         val categoryMasterModelResult = realm.where<CampGearModel>()
+            .equalTo("campId",campId)
             .equalTo("campGearId",myModel?.campGearId).findFirst()
         holder.oneTvCategory.text = categoryMasterModelResult?.campGearName
 
 
-        val campId = MyApp.getInstance().campId
         val goodsResult = realm.where<CampGearDetailModel>()
             .equalTo("campGearId",myModel?.campGearId)
             .equalTo("campId",campId)
@@ -49,8 +50,6 @@ class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, CampGearDetailAddActivity::class.java)
-//            intent.putExtra("campId",myModel?.campId)
-//            intent.putExtra("myGearId",myModel?.id)
             it.context.startActivity(intent);
         }
     }

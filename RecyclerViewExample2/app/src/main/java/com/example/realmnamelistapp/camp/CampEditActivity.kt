@@ -13,7 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.realmnamelistapp.R
+import com.example.realmnamelistapp.model.CampGearDetailModel
+import com.example.realmnamelistapp.model.CampGearModel
 import com.example.realmnamelistapp.model.CampModel
+import com.example.realmnamelistapp.model.RegularGearDetailModel
+import com.example.realmnamelistapp.model.RegularGearModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
@@ -87,14 +91,38 @@ class CampEditActivity : AppCompatActivity() {
             if(getId == 0L){
                 realm.executeTransaction {
                     val currentId = realm.where<CampModel>().max("campId")
-                    val nextId = (currentId?.toLong()?:0L) + 1L
-                    val campModel = realm.createObject<CampModel>(nextId)
+                    val nextCampId = (currentId?.toLong()?:0L) + 1L
+                    val campModel = realm.createObject<CampModel>(nextCampId)
                     campModel.campName = campName
                     campModel.address = address
                     val listStartDate = etStartDate.text.toString().split("/")
                     campModel.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
                     val listEndDate = etEndDate.text.toString().split("/")
                     campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
+
+                    // set camp gear info
+                    val regularGearModel = realm.where<RegularGearModel>()
+                        .findAll()
+                    regularGearModel.forEach {
+                        val campGearCurrentId = realm.where<CampGearModel>().max("campGearId")
+                        val campGearNextId = (campGearCurrentId?.toLong() ?: 0L) + 1L
+                        val campGearModel = realm.createObject<CampGearModel>(campGearNextId)
+                        campGearModel.campGearName = it.gearName
+                        campGearModel.campId = nextCampId
+
+                        val regularGearDetailModel = realm.where<RegularGearDetailModel>()
+                            .equalTo("regularGearId", it.regularGearId)
+                            .findAll()
+
+                        regularGearDetailModel.forEach{ v->
+                            val campGearDetailCurrentId = realm.where<CampGearDetailModel>().max("campGearDetailId")
+                            val campGearDetailNextId = (campGearDetailCurrentId?.toLong() ?: 0L) + 1L
+                            val campGearDetailModel = realm.createObject<CampGearDetailModel>(campGearDetailNextId)
+                            campGearDetailModel.campGearId = campGearNextId
+                            campGearDetailModel.campGearName = v.gearName
+                            campGearDetailModel.campId = nextCampId
+                        }
+                    }
                 }
             }else{
                 realm.executeTransaction{

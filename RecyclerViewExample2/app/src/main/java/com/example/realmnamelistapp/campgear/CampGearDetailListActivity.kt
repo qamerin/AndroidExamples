@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.realmnamelistapp.R
 import com.example.realmnamelistapp.campgear.bulkregister.CampGearDetailBulkRegisterListActivity
+import com.example.realmnamelistapp.common.MyApp
 import com.example.realmnamelistapp.model.CampGearModel
 import io.realm.Realm
 import io.realm.Sort
@@ -68,10 +69,11 @@ class CampGearDetailListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        val realmResults = realm.where(GoodsModel::class.java)
-//            .findAll().sort("id", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+        val campId = MyApp.getInstance().campId
         val realmResults = realm.where(CampGearModel::class.java)
-            .findAll().sort("campGearId", Sort.ASCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+            .equalTo("campId",campId)
+            .findAll()
+            .sort("campGearId", Sort.ASCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvGoods)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = CampGearRecyclerAdapter(realmResults)

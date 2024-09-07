@@ -8,7 +8,7 @@ open class CampGearDetailModel: RealmObject() {
     @PrimaryKey
     var campGearDetailId : Long=0
     var campGearId: Long=0
-//    var name : String=""
+    var campGearName : String=""
     var goodsId: Long=0
     var campId : Long=0
 }

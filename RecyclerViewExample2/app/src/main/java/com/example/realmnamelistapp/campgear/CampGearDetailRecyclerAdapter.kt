@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.realmnamelistapp.R
-import com.example.realmnamelistapp.model.CampGearModel
-import com.example.realmnamelistapp.model.MyGearModel
 import com.example.realmnamelistapp.model.CampGearDetailModel
 import io.realm.Realm
 import io.realm.RealmResults
@@ -29,20 +27,12 @@ class CampGearDetailRecyclerAdapter(realmResults:RealmResults<CampGearDetailMode
     override fun onBindViewHolder(holder: CampGearDetailViewHolderItem, position: Int) {
         realm = Realm.getDefaultInstance()
         val myModel = rResults[position]
-//        holder.oneTvName.text = myModel?.name.toString()
-
-        val myGearModelResult = realm.where<MyGearModel>()
-            .equalTo("myGearId",myModel?.goodsId).findFirst()
-        holder.oneTvName.text = myGearModelResult?.gearName
-//        holder.oneTvName.text ="hogehoge"
-
-        // get Category Name
-        val campGearModelResult = realm.where<CampGearModel>()
+        val campGearDetailModelResult = realm.where<CampGearDetailModel>()
             .equalTo("campGearId",myModel?.campGearId).findFirst()
+        holder.oneTvName.text = campGearDetailModelResult?.campGearName
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, CampGearDetailAddActivity::class.java)
-//            intent.putExtra("campId",myModel?.campId)
             intent.putExtra("campGearDetailId",myModel?.campGearDetailId)
             it.context.startActivity(intent);
         }

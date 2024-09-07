@@ -11,7 +11,6 @@ class MyTransaction : Realm.Transaction {
         realm?.let {
             CustomApplication.instance?.let {
                 source ->
-                it.createAllFromJson(CampGearModel::class.java, source.resources.assets.open("camp_gear_data.json"))
                 it.createAllFromJson(GearMasterModel::class.java, source.resources.assets.open("gear_master_data.json"))
                 it.createAllFromJson(RegularGearModel::class.java, source.resources.assets.open("regular_gear_data.json"))
             }
