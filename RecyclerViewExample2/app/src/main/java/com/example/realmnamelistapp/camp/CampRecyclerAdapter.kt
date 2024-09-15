@@ -25,6 +25,8 @@ class CampRecyclerAdapter(realmResults:RealmResults<CampModel>):RecyclerView.Ada
     override fun onBindViewHolder(holder: CampViewHolderItem, position: Int) {
         val myModel = rResults[position]
         holder.oneTvName.text = myModel?.campName.toString()
+        holder.oneTvDate.text = myModel?.startDate.toString() +
+                " 〜 " + myModel?.endDate.toString()
 //        holder.oneTvAge.text = myModel?.age.toString()
 
         holder.itemView.setOnClickListener {

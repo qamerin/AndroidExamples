@@ -7,6 +7,6 @@ import com.example.realmnamelistapp.R
 
 class CampViewHolderItem(v:View) :RecyclerView.ViewHolder(v){
     var oneTvName: TextView = v.findViewById(R.id.oneTvName)
-    var oneTvAge: TextView = v.findViewById(R.id.oneTvAge)
+    var oneTvDate: TextView = v.findViewById(R.id.oneTvDate)
 
 }
