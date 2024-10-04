@@ -1,5 +1,6 @@
 package com.qamerin.mycampapp.camp
 
+import android.R.attr.button
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -13,18 +14,27 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.qamerin.mycampapp.R
 import com.qamerin.mycampapp.campmaster.CampgoundMasterActivity
 import com.qamerin.mycampapp.model.CampModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+
 
 class CampEditActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     private var startDbDate:LocalDate = LocalDate.now()
     private var endDbDate:LocalDate = LocalDate.now()
+    private lateinit var selectedDate: TextView
+    private lateinit var datePicker: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,16 +54,8 @@ class CampEditActivity : AppCompatActivity() {
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         val etStartDate : TextView = findViewById(R.id.etStartDate)
-        val btnStartDateCal : Button = findViewById(R.id.startDateButton)
         val etEndDate : TextView = findViewById(R.id.etEndDate)
-        val btnEndDateCal : Button = findViewById(R.id.endDateButton)
         val btnSearch : ImageView = findViewById(R.id.btnSearch)
-        btnStartDateCal.setOnClickListener {
-            showDatePicker(etStartDate)
-        }
-        btnEndDateCal.setOnClickListener {
-            showDatePicker(etEndDate)
-        }
 
         val campgroundName = intent.getStringExtra("campgroundName")
         if(!campgroundName.isNullOrEmpty()) {
@@ -140,7 +142,65 @@ class CampEditActivity : AppCompatActivity() {
             val intent = Intent(this, CampgoundMasterActivity::class.java)
             startActivity(intent)
         }
+
+        datePicker = findViewById(R.id.datePicker)
+
+        datePicker.setOnClickListener {
+            // 初期値として設定する日付を取得
+            val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+            val initialStartDate = if (etStartDate.text.toString().isNotEmpty()) {
+                val calendar = Calendar.getInstance().apply {
+                    time = dateFormat.parse(etStartDate.text.toString())
+                    add(Calendar.DAY_OF_MONTH, 1) // 1日進める
+                }
+                calendar.timeInMillis
+            } else {
+                // デフォルトの日付を設定（例：現在の日付）
+                Calendar.getInstance().timeInMillis
+            }
+
+            val initialEndDate = if (etEndDate.text.toString().isNotEmpty()) {
+                val calendar = Calendar.getInstance().apply {
+                    time = dateFormat.parse(etEndDate.text.toString())
+                    add(Calendar.DAY_OF_MONTH, 1) // 1日進める
+                }
+                calendar.timeInMillis
+            } else {
+                // デフォルトの日付を設定（例：現在の日付）
+                Calendar.getInstance().timeInMillis
+            }
+            // DatePickerのビルダーを作成し、初期値を設定
+            val datePickerBuilder = MaterialDatePicker.Builder.dateRangePicker()
+            datePickerBuilder.setSelection(androidx.core.util.Pair(initialStartDate, initialEndDate))
+            val datePicker = datePickerBuilder.build()
+
+            datePicker.show(supportFragmentManager, "DatePicker")
+
+            // Setting up the event for when cancelled is clicked
+             datePicker.addOnNegativeButtonClickListener {
+                 Toast.makeText(this, "${datePicker.headerText} is cancelled", Toast.LENGTH_LONG).show()
+             }
+            datePicker.addOnPositiveButtonClickListener {  dateRange ->
+                val startDate = dateRange.first
+                val endDate = dateRange.second
+
+                val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+                val startDateString = dateFormat.format(Date(startDate))
+                val endDateString = dateFormat.format(Date(endDate))
+
+                Toast.makeText(this, "Selected: From $startDateString To $endDateString", Toast.LENGTH_LONG).show()
+
+                etStartDate.text = startDateString
+                etEndDate.text = endDateString
+
+            }
+            // Setting up the event for when back button is pressed
+            datePicker.addOnCancelListener {
+                Toast.makeText(this, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
+            }
+        }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
