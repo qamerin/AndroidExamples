@@ -1,0 +1,46 @@
+[
+  {
+    "gearCategoryId": 0,
+    "categoryName": "テント・タープ"
+  },
+  {
+    "gearCategoryId":1,
+    "categoryName": "テーブル・椅子"
+  },
+  {
+    "gearCategoryId":2,
+    "categoryName": "寝具"
+  },
+  {
+    "gearCategoryId":3,
+    "categoryName": "調理器具"
+  },
+  {
+    "gearCategoryId":4,
+    "categoryName": "食器類"
+  },
+  {
+    "gearCategoryId":5,
+    "categoryName": "飲食物"
+  },
+  {
+    "gearCategoryId":6,
+    "categoryName": "ライト"
+  },
+  {
+    "gearCategoryId":7,
+    "categoryName": "着替え"
+  },
+  {
+    "gearCategoryId":8,
+    "categoryName": "雑貨"
+  },
+  {
+    "gearCategoryId":9,
+    "categoryName": "焚き火"
+  },
+  {
+    "gearCategoryId":10,
+    "categoryName": "その他"
+  }
+]
