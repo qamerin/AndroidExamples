@@ -24,6 +24,12 @@
             android:name=".campmaster.CampgroundMasterActivity"
             android:exported="false" />
         <activity
+            android:name=".campgear.CampGearDetailListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".campgear.CampGearDetailAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".camp.CampMainActivity"
             android:exported="true">
             <intent-filter>

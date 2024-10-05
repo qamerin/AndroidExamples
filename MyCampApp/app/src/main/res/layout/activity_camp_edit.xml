@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="From"
+        android:text=""
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="To"
+        android:text=""
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tvStartEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />

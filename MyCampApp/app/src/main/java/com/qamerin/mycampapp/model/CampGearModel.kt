@@ -8,6 +8,7 @@ open class CampGearModel: RealmObject() {
     @PrimaryKey
     var campGearId : Long=0
     var campGearName: String = ""
+    var categoryName: String = ""
     var campId : Long=0
 
     override fun toString(): String {

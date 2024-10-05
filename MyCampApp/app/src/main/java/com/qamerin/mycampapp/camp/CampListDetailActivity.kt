@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.qamerin.mycampapp.R
+import com.qamerin.mycampapp.campgear.CampGearDetailListActivity
 import com.qamerin.mycampapp.common.MyApp
 //import com.qamerin.mycampapp.campgear.CampGearDetailListActivity
 //import com.qamerin.mycampapp.master.gear.GearMasterActivity
@@ -63,11 +64,11 @@ class CampListDetailActivity : AppCompatActivity() {
                 intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
-//            btnCampGear.setOnClickListener {
-//                val intent = Intent(this, CampGearDetailListActivity::class.java)
-//                intent.putExtra("campId",campModelResult?.campId)
-//                startActivity(intent)
-//            }
+            btnCampGear.setOnClickListener {
+                val intent = Intent(this, CampGearDetailListActivity::class.java)
+                intent.putExtra("campId",campModelResult?.campId)
+                startActivity(intent)
+            }
 //            btnRegularGear.setOnClickListener {
 //                val intent = Intent(this, RegularGearDetailListActivity::class.java)
 //                startActivity(intent)

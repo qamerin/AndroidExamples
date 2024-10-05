@@ -137,6 +137,8 @@ class CampEditActivity : AppCompatActivity() {
         }
         btnSearch.setOnClickListener {
             val intent = Intent(this, CampgroundMasterActivity::class.java)
+            intent.putExtra("etStartDate",etStartDate.text)
+            intent.putExtra("etEndDate",etEndDate.text)
             startActivity(intent)
         }
 
@@ -207,17 +209,6 @@ class CampEditActivity : AppCompatActivity() {
     }
 
 
-    private fun showDatePicker(tvCal:TextView) {
-        val datePickerDialog = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener() {_ , year, month, dayOfMonth->
-                tvCal.text = "${year}/${month+1}/${dayOfMonth}"
-            },
-            startDbDate.year,
-            startDbDate.monthValue-1,
-            startDbDate.dayOfMonth)
-        datePickerDialog.show()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
