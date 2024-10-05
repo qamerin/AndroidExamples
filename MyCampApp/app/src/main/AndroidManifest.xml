@@ -21,7 +21,7 @@
             android:name=".camp.CampEditActivity"
             android:exported="false" />
         <activity
-            android:name=".campmaster.CampgoundMasterActivity"
+            android:name=".campmaster.CampgroundMasterActivity"
             android:exported="false" />
         <activity
             android:name=".camp.CampMainActivity"

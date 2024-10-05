@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.qamerin.mycampapp.R
+import com.qamerin.mycampapp.common.MyApp
 //import com.qamerin.mycampapp.campgear.CampGearDetailListActivity
 //import com.qamerin.mycampapp.master.gear.GearMasterActivity
 //import com.qamerin.mycampapp.mygear.MyGearListActivity
@@ -43,10 +44,11 @@ class CampListDetailActivity : AppCompatActivity() {
         val btnModify: Button = findViewById(R.id.btnModify)
         val btnCampGear: Button = findViewById(R.id.btCampGear)
         realm = Realm.getDefaultInstance()
-        val getId = intent.getLongExtra("campId",0L)
-        if(getId>0){
+        val campId = MyApp.getInstance().campId
+//        val getId = intent.getLongExtra("campId",0L)
+        if(campId>0){
             val campModelResult = realm.where<CampModel>()
-                .equalTo("campId",getId).findFirst()
+                .equalTo("campId",campId).findFirst()
             etName.text = campModelResult?.campName.toString()
             etAddress.text = campModelResult?.address.toString()
             etStartDate.text = campModelResult?.startDate?.year.toString()+

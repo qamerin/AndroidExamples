@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.master.gear.GearMasterRecyclerAdapter
+import com.qamerin.mycampapp.master.gear.CampgroundMasterRecyclerAdapter
 import com.qamerin.mycampapp.model.CampgroundMasterModel
 import io.realm.Realm
 import io.realm.Sort
 
-class CampgoundMasterActivity : AppCompatActivity() {
+class CampgroundMasterActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
-    private lateinit var recyclerAdapter: GearMasterRecyclerAdapter
+    private lateinit var recyclerAdapter: CampgroundMasterRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class CampgoundMasterActivity : AppCompatActivity() {
                     .sort("campgroundId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
                 recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-                recyclerAdapter = GearMasterRecyclerAdapter(realmResults)
+                recyclerAdapter = CampgroundMasterRecyclerAdapter(realmResults)
                 recyclerView.adapter = recyclerAdapter
                 recyclerView.layoutManager = layoutManager
 
@@ -71,7 +71,7 @@ class CampgoundMasterActivity : AppCompatActivity() {
             .findAll().sort("campgroundId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-        recyclerAdapter = GearMasterRecyclerAdapter(realmResults)
+        recyclerAdapter = CampgroundMasterRecyclerAdapter(realmResults)
         recyclerView.adapter = recyclerAdapter
 
         layoutManager = LinearLayoutManager(this)

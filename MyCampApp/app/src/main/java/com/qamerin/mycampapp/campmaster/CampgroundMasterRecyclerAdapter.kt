@@ -6,30 +6,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.qamerin.mycampapp.R
 import com.qamerin.mycampapp.camp.CampEditActivity
+import com.qamerin.mycampapp.common.MyApp
 //import com.qamerin.mycampapp.mygear.MyGearAddActivity
-import com.qamerin.mycampapp.model.CampGearModel
 import com.qamerin.mycampapp.model.CampgroundMasterModel
 //import com.qamerin.mycampapp.model.GearMasterModel
 //import com.qamerin.mycampapp.regulargear.RegularGearDetailAddActivity
 import io.realm.Realm
 import io.realm.RealmResults
-import io.realm.kotlin.where
 
-class GearMasterRecyclerAdapter(realmResults:RealmResults<CampgroundMasterModel>):RecyclerView.Adapter<GearMasterViewHolderItem>() {
+class CampgroundMasterRecyclerAdapter(realmResults:RealmResults<CampgroundMasterModel>):RecyclerView.Adapter<CampgroundMasterViewHolderItem>() {
     private lateinit var realm: Realm
     private val rResults:RealmResults<CampgroundMasterModel> = realmResults
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GearMasterViewHolderItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampgroundMasterViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
             .inflate(R.layout.one_camp_master_layout,parent,false)
-        return GearMasterViewHolderItem(oneXml)
+        return CampgroundMasterViewHolderItem(oneXml)
     }
 
     override fun getItemCount(): Int {
         return rResults.size
     }
 
-    override fun onBindViewHolder(holder: GearMasterViewHolderItem, position: Int) {
+    override fun onBindViewHolder(holder: CampgroundMasterViewHolderItem, position: Int) {
         val myModel = rResults[position]
         holder.oneTvCampgroundName.text = myModel?.campgroundName.toString()
         holder.oneTvAddress.text = myModel?.address.toString()
@@ -45,6 +44,7 @@ class GearMasterRecyclerAdapter(realmResults:RealmResults<CampgroundMasterModel>
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
 //                it.context.startActivity(intent);
 //            }else{
+
                 val intent = Intent(it.context, CampEditActivity::class.java)
                 intent.putExtra("campgroundName",myModel?.campgroundName)
                 intent.putExtra("campgroundAddress",myModel?.address)

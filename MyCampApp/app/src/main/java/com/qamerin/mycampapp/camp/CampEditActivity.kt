@@ -1,6 +1,5 @@
 package com.qamerin.mycampapp.camp
 
-import android.R.attr.button
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.campmaster.CampgoundMasterActivity
+import com.qamerin.mycampapp.campmaster.CampgroundMasterActivity
+import com.qamerin.mycampapp.common.MyApp
 import com.qamerin.mycampapp.model.CampModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
@@ -48,7 +48,6 @@ class CampEditActivity : AppCompatActivity() {
         // ツールバーに戻るボタンを設置
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         val etCampName : TextView = findViewById(R.id.etCampName)
         val etAddress : TextView = findViewById(R.id.etAdress)
         val btnSave : Button = findViewById(R.id.btnSave)
@@ -57,21 +56,11 @@ class CampEditActivity : AppCompatActivity() {
         val etEndDate : TextView = findViewById(R.id.etEndDate)
         val btnSearch : ImageView = findViewById(R.id.btnSearch)
 
-        val campgroundName = intent.getStringExtra("campgroundName")
-        if(!campgroundName.isNullOrEmpty()) {
-            etCampName.text = campgroundName
-        }
-        val campgroundAddress = intent.getStringExtra("campgroundAddress")
-        if(!campgroundAddress.isNullOrEmpty()) {
-            etAddress.text = campgroundAddress
-        }
-
-
         realm = Realm.getDefaultInstance()
-        val getId = intent.getLongExtra("campId",0L)
-        if(getId>0){
+        val campId = MyApp.getInstance().campId
+        if(campId>0){
             val campModelResult = realm.where<CampModel>()
-                .equalTo("campId",getId).findFirst()
+                .equalTo("campId",campId).findFirst()
             etCampName.text = campModelResult?.campName.toString()
             etAddress.text = campModelResult?.address.toString()
             etStartDate.text = campModelResult?.startDate?.year.toString()+
@@ -89,6 +78,14 @@ class CampEditActivity : AppCompatActivity() {
         }else{
             btnDel.visibility = View.INVISIBLE
         }
+        val campgroundName = intent.getStringExtra("campgroundName")
+        if(!campgroundName.isNullOrEmpty()) {
+            etCampName.text = campgroundName
+        }
+        val campgroundAddress = intent.getStringExtra("campgroundAddress")
+        if(!campgroundAddress.isNullOrEmpty()) {
+            etAddress.text = campgroundAddress
+        }
         btnSave.setOnClickListener {
             var campName:String = ""
             var address:String = ""
@@ -99,7 +96,7 @@ class CampEditActivity : AppCompatActivity() {
                 address = etAddress.text.toString()
             }
 
-            if(getId == 0L){
+            if(campId == 0L){
                 realm.executeTransaction {
                     val currentId = realm.where<CampModel>().max("campId")
                     val nextCampId = (currentId?.toLong()?:0L) + 1L
@@ -114,7 +111,7 @@ class CampEditActivity : AppCompatActivity() {
             }else{
                 realm.executeTransaction{
                     val campModel = realm.where<CampModel>()
-                        .equalTo("campId",getId).findFirst()
+                        .equalTo("campId",campId).findFirst()
                     campModel?.campName = campName
                     campModel?.address = address
                     val listStartDate = etStartDate.text.toString().split("/")
@@ -131,7 +128,7 @@ class CampEditActivity : AppCompatActivity() {
         btnDel.setOnClickListener {
             realm.executeTransaction{
                realm.where<CampModel>()
-                    .equalTo("campId",getId).findFirst()?.deleteFromRealm()
+                    .equalTo("campId",campId).findFirst()?.deleteFromRealm()
             }
             Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
             finish()
@@ -139,7 +136,7 @@ class CampEditActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnSearch.setOnClickListener {
-            val intent = Intent(this, CampgoundMasterActivity::class.java)
+            val intent = Intent(this, CampgroundMasterActivity::class.java)
             startActivity(intent)
         }
 
