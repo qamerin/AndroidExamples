@@ -61,12 +61,12 @@ class CampListDetailActivity : AppCompatActivity() {
 
             btnModify.setOnClickListener {
                 val intent = Intent(this, CampEditActivity::class.java)
-                intent.putExtra("campId",campModelResult?.campId)
+//                intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
             btnCampGear.setOnClickListener {
                 val intent = Intent(this, CampGearDetailListActivity::class.java)
-                intent.putExtra("campId",campModelResult?.campId)
+//                intent.putExtra("campId",campModelResult?.campId)
                 startActivity(intent)
             }
 //            btnRegularGear.setOnClickListener {

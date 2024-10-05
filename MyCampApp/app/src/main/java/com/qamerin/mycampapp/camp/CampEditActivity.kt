@@ -17,8 +17,11 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.qamerin.mycampapp.R
 import com.qamerin.mycampapp.campmaster.CampgroundMasterActivity
 import com.qamerin.mycampapp.common.MyApp
+import com.qamerin.mycampapp.model.CampGearDefaultModel
+import com.qamerin.mycampapp.model.CampGearModel
 import com.qamerin.mycampapp.model.CampModel
 import io.realm.Realm
+import io.realm.Sort
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import java.text.SimpleDateFormat
@@ -97,6 +100,7 @@ class CampEditActivity : AppCompatActivity() {
             }
 
             if(campId == 0L){
+                // Add New Camp Record
                 realm.executeTransaction {
                     val currentId = realm.where<CampModel>().max("campId")
                     val nextCampId = (currentId?.toLong()?:0L) + 1L
@@ -107,6 +111,20 @@ class CampEditActivity : AppCompatActivity() {
                     campModel.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
                     val listEndDate = etEndDate.text.toString().split("/")
                     campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
+
+                    // Add Camp Gear Record from Camp Default Gear
+                    val campGearDefaultResult = realm.where(/* clazz = */ CampGearDefaultModel::class.java)
+                        .findAll().sort("defaultCampGearId", Sort.ASCENDING)//
+                    val defaultCampGearList = ArrayList<CampGearDefaultModel>()
+                    defaultCampGearList.addAll(realm.copyFromRealm(campGearDefaultResult));
+                    defaultCampGearList.forEach { defaultGearModel ->
+                       val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
+                       val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
+                       val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
+                       newCampGearModel.campGearName = defaultGearModel.campGearName
+                       newCampGearModel.categoryName = defaultGearModel.categoryName
+                       newCampGearModel.campId = nextCampId
+                   }
                 }
             }else{
                 realm.executeTransaction{

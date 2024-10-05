@@ -4,15 +4,10 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 
-open class CampGearModel: RealmObject() {
+open class CampGearDefaultModel: RealmObject() {
     @PrimaryKey
-    var campGearId : Long=0
+    var defaultCampGearId : Long=0
     var campGearName: String = ""
     var categoryName: String = ""
-    var isLoaded = false
-    var campId : Long=0
 
-    override fun toString(): String {
-        return campGearName
-    }
 }

@@ -27,11 +27,9 @@ class CampRecyclerAdapter(realmResults:RealmResults<CampModel>):RecyclerView.Ada
         holder.oneTvName.text = myModel?.campName.toString()
         holder.oneTvDate.text = myModel?.startDate.toString() +
                 " 〜 " + myModel?.endDate.toString()
-//        holder.oneTvAge.text = myModel?.age.toString()
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, CampListDetailActivity::class.java)
-//            intent.putExtra("campId",myModel?.campId)
             val myApp = MyApp.getInstance()
             myApp.campId = myModel!!.campId
             it.context.startActivity(intent);

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.qamerin.mycampapp.R
+import com.qamerin.mycampapp.common.MyApp
 import com.qamerin.mycampapp.model.CampModel
 import io.realm.Realm
 import io.realm.Sort
@@ -29,6 +30,8 @@ class CampMainActivity : AppCompatActivity() {
 
         //６）btnAddを押したらintent
         btnAdd.setOnClickListener {
+            val myApp = MyApp.getInstance()
+            myApp.campId = 0L
             val intent = Intent(this, CampEditActivity::class.java)
             startActivity(intent)
         }

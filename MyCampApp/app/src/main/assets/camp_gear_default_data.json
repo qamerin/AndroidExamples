@@ -1,0 +1,57 @@
+[
+  {
+    "defaultCampGearId": 0,
+    "campGearName": "テント",
+    "categoryName": "テント・タープ"
+  },
+  {
+    "defaultCampGearId": 1,
+    "campGearName": "タープ",
+    "categoryName": "テント・タープ"
+  },
+  {
+    "defaultCampGearId":2,
+    "campGearName": "テーブル",
+    "categoryName": "テーブル・椅子"
+  },
+  {
+    "defaultCampGearId":3,
+    "campGearName": "椅子",
+    "categoryName": "テーブル・椅子"
+  },
+  {
+    "defaultCampGearId":4,
+    "campGearName": "寝袋",
+    "categoryName": "寝具"
+  },
+  {
+    "defaultCampGearId":5,
+    "campGearName": "マット",
+    "categoryName": "寝具"
+  },
+  {
+    "defaultCampGearId":6,
+    "campGearName": "鍋/フライパン",
+    "categoryName": "調理器具"
+  },
+  {
+    "defaultCampGearId":7,
+    "campGearName": "包丁",
+    "categoryName": "調理器具"
+  },
+  {
+    "defaultCampGearId":8,
+    "campGearName": "皿/シェラカップ",
+    "categoryName": "食器類"
+  },
+  {
+    "defaultCampGearId":9,
+    "campGearName": "マグカップ",
+    "categoryName": "食器類"
+  },
+  {
+    "defaultCampGearId":9,
+    "campGearName": "箸",
+    "categoryName": "食器類"
+  }
+]
