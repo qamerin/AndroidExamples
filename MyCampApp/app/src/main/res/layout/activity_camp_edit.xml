@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".camp.CampEditActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -24,31 +25,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Camp Ground"
+        android:text="Camping Ground"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <EditText
         android:id="@+id/etCampName"
-        android:layout_width="315dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="54dp"
         android:ems="10"
         android:hint="text"
         android:inputType="text"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCampName" />
 
     <ImageView
         android:id="@+id/btnSearch"
-        android:layout_width="52dp"
-        android:layout_height="43dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/baseline_search_24"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etCampName"
         app:layout_constraintTop_toBottomOf="@+id/tvCampName" />
 
@@ -65,14 +71,14 @@
 
     <EditText
         android:id="@+id/etAdress"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Adress"
         android:inputType="text"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
 
@@ -93,12 +99,24 @@
         android:id="@+id/etStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="From"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
+
+    <TextView
+        android:id="@+id/tvStartEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="〜"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/etStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
+
 
     <TextView
         android:id="@+id/etEndDate"
@@ -108,9 +126,8 @@
         android:layout_marginTop="16dp"
         android:text="To"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/etStartDate"
+        app:layout_constraintStart_toEndOf="@+id/tvStartEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
-
 
     <Button
         android:id="@+id/btnSave"
