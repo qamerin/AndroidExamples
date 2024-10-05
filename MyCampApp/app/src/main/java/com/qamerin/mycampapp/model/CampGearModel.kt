@@ -9,7 +9,7 @@ open class CampGearModel: RealmObject() {
     var campGearId : Long=0
     var campGearName: String = ""
     var categoryName: String = ""
-    var isLoaded = false
+    var isCarLoaded : Boolean=false
     var campId : Long=0
 
     override fun toString(): String {
