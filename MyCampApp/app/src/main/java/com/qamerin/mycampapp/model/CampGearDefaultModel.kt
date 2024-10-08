@@ -9,5 +9,5 @@ open class CampGearDefaultModel: RealmObject() {
     var defaultCampGearId : Long=0
     var campGearName: String = ""
     var categoryName: String = ""
-
+    var gearCategoryId: Long=0
 }

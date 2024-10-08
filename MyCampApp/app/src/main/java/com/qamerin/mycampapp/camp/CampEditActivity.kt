@@ -123,6 +123,7 @@ class CampEditActivity : AppCompatActivity() {
                        val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
                        newCampGearModel.campGearName = defaultGearModel.campGearName
                        newCampGearModel.categoryName = defaultGearModel.categoryName
+                       newCampGearModel.gearCategoryId = defaultGearModel.gearCategoryId
                        newCampGearModel.campId = nextCampId
                    }
                 }

@@ -9,6 +9,7 @@ open class CampGearModel: RealmObject() {
     var campGearId : Long=0
     var campGearName: String = ""
     var categoryName: String = ""
+    var gearCategoryId: Long=0
     var isCarLoaded : Boolean=false
     var campId : Long=0
 
