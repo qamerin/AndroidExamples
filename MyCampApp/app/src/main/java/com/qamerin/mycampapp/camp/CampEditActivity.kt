@@ -122,7 +122,6 @@ class CampEditActivity : AppCompatActivity() {
                        val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
                        val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
                        newCampGearModel.campGearName = defaultGearModel.campGearName
-                       newCampGearModel.categoryName = defaultGearModel.categoryName
                        newCampGearModel.gearCategoryId = defaultGearModel.gearCategoryId
                        newCampGearModel.campId = nextCampId
                    }

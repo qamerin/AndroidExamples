@@ -2,145 +2,116 @@
   {
     "defaultCampGearId": 0,
     "campGearName": "テント",
-    "categoryName": "テント・タープ",
     "gearCategoryId": 1
   },
   {
     "defaultCampGearId": 1,
     "campGearName": "タープ",
-    "categoryName": "テント・タープ",
     "gearCategoryId": 1
   },
   {
     "defaultCampGearId": 2,
     "campGearName": "ペグ/ハンマー",
-    "categoryName": "テント・タープ",
     "gearCategoryId": 1
   },
   {
     "defaultCampGearId":3,
     "campGearName": "テーブル",
-    "categoryName": "テーブル・椅子",
     "gearCategoryId": 2
   },
   {
     "defaultCampGearId":4,
     "campGearName": "椅子",
-    "categoryName": "テーブル・椅子",
     "gearCategoryId": 2
   },
   {
     "defaultCampGearId":5,
     "campGearName": "寝袋",
-    "categoryName": "寝具",
     "gearCategoryId": 3
   },
   {
     "defaultCampGearId":6,
     "campGearName": "マット",
-    "categoryName": "寝具",
     "gearCategoryId": 3
   },
   {
     "defaultCampGearId":7,
     "campGearName": "鍋/フライパン",
-    "categoryName": "調理器具",
     "gearCategoryId": 4
   },
   {
     "defaultCampGearId":8,
     "campGearName": "包丁",
-    "categoryName": "調理器具",
     "gearCategoryId": 4
   },
   {
     "defaultCampGearId":9,
     "campGearName": "バーナー",
-    "categoryName": "調理器具",
     "gearCategoryId": 4
   },
   {
     "defaultCampGearId":10,
     "campGearName": "ガス缶",
-    "categoryName": "調理器具",
     "gearCategoryId": 4
   },
   {
     "defaultCampGearId":11,
     "campGearName": "皿/シェラカップ",
-    "categoryName": "食器類",
     "gearCategoryId": 5
   },
   {
     "defaultCampGearId":12,
     "campGearName": "マグカップ",
-    "categoryName": "食器類",
     "gearCategoryId": 5
   },
   {
     "defaultCampGearId":13,
     "campGearName": "箸",
-    "categoryName": "食器類",
     "gearCategoryId": 5
   },
   {
     "defaultCampGearId":14,
     "campGearName": "食材",
-    "categoryName": "飲食物",
     "gearCategoryId": 6
   },
   {
     "defaultCampGearId":15,
     "campGearName": "飲み物",
-    "categoryName": "飲食物",
     "gearCategoryId": 6
   },
   {
     "defaultCampGearId":16,
     "campGearName": "クーラーボックス/保冷剤",
-    "categoryName": "飲食物",
     "gearCategoryId": 6
   },
   {
     "defaultCampGearId":17,
     "campGearName": "ランタン",
-    "categoryName": "ライト",
     "gearCategoryId": 7
   },
   {
     "defaultCampGearId":18,
     "campGearName": "懐中電灯",
-    "categoryName": "ライト",
     "gearCategoryId": 7
   },
   {
     "defaultCampGearId":19,
     "campGearName": "着替え",
-    "categoryName": "着替え",
     "gearCategoryId": 8
-  },
-  {
-    "defaultCampGearId":20,
-    "campGearName": "",
-    "categoryName": "雑貨",
-    "gearCategoryId": 9
   },
   {
     "defaultCampGearId":21,
     "campGearName": "焚き火台",
-    "categoryName": "焚き火",
     "gearCategoryId": 10
   },
   {
     "defaultCampGearId":22,
     "campGearName": "薪割り道具",
-    "categoryName": "焚き火",
     "gearCategoryId": 10
   },
   {
     "defaultCampGearId":23,
     "campGearName": "ポータブル電源",
-    "categoryName": "その他",
     "gearCategoryId": 11
   }
 ]

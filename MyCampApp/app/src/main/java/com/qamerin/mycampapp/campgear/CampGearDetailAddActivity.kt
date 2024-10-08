@@ -42,7 +42,6 @@ class CampGearDetailAddActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val etGearName : TextView = findViewById(R.id.etGearName)
-        val etCategoryName : TextView = findViewById(R.id.etGearCategory)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
@@ -53,7 +52,6 @@ class CampGearDetailAddActivity : AppCompatActivity() {
             val myModel = realm.where<CampGearModel>()
                 .equalTo("campGearId", campGearId).findFirst()
             etGearName.text = myModel?.campGearName
-            etCategoryName.text = myModel?.categoryName
 
             btnDel.visibility = View.VISIBLE
 
@@ -68,7 +66,6 @@ class CampGearDetailAddActivity : AppCompatActivity() {
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
                     val myModel = realm.createObject<CampGearModel>(nextId)
                     myModel.campGearName =etGearName.text.toString()
-                    myModel.categoryName = etCategoryName.text.toString()
                     myModel.campId = campId
                 }
             } else {
@@ -76,7 +73,6 @@ class CampGearDetailAddActivity : AppCompatActivity() {
                     val myModel = realm.where<CampGearModel>()
                         .equalTo("campGearId", campGearId).findFirst()
                     myModel?.campGearName =etGearName.text.toString()
-                    myModel?.categoryName = etCategoryName.text.toString()
 
                     // 選択されたgearCategoryIdを取得
                     val selectedCategoryId = adapter.getSelectedCategoryId()

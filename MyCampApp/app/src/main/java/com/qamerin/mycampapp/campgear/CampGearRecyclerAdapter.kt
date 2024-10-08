@@ -32,7 +32,6 @@ class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
         // get Category Name
         realm = Realm.getDefaultInstance()
         holder.oneTvCampGearName.text = myModel?.campGearName
-        holder.oneTvCategory.text = myModel?.categoryName
         holder.carLoadCheck.isChecked = myModel?.isCarLoaded ?: false
 
         holder.itemView.setOnClickListener {
