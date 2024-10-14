@@ -3,11 +3,10 @@ package com.qamerin.mycampapp.campgear
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.common.MyApp
 import com.qamerin.mycampapp.model.CampGearModel
+import com.qamerin.mycampapp.model.GearCategoryModel
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
@@ -33,6 +32,15 @@ class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
         realm = Realm.getDefaultInstance()
         holder.oneTvCampGearName.text = myModel?.campGearName
         holder.carLoadCheck.isChecked = myModel?.isCarLoaded ?: false
+
+        realm.executeTransaction { realm ->
+            val category = realm.where<GearCategoryModel>()
+                .equalTo("gearCategoryId", myModel?.gearCategoryId)
+                .findFirst()
+            category?.let {
+                holder.oneTvCategory.text = it.categoryName
+            }
+        }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, CampGearDetailAddActivity::class.java)
