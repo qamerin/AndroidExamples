@@ -123,7 +123,7 @@ class CampEditActivity : AppCompatActivity() {
                     campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
 
                     // Add Camp Gear Record from Camp Default Gear
-                    if(currentId ==0L){
+                    if(currentId == null){
                         // Add Camp Gear Record from Camp Default Gear
                         val campGearDefaultResult = realm.where(/* clazz = */ CampGearDefaultModel::class.java)
                             .findAll().sort("defaultCampGearId", Sort.ASCENDING)//
