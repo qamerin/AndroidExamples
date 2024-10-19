@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- ベーステーマ -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- プライマリカラー -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <!-- アクションバーを無効にする -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:fontFamily">@font/work_sans_variable_font</item>
         <item name="android:textColor">@color/white</item>

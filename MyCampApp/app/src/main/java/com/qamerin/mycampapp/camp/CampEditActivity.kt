@@ -59,6 +59,8 @@ class CampEditActivity : AppCompatActivity() {
         // ツールバーに戻るボタンを設置
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
+
         val etCampName : TextView = findViewById(R.id.etCampName)
         val etAddress : TextView = findViewById(R.id.etAdress)
         val btnSave : Button = findViewById(R.id.btnSave)
