@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -40,6 +41,8 @@ class CampGearDetailAddActivity : AppCompatActivity() {
         // ツールバーの表示
         setSupportActionBar(findViewById(R.id.my_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // ステータスバーの色を設定
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
         val etGearName : TextView = findViewById(R.id.etGearName)
         val btnSave : Button = findViewById(R.id.btnSave)

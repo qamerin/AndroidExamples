@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.qamerin.mycampapp.R
@@ -31,7 +33,10 @@ class CampListDetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        // ツールバーの表示
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        // ステータスバーの色を設定
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
         // ツールバーに戻るボタンを設置
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

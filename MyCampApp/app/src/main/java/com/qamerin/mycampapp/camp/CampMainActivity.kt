@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -24,6 +25,8 @@ class CampMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camp_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+
+
         //１）viewの取得
         val btnAdd:Button = findViewById(R.id.btnAdd)
         realm= Realm.getDefaultInstance()//７）realmのインスタンス生成
