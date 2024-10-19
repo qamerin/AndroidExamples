@@ -8,6 +8,10 @@ import com.qamerin.mycampapp.R
 import com.qamerin.mycampapp.common.MyApp
 import com.qamerin.mycampapp.model.CampModel
 import io.realm.RealmResults
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class CampRecyclerAdapter(realmResults:RealmResults<CampModel>):RecyclerView.Adapter<CampViewHolderItem>() {
     private val rResults:RealmResults<CampModel> = realmResults
@@ -25,8 +29,8 @@ class CampRecyclerAdapter(realmResults:RealmResults<CampModel>):RecyclerView.Ada
     override fun onBindViewHolder(holder: CampViewHolderItem, position: Int) {
         val myModel = rResults[position]
         holder.oneTvName.text = myModel?.campName.toString()
-        holder.oneTvDate.text = myModel?.startDate.toString() +
-                " 〜 " + myModel?.endDate.toString()
+        holder.oneTvDate.text =  myModel?.startDate.toString().replace("-","/") +
+                " 〜 " + myModel?.endDate.toString().replace("-","/")
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, CampListDetailActivity::class.java)

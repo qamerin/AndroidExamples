@@ -25,6 +25,7 @@
         android:layout_marginTop="16dp"
         android:text="Camping Ground"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
@@ -49,6 +50,7 @@
         android:layout_marginTop="16dp"
         android:text="Adress"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCampName" />
 
@@ -83,6 +85,7 @@
         android:layout_marginTop="16dp"
         android:text="Date"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etAdress" />
 
@@ -130,6 +133,7 @@
         android:layout_marginTop="24dp"
         android:text="Camp Gear"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnModify" />
 
