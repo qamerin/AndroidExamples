@@ -123,18 +123,35 @@ class CampEditActivity : AppCompatActivity() {
                     campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
 
                     // Add Camp Gear Record from Camp Default Gear
-                    val campGearDefaultResult = realm.where(/* clazz = */ CampGearDefaultModel::class.java)
-                        .findAll().sort("defaultCampGearId", Sort.ASCENDING)//
-                    val defaultCampGearList = ArrayList<CampGearDefaultModel>()
-                    defaultCampGearList.addAll(realm.copyFromRealm(campGearDefaultResult));
-                    defaultCampGearList.forEach { defaultGearModel ->
-                       val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
-                       val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
-                       val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
-                       newCampGearModel.campGearName = defaultGearModel.campGearName
-                       newCampGearModel.gearCategoryId = defaultGearModel.gearCategoryId
-                       newCampGearModel.campId = nextCampId
-                   }
+                    if(currentId ==0L){
+                        // Add Camp Gear Record from Camp Default Gear
+                        val campGearDefaultResult = realm.where(/* clazz = */ CampGearDefaultModel::class.java)
+                            .findAll().sort("defaultCampGearId", Sort.ASCENDING)//
+                        val defaultCampGearList = ArrayList<CampGearDefaultModel>()
+                        defaultCampGearList.addAll(realm.copyFromRealm(campGearDefaultResult));
+                        defaultCampGearList.forEach { defaultGearModel ->
+                            val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
+                            val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
+                            val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
+                            newCampGearModel.campGearName = defaultGearModel.campGearName
+                            newCampGearModel.gearCategoryId = defaultGearModel.gearCategoryId
+                            newCampGearModel.campId = nextCampId
+                        }
+                    }else{
+                        // ２件目以上のキャンプ情報の登録
+                        val campGearModelResults = realm.where<CampGearModel>().equalTo("campId",
+                            currentId?.toLong()
+                        ).findAll()
+                            .sort("campGearId", Sort.ASCENDING)//
+                        campGearModelResults.forEach{
+                            val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
+                            val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
+                            val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
+                            newCampGearModel.campGearName = it.campGearName
+                            newCampGearModel.gearCategoryId = it.gearCategoryId
+                            newCampGearModel.campId = nextCampId
+                        }
+                    }
                 }
             }else{
                 realm.executeTransaction{
@@ -147,6 +164,9 @@ class CampEditActivity : AppCompatActivity() {
                     val listEndDate = etEndDate.text.toString().split("/")
                     campModel?.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
                 }
+
+
+
             }
 
             Toast.makeText(applicationContext,"保存しました",Toast.LENGTH_SHORT).show()
