@@ -66,19 +66,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
-        android:text="Adress"
+        android:text="Address"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCampName" />
 
     <EditText
-        android:id="@+id/etAdress"
+        android:id="@+id/etAddress"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Adress"
+        android:hint="Address"
         android:inputType="text"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +95,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAdress" />
+        app:layout_constraintTop_toBottomOf="@+id/etAddress" />
 
 
     <TextView
@@ -136,10 +136,10 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:text="Save"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etStartDate" />
 
     <Button
@@ -147,9 +147,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
         android:text="Del"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etStartDate" />
 
     <Button
@@ -158,10 +157,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="日付設定"
+        android:text="Set Date"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAdress" />
+        app:layout_constraintTop_toBottomOf="@+id/etAddress" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

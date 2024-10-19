@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -44,7 +43,7 @@ class CampListDetailActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val etName : TextView = findViewById(R.id.etCampName)
-        val etAddress : TextView = findViewById(R.id.etAdress)
+        val etAddress : TextView = findViewById(R.id.etAddress)
         val etStartDate : TextView = findViewById(R.id.etStartDate)
         val etEndDate : TextView = findViewById(R.id.etEndDate)
         val btnModify: Button = findViewById(R.id.btnModify)

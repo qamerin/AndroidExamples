@@ -1,6 +1,5 @@
 package com.qamerin.mycampapp.camp
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -62,7 +60,7 @@ class CampEditActivity : AppCompatActivity() {
 
 
         val etCampName : TextView = findViewById(R.id.etCampName)
-        val etAddress : TextView = findViewById(R.id.etAdress)
+        val etAddress : TextView = findViewById(R.id.etAddress)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         val etStartDate : TextView = findViewById(R.id.etStartDate)
