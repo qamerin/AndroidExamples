@@ -16,6 +16,7 @@
         <item name="android:windowBackground">@color/white</item>
         <!-- デフォルトの文字色 -->
         <item name="android:textColor">@color/black</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="S">@color/iconColor</item>
     </style>
 
     <style name="Theme.MyCampApp" parent="Base.Theme.MyCampApp" />
