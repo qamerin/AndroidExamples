@@ -6,6 +6,7 @@
     <color name="colorPrimaryDark">#1C8463</color>
     <color name="colorAccent">#FFC107</color>
     <color name="iconColor">#00BF63</color>
+    <color name="textColor">#000000</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
