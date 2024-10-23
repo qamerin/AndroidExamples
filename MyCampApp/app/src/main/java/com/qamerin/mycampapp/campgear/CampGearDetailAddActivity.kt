@@ -70,6 +70,10 @@ class CampGearDetailAddActivity : AppCompatActivity() {
                     val myModel = realm.createObject<CampGearModel>(nextId)
                     myModel.campGearName =etGearName.text.toString()
                     myModel.campId = campId
+
+                    // 選択されたgearCategoryIdを取得
+                    val selectedCategoryId = adapter.getSelectedCategoryId()
+                    myModel.gearCategoryId = selectedCategoryId
                 }
             } else {
                 realm.executeTransaction {
