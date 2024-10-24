@@ -13,7 +13,7 @@ import io.realm.kotlin.where
 
 class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):RecyclerView.Adapter<CampGearViewHolderItem>() {
     private lateinit var realm: Realm
-    private val rResults:RealmResults<CampGearModel> = realmResults
+    private var rResults:RealmResults<CampGearModel> = realmResults
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampGearViewHolderItem {
         val oneXml = LayoutInflater.from(parent.context)
@@ -59,5 +59,10 @@ class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
                 }
             }
         }
+    }
+
+    fun updateList(newItems: RealmResults<CampGearModel>) {
+        rResults = newItems
+        notifyDataSetChanged()
     }
 }

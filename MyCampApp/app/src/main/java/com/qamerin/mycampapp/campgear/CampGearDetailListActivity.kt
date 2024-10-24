@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,12 +18,15 @@ import com.qamerin.mycampapp.common.MyApp
 import com.qamerin.mycampapp.model.CampGearModel
 import io.realm.Realm
 import io.realm.Sort
+import io.realm.kotlin.where
 
 class CampGearDetailListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var realm: Realm
     private lateinit var recyclerAdapter: CampGearRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
+    private var campGearList: List<CampGearModel> = listOf() // データを取得する
+    private lateinit var switchIsCarLoaded: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,9 +77,25 @@ class CampGearDetailListActivity : AppCompatActivity() {
         recyclerAdapter = CampGearRecyclerAdapter(realmResults)
         recyclerView.adapter = recyclerAdapter
 
+        // Switchの状態に基づいてリストをフィルタリング
+        switchIsCarLoaded = findViewById(R.id.switchIsNotCarLoaded)
+        switchIsCarLoaded.setOnCheckedChangeListener { _, isChecked ->
+            filterList(isChecked)
+        }
+
+
         layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+    }
+
+    private fun filterList(isNotCarLoaded: Boolean) {
+        val filteredList = if (isNotCarLoaded) {
+            realm.where<CampGearModel>().equalTo("isCarLoaded",false).findAll()
+        } else {
+            realm.where<CampGearModel>().findAll()
+        }
+        recyclerAdapter.updateList(filteredList)
     }
 
     override fun onDestroy() {
