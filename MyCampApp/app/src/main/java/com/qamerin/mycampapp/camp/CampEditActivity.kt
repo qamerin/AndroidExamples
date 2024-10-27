@@ -57,7 +57,7 @@ class CampEditActivity : AppCompatActivity() {
         // ツールバーに戻るボタンを設置
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // ツールバーのタイトルを設定
-        supportActionBar?.title = "Camp Basic Info"
+        supportActionBar?.title = getString(R.string.camp_basic_info_label)
 
         val etCampName : TextView = findViewById(R.id.etCampName)
         val etAddress : TextView = findViewById(R.id.etAddress)

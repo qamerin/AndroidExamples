@@ -41,7 +41,7 @@ class CampGearDetailListActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // ツールバーのタイトルを設定
-        supportActionBar?.title = "Camp Gears"
+        supportActionBar?.title = getString(R.string.camp_gear_label)
         // ステータスバーの色を設定
         window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
 

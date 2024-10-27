@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">My Camp Plan</string>
+    <string name="app_name">My Camp</string>
+    <string name="car_loaded_label">積載済み</string>
+    <string name="item_add_label">+</string>
+    <string name="camping_ground">キャンプ場</string>
+    <string name="camping_ground_input">キャンプ場名を入力または検索してください</string>
+    <string name="address">住所</string>
+    <string name="address_input">住所を入力（検索時は自動で入力されます）</string>
+    <string name="modify">変更</string>
+    <string name="date">日付</string>
+    <string name="from_to_label">〜</string>
+    <string name="camp_gear_label">キャンプ道具</string>
+    <string name="camp_gear_button_label">持ち物</string>
+    <string name="camp_gear_category">カテゴリー</string>
+    <string name="save_button_label">登録</string>
+    <string name="del_button_label">削除</string>
+    <string name="camp_detail_name_label">キャンプの計画</string>
+    <string name="camp_basic_info_label">キャンプの基本情報</string>
+    <string name="set_date_button_label">日付選択</string>
+
 </resources>

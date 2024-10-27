@@ -37,7 +37,7 @@ class CampListDetailActivity : AppCompatActivity() {
         // ステータスバーの色を設定
         window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
         // ツールバーのタイトルを設定
-        supportActionBar?.title = "Camp Detail"
+        supportActionBar?.title = getString(R.string.camp_detail_name_label)
         // ツールバーに戻るボタンを設置
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
