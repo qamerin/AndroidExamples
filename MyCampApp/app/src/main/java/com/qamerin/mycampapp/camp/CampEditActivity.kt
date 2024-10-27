@@ -1,5 +1,6 @@
 package com.qamerin.mycampapp.camp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -38,6 +39,7 @@ class CampEditActivity : AppCompatActivity() {
     private lateinit var selectedDate: TextView
     private lateinit var datePicker: Button
 
+    @SuppressLint("SetTextI18n", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -66,7 +68,7 @@ class CampEditActivity : AppCompatActivity() {
         val etStartDate : TextView = findViewById(R.id.etStartDate)
         val tvFromTo : TextView = findViewById(R.id.tvStartEnd)
         val etEndDate : TextView = findViewById(R.id.etEndDate)
-        val btnSearch : ImageView = findViewById(R.id.btnSearch)
+        val btnCampGroundSearch : ImageView = findViewById(R.id.btnCampGroundSearch)
 
         realm = Realm.getDefaultInstance()
         val campId = MyApp.getInstance().campId
@@ -80,18 +82,27 @@ class CampEditActivity : AppCompatActivity() {
                     "/" + campModelResult?.startDate?.dayOfMonth.toString()
             startDbDate = campModelResult?.startDate!!
 
-             campModelResult?.startDate?.let {
+            campModelResult.startDate.let {
                 tvFromTo.text =getString(R.string.from_to_label)
-             }
+            }
 
-            etEndDate.text = campModelResult?.endDate?.year.toString()+
-                    "/"+  campModelResult?.endDate?.monthValue.toString() +
-                    "/" + campModelResult?.endDate?.dayOfMonth.toString()
-            endDbDate = campModelResult?.endDate!!
+            etEndDate.text = campModelResult.endDate.year.toString()+
+                    "/"+  campModelResult.endDate.monthValue.toString() +
+                    "/" + campModelResult.endDate.dayOfMonth.toString()
+            endDbDate = campModelResult.endDate
 
             btnDel.visibility = View.VISIBLE
 
         }else{
+            val startDate = intent.getStringExtra("etStartDate")
+            if(!startDate.isNullOrEmpty()) {
+                etStartDate.text = startDate
+                tvFromTo.text =getString(R.string.from_to_label)
+            }
+            val endDate = intent.getStringExtra("etEndDate")
+            if(!startDate.isNullOrEmpty()) {
+                etEndDate.text = endDate
+            }
             btnDel.visibility = View.INVISIBLE
         }
         val campgroundName = intent.getStringExtra("campgroundName")
@@ -102,6 +113,9 @@ class CampEditActivity : AppCompatActivity() {
         if(!campgroundAddress.isNullOrEmpty()) {
             etAddress.text = campgroundAddress
         }
+
+
+
         btnSave.setOnClickListener {
             var campName:String = ""
             var address:String = ""
@@ -143,7 +157,7 @@ class CampEditActivity : AppCompatActivity() {
                     }else{
                         // ２件目以上のキャンプ情報の登録
                         val campGearModelResults = realm.where<CampGearModel>().equalTo("campId",
-                            currentId?.toLong()
+                            currentId.toLong()
                         ).findAll()
                             .sort("campGearId", Sort.ASCENDING)//
                         campGearModelResults.forEach{
@@ -186,7 +200,7 @@ class CampEditActivity : AppCompatActivity() {
             val intent = Intent(this, CampMainActivity::class.java)
             startActivity(intent)
         }
-        btnSearch.setOnClickListener {
+        btnCampGroundSearch.setOnClickListener {
             val intent = Intent(this, CampgroundMasterActivity::class.java)
             intent.putExtra("etStartDate",etStartDate.text)
             intent.putExtra("etEndDate",etEndDate.text)
@@ -200,7 +214,7 @@ class CampEditActivity : AppCompatActivity() {
             val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
             val initialStartDate = if (etStartDate.text.toString().isNotEmpty()) {
                 val calendar = Calendar.getInstance().apply {
-                    time = dateFormat.parse(etStartDate.text.toString())
+                    this.time = dateFormat.parse(etStartDate.text.toString())!!
                     add(Calendar.DAY_OF_MONTH, 1) // 1日進める
                 }
                 calendar.timeInMillis
@@ -211,7 +225,7 @@ class CampEditActivity : AppCompatActivity() {
 
             val initialEndDate = if (etEndDate.text.toString().isNotEmpty()) {
                 val calendar = Calendar.getInstance().apply {
-                    time = dateFormat.parse(etEndDate.text.toString())
+                    time = dateFormat.parse(etEndDate.text.toString())!!
                     add(Calendar.DAY_OF_MONTH, 1) // 1日進める
                 }
                 calendar.timeInMillis

@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCampName" />
 
     <ImageView
-        android:id="@+id/btnSearch"
+        android:id="@+id/btnCampGroundSearch"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="center"

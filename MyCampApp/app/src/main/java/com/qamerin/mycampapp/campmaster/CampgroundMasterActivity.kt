@@ -22,6 +22,8 @@ class CampgroundMasterActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     private lateinit var recyclerAdapter: CampgroundMasterRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
+    private lateinit var startDate: String
+    private lateinit var endDate: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,13 @@ class CampgroundMasterActivity : AppCompatActivity() {
 
         realm = Realm.getDefaultInstance()
 
+        intent.getStringExtra("etStartDate").let {
+            startDate = it.toString()
+        }
+        intent.getStringExtra("etEndDate").let {
+            endDate = it.toString()
+        }
+
         val svProduct : SearchView = findViewById(R.id.svProduct)
         svProduct.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -53,7 +62,10 @@ class CampgroundMasterActivity : AppCompatActivity() {
                     .sort("campgroundId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
                 recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-                recyclerAdapter = CampgroundMasterRecyclerAdapter(realmResults)
+                recyclerAdapter = CampgroundMasterRecyclerAdapter(
+                    startDate,
+                    endDate,
+                    realmResults)
                 recyclerView.adapter = recyclerAdapter
                 recyclerView.layoutManager = layoutManager
 
@@ -74,7 +86,11 @@ class CampgroundMasterActivity : AppCompatActivity() {
             .findAll().sort("campgroundId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
 
         recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-        recyclerAdapter = CampgroundMasterRecyclerAdapter(realmResults)
+        recyclerAdapter = CampgroundMasterRecyclerAdapter(
+            startDate,
+            endDate,
+            realmResults
+        )
         recyclerView.adapter = recyclerAdapter
 
         layoutManager = LinearLayoutManager(this)

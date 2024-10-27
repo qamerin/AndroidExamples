@@ -14,7 +14,11 @@ import com.qamerin.mycampapp.model.CampgroundMasterModel
 import io.realm.Realm
 import io.realm.RealmResults
 
-class CampgroundMasterRecyclerAdapter(realmResults:RealmResults<CampgroundMasterModel>):RecyclerView.Adapter<CampgroundMasterViewHolderItem>() {
+class CampgroundMasterRecyclerAdapter(
+    private val startDate: String?,
+    private val endDate: String?,
+    realmResults:RealmResults<CampgroundMasterModel>
+):RecyclerView.Adapter<CampgroundMasterViewHolderItem>() {
     private lateinit var realm: Realm
     private val rResults:RealmResults<CampgroundMasterModel> = realmResults
 
@@ -48,6 +52,8 @@ class CampgroundMasterRecyclerAdapter(realmResults:RealmResults<CampgroundMaster
                 val intent = Intent(it.context, CampEditActivity::class.java)
                 intent.putExtra("campgroundName",myModel?.campgroundName)
                 intent.putExtra("campgroundAddress",myModel?.address)
+                intent.putExtra("etStartDate",startDate)
+                intent.putExtra("etEndDate",endDate)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 it.context.startActivity(intent);
 //            }
