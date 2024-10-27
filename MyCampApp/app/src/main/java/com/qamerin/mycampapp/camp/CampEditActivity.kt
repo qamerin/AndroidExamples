@@ -64,6 +64,7 @@ class CampEditActivity : AppCompatActivity() {
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         val etStartDate : TextView = findViewById(R.id.etStartDate)
+        val tvFromTo : TextView = findViewById(R.id.tvStartEnd)
         val etEndDate : TextView = findViewById(R.id.etEndDate)
         val btnSearch : ImageView = findViewById(R.id.btnSearch)
 
@@ -78,6 +79,10 @@ class CampEditActivity : AppCompatActivity() {
                     "/"+  campModelResult?.startDate?.monthValue.toString() +
                     "/" + campModelResult?.startDate?.dayOfMonth.toString()
             startDbDate = campModelResult?.startDate!!
+
+             campModelResult?.startDate?.let {
+                tvFromTo.text =getString(R.string.from_to_label)
+             }
 
             etEndDate.text = campModelResult?.endDate?.year.toString()+
                     "/"+  campModelResult?.endDate?.monthValue.toString() +
@@ -237,7 +242,7 @@ class CampEditActivity : AppCompatActivity() {
 
                 etStartDate.text = startDateString
                 etEndDate.text = endDateString
-
+                tvFromTo.text =getString(R.string.from_to_label)
             }
             // Setting up the event for when back button is pressed
             datePicker.addOnCancelListener {
