@@ -10,12 +10,18 @@
     <string name="date">日付</string>
     <string name="from_to_label">〜</string>
     <string name="camp_gear_label">キャンプ道具</string>
-    <string name="camp_gear_button_label">持ち物</string>
+    <string name="camp_gear_button_label">一覧</string>
+    <string name="shopping_item_label">買い物</string>
+    <string name="shopping_item_button_label">一覧</string>
     <string name="camp_gear_category">カテゴリー</string>
     <string name="save_button_label">登録</string>
     <string name="del_button_label">削除</string>
     <string name="camp_detail_name_label">キャンプの計画</string>
     <string name="camp_basic_info_label">キャンプの基本情報</string>
     <string name="set_date_button_label">日付選択</string>
+    <string name="shopping_item_bought_label">購入済み</string>
+    <string name="shopping_item_title_label">買い物リスト</string>
+    <string name="shopping_item_name_label">品名</string>
+    <string name="shopping_item_category_label">カテゴリー</string>
 
 </resources>

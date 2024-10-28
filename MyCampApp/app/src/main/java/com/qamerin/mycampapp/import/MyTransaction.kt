@@ -4,6 +4,7 @@ import com.qamerin.mycampapp.common.CustomApplication
 import com.qamerin.mycampapp.model.CampGearDefaultModel
 import com.qamerin.mycampapp.model.CampgroundMasterModel
 import com.qamerin.mycampapp.model.GearCategoryModel
+import com.qamerin.mycampapp.model.ShoppingCategoryModel
 import io.realm.Realm
 
 class MyTransaction : Realm.Transaction {
@@ -14,6 +15,7 @@ class MyTransaction : Realm.Transaction {
                 it.createAllFromJson(CampgroundMasterModel::class.java, source.resources.assets.open("campgrounds.json"))
                 it.createAllFromJson(CampGearDefaultModel::class.java, source.resources.assets.open("camp_gear_default_data.json"))
                 it.createAllFromJson(GearCategoryModel::class.java, source.resources.assets.open("category_default_data.json"))
+                it.createAllFromJson(ShoppingCategoryModel::class.java, source.resources.assets.open("shopping_category_default_data.json"))
             }
         }
     }

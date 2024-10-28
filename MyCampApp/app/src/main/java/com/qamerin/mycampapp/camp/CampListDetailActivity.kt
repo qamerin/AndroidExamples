@@ -17,6 +17,7 @@ import com.qamerin.mycampapp.common.MyApp
 //import com.qamerin.mycampapp.master.gear.GearMasterActivity
 //import com.qamerin.mycampapp.mygear.MyGearListActivity
 import com.qamerin.mycampapp.model.CampModel
+import com.qamerin.mycampapp.shopping.ShoppingItemListActivity
 //import com.qamerin.mycampapp.regulargear.RegularGearDetailListActivity
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -73,6 +74,11 @@ class CampListDetailActivity : AppCompatActivity() {
             btnCampGear.setOnClickListener {
                 val intent = Intent(this, CampGearDetailListActivity::class.java)
 //                intent.putExtra("campId",campModelResult?.campId)
+                startActivity(intent)
+            }
+            val btShoppingItem: Button = findViewById(R.id.btShoppingItem)
+            btShoppingItem.setOnClickListener {
+                val intent = Intent(this, ShoppingItemListActivity::class.java)
                 startActivity(intent)
             }
 //            btnRegularGear.setOnClickListener {

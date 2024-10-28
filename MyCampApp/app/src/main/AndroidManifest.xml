@@ -31,6 +31,13 @@
             android:name=".campgear.CampGearDetailAddActivity"
             android:exported="false" />
         <activity
+            android:name=".shopping.ShoppingItemListActivity"
+            android:exported="false"
+            android:parentActivityName=".camp.CampListDetailActivity" />
+        <activity
+            android:name=".shopping.ShoppingItemAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".camp.CampMainActivity"
             android:exported="true">
             <intent-filter>

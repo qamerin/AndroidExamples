@@ -1,0 +1,18 @@
+[
+  {
+    "shoppingCategoryId": 1,
+    "categoryName": "昼食"
+  },
+  {
+    "shoppingCategoryId":2,
+    "categoryName": "夕食"
+  },
+  {
+    "shoppingCategoryId":3,
+    "categoryName": "朝食"
+  },
+  {
+    "shoppingCategoryId":4,
+    "categoryName": "その他"
+  }
+]

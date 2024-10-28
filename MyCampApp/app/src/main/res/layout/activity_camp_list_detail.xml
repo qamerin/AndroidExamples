@@ -149,5 +149,28 @@
         app:layout_constraintStart_toEndOf="@+id/tvCampGear"
         app:layout_constraintTop_toBottomOf="@+id/btnModify" />
 
+    <TextView
+        android:id="@+id/tvShoppingItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/shopping_item_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btCampGear" />
+
+
+    <Button
+        android:id="@+id/btShoppingItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/shopping_item_button_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvCampGear"
+        app:layout_constraintTop_toBottomOf="@+id/btCampGear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
