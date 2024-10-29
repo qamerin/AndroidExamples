@@ -1,5 +1,6 @@
 package com.qamerin.mycampapp.campgear
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -25,7 +26,7 @@ class CampGearDetailListActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     private lateinit var recyclerAdapter: CampGearRecyclerAdapter
     private lateinit var layoutManager: LayoutManager
-    private var campGearList: List<CampGearModel> = listOf() // データを取得する
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switchIsCarLoaded: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {

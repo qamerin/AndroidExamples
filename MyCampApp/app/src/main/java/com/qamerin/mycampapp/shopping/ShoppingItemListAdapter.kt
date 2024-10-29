@@ -1,19 +1,24 @@
 package com.qamerin.mycampapp.shopping
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.qamerin.mycampapp.R
+import com.qamerin.mycampapp.model.ShoppingCategoryModel
 import com.qamerin.mycampapp.model.ShoppingItemModel
+import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.kotlin.where
 
 class ShoppingItemListAdapter(
     realmResults: RealmResults<ShoppingItemModel>
     ) : RecyclerView.Adapter<ShoppingItemListViewHolderItem>() {
-    private val rResults:RealmResults<ShoppingItemModel> = realmResults
+    private var rResults:RealmResults<ShoppingItemModel> = realmResults
+    private lateinit var realm: Realm
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):    ShoppingItemListViewHolderItem {
-    val oneXml = LayoutInflater.from(parent.context)
+        val oneXml = LayoutInflater.from(parent.context)
         .inflate(R.layout.one_shopping_item_layout,parent,false)
         return ShoppingItemListViewHolderItem(oneXml)
     }
@@ -23,13 +28,41 @@ class ShoppingItemListAdapter(
     }
 
     override fun onBindViewHolder(holder: ShoppingItemListViewHolderItem, position: Int) {
-        val item = rResults[position]
-        holder.oneTextItem.text = item?.shoppingItemName
+        val myModel = rResults[position]
+        realm = Realm.getDefaultInstance()
+        holder.oneTextItem.text = myModel?.shoppingItemName
+        holder.boughtCheck.isChecked = myModel?.isItemBought ?: false
 
-//        holder.buttonUpdate.setOnClickListener {
-//            items[position] = holder.editTextItem.text.toString()
-//            notifyItemChanged(position)
-//        }
+        realm.executeTransaction { realm ->
+            val category = realm.where<ShoppingCategoryModel>()
+                .equalTo("shoppingCategoryId", myModel?.shoppingCategoryId)
+                .findFirst()
+            category?.let {
+                holder.oneTvShoppingCategoryName.text = it.categoryName
+            }
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, ShoppingItemAddActivity::class.java)
+            intent.putExtra("shoppingItemId",myModel?.shoppingItemId)
+            it.context.startActivity(intent);
+        }
+
+        // carLoadCheckの状態を設定
+        holder.boughtCheck.setOnClickListener{
+            realm.executeTransaction { realm ->
+                val gear = realm.where<ShoppingItemModel>()
+                    .equalTo("shoppingItemId", myModel?.shoppingItemId)
+                    .findFirst()
+                gear?.let {
+                    it.isItemBought = !it.isItemBought
+                }
+            }
+        }
+    }
+    fun updateList(newItems: RealmResults<ShoppingItemModel>) {
+        rResults = newItems
+        notifyDataSetChanged()
     }
 
 

@@ -7,7 +7,7 @@ android:layout_height="wrap_content"
 android:padding="0dp">
 
 <CheckBox
-    android:id="@+id/carLoadCheck"
+    android:id="@+id/boughtCheck"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@ android:padding="0dp">
         android:textColor="@color/textColor"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carLoadCheck"
+        app:layout_constraintStart_toEndOf="@+id/boughtCheck"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.615" />
 

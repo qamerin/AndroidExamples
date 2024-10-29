@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Camp</string>
-    <string name="car_loaded_label">積載済み</string>
+    <string name="car_loaded_label">未積載のみ表示</string>
     <string name="item_add_label">+</string>
     <string name="camping_ground">キャンプ場</string>
     <string name="camping_ground_input">キャンプ場名を入力または検索してください</string>
@@ -19,7 +19,7 @@
     <string name="camp_detail_name_label">キャンプの計画</string>
     <string name="camp_basic_info_label">キャンプの基本情報</string>
     <string name="set_date_button_label">日付選択</string>
-    <string name="shopping_item_bought_label">購入済み</string>
+    <string name="shopping_item_bought_label">未購入のみ表示</string>
     <string name="shopping_item_title_label">買い物リスト</string>
     <string name="shopping_item_name_label">品名</string>
     <string name="shopping_item_category_label">カテゴリー</string>

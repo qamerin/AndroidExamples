@@ -1,8 +1,10 @@
 package com.qamerin.mycampapp.shopping
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,17 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.campgear.CampGearDetailAddActivity
 import com.qamerin.mycampapp.common.MyApp
 import com.qamerin.mycampapp.model.ShoppingItemModel
 import io.realm.Realm
 import io.realm.Sort
+import io.realm.kotlin.where
 
 class ShoppingItemListActivity : AppCompatActivity() {
     private lateinit var realm: Realm
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: LayoutManager
     private lateinit var recyclerAdapter: ShoppingItemListAdapter
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private lateinit var switchIsBought: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +71,24 @@ class ShoppingItemListActivity : AppCompatActivity() {
         )
         recyclerView.adapter = recyclerAdapter
 
+        // Switchの状態に基づいてリストをフィルタリング
+        switchIsBought = findViewById(R.id.switchIsBought)
+        switchIsBought.setOnCheckedChangeListener { _, isChecked ->
+            filterList(isChecked)
+        }
+
         layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
     }
 
-
+    private fun filterList(isNotCarLoaded: Boolean) {
+        val filteredList = if (isNotCarLoaded) {
+            realm.where<ShoppingItemModel>().equalTo("isItemBought",false).findAll()
+        } else {
+            realm.where<ShoppingItemModel>().findAll()
+        }
+        recyclerAdapter.updateList(filteredList)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
