@@ -45,7 +45,7 @@ class ShoppingItemAddActivity : AppCompatActivity() {
         // ステータスバーの色を設定
         window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
 
-        val etGearName : TextView = findViewById(R.id.etShoppingItemName)
+        val etShoppingItemName : TextView = findViewById(R.id.etShoppingItemName)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
         realm = Realm.getDefaultInstance()
@@ -55,7 +55,7 @@ class ShoppingItemAddActivity : AppCompatActivity() {
         if(shoppingItemId>0){
             val myModel = realm.where<ShoppingItemModel>()
                 .equalTo("shoppingItemId", shoppingItemId).findFirst()
-            etGearName.text = myModel?.shoppingItemName
+            etShoppingItemName.text = myModel?.shoppingItemName
 
             btnDel.visibility = View.VISIBLE
 
@@ -69,7 +69,7 @@ class ShoppingItemAddActivity : AppCompatActivity() {
                     val currentId = realm.where<ShoppingItemModel>().max("shoppingItemId")
                     val nextId = (currentId?.toLong() ?: 0L) + 1L
                     val myModel = realm.createObject<ShoppingItemModel>(nextId)
-                    myModel.shoppingItemName =etGearName.text.toString()
+                    myModel.shoppingItemName =etShoppingItemName.text.toString()
                     myModel.campId = campId
 
                     // 選択されたgearCategoryIdを取得
@@ -78,13 +78,13 @@ class ShoppingItemAddActivity : AppCompatActivity() {
                 }
             } else {
                 realm.executeTransaction {
-                    val myModel = realm.where<CampGearModel>()
-                        .equalTo("campGearId", shoppingItemId).findFirst()
-                    myModel?.campGearName =etGearName.text.toString()
+                    val myModel = realm.where<ShoppingItemModel>()
+                        .equalTo("shoppingItemId", shoppingItemId).findFirst()
+                    myModel?.shoppingItemName =etShoppingItemName.text.toString()
 
                     // 選択されたgearCategoryIdを取得
                     val selectedCategoryId = adapter.getSelectedCategoryId()
-                    myModel?.gearCategoryId = selectedCategoryId
+                    myModel?.shoppingCategoryId = selectedCategoryId
                 }
             }
 
