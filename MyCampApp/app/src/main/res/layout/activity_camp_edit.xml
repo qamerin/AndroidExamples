@@ -41,7 +41,7 @@
         android:ems="10"
         android:hint="@string/camping_ground_input"
         android:inputType="text"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
         android:ems="10"
         android:text="@string/address_input"
         android:inputType="text"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
 
@@ -120,7 +120,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/etStartDate"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
 
@@ -132,7 +132,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tvStartEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
 

@@ -62,7 +62,7 @@ class ShoppingItemListActivity : AppCompatActivity() {
         val campId = MyApp.getInstance().campId
         val realmResults = realm.where(ShoppingItemModel::class.java)
             .equalTo("campId",campId)
-            .findAll().sort("shoppingItemId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+            .findAll().sort("shoppingItemId", Sort.ASCENDING)
 
         // RecyclerViewの初期化をonCreate内で行う
         recyclerView = findViewById(R.id.rvShoppingItem)
@@ -82,10 +82,16 @@ class ShoppingItemListActivity : AppCompatActivity() {
     }
 
     private fun filterList(isNotCarLoaded: Boolean) {
+        val campId = MyApp.getInstance().campId
         val filteredList = if (isNotCarLoaded) {
-            realm.where<ShoppingItemModel>().equalTo("isItemBought",false).findAll()
+            realm.where<ShoppingItemModel>()
+                .equalTo("campId",campId)
+                .equalTo("isItemBought",false)
+                .findAll().sort("shoppingItemId", Sort.ASCENDING)
         } else {
-            realm.where<ShoppingItemModel>().findAll()
+            realm.where<ShoppingItemModel>()
+                .equalTo("campId",campId)
+                .findAll().sort("shoppingItemId", Sort.ASCENDING)
         }
         recyclerAdapter.updateList(filteredList)
     }

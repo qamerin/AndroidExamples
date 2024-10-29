@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qamerin.mycampapp.R
 
 class CampgroundMasterViewHolderItem(v:View) :RecyclerView.ViewHolder(v){
-    var oneTvCampgroundName: TextView = v.findViewById(R.id.oneTvCampgoundName)
+    var oneTvCampgroundName: TextView = v.findViewById(R.id.oneTvCampgroundName)
     var oneTvAddress: TextView = v.findViewById(R.id.oneTvAddress)
 
 }

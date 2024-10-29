@@ -44,7 +44,7 @@ class CampGearDetailListActivity : AppCompatActivity() {
         // ツールバーのタイトルを設定
         supportActionBar?.title = getString(R.string.camp_gear_label)
         // ステータスバーの色を設定
-        window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
         // realmのインスタンス生成
         realm= Realm.getDefaultInstance()

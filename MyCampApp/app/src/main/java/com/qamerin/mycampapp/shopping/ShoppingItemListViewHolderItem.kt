@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qamerin.mycampapp.R
 
 class ShoppingItemListViewHolderItem(v:View) :RecyclerView.ViewHolder(v){
-    var oneTextItem: TextView = v.findViewById(R.id.editTextItem)
+    var oneTextItem: TextView = v.findViewById(R.id.tvShoppingItemName)
     var oneTvShoppingCategoryName: TextView = v.findViewById(R.id.oneTvShoppingCategoryName)
     var boughtCheck: CheckBox = v.findViewById(R.id.boughtCheck)
 
