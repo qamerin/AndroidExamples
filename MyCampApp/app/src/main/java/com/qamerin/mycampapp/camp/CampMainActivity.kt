@@ -1,10 +1,10 @@
 package com.qamerin.mycampapp.camp
 
+import DividerItemDecoration
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -49,6 +49,10 @@ override fun onStart() {
     recyclerView = findViewById(R.id.rv)//ここでまずは中身recyclerViewにを入れる
     campRecyclerAdapter = CampRecyclerAdapter(realmResults)
     recyclerView.adapter = campRecyclerAdapter
+
+    // カスタムdividerを追加
+    val dividerItemDecoration = DividerItemDecoration(this, R.drawable.custom_divider)
+    recyclerView.addItemDecoration(dividerItemDecoration)
 
     layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
