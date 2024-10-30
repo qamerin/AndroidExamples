@@ -29,18 +29,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
+    <Button
+        android:id="@+id/btnModify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/modify"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+
     <TextView
         android:id="@+id/etCampName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCampName" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
 
     <TextView
         android:id="@+id/tvAddress"
@@ -67,15 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
 
-    <Button
-        android:id="@+id/btnModify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/modify"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEndDate" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -124,17 +125,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
 
-
     <TextView
         android:id="@+id/tvCampGear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/camp_gear_label"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+        app:layout_constraintTop_toBottomOf="@+id/dvLine" />
 
 
     <Button
@@ -145,7 +145,7 @@
         android:layout_marginEnd="16dp"
         android:text="@string/camp_gear_button_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModify" />
+        app:layout_constraintTop_toBottomOf="@+id/dvLine" />
 
     <TextView
         android:id="@+id/tvShoppingItem"
@@ -168,5 +168,15 @@
         android:text="@string/shopping_item_button_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btCampGear" />
+
+    <View
+        android:id="@+id/dvLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_divider"
+        app:layout_constraintTop_toBottomOf="@+id/etEndDate"
+        tools:layout_editor_absoluteX="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
