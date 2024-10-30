@@ -17,21 +17,33 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProduct"
-        android:layout_width="409dp"
-        android:layout_height="665dp"
-        app:layout_constraintTop_toBottomOf="@+id/svProduct"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp" />
-
     <SearchView
         android:id="@+id/svProduct"
         android:layout_width="match_parent"
         android:layout_height="76dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="0dp"
+        android:queryHint="キャンプ場の名前で検索する"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        tools:layout_editor_absoluteX="64dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+    </SearchView>
+
+    <View
+        android:id="@+id/dvLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/dividerColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svProduct"
         tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="665dp"
+        app:layout_constraintTop_toBottomOf="@+id/dvLine"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
