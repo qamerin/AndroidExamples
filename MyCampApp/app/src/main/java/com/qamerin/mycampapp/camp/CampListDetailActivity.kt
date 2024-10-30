@@ -36,7 +36,7 @@ class CampListDetailActivity : AppCompatActivity() {
         // ツールバーの表示
         setSupportActionBar(findViewById(R.id.my_toolbar))
         // ステータスバーの色を設定
-        window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
         // ツールバーのタイトルを設定
         supportActionBar?.title = getString(R.string.camp_detail_name_label)
         // ツールバーに戻るボタンを設置

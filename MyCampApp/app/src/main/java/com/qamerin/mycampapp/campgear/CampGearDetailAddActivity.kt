@@ -42,7 +42,7 @@ class CampGearDetailAddActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // ステータスバーの色を設定
-        window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
         val etGearName : TextView = findViewById(R.id.etGearName)
         val btnSave : Button = findViewById(R.id.btnSave)

@@ -43,7 +43,7 @@ class ShoppingItemListActivity : AppCompatActivity() {
         // ツールバーのタイトルを設定
         supportActionBar?.title = getString(R.string.shopping_item_title_label)
         // ステータスバーの色を設定
-        window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
         realm = Realm.getDefaultInstance()
 

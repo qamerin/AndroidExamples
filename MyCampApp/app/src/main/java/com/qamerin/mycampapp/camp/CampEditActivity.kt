@@ -50,7 +50,7 @@ class CampEditActivity : AppCompatActivity() {
             insets
         }
         // ステータスバーの色を設定
-        window.statusBarColor = ContextCompat.getColor(this, R.color.green_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
         // ツールバーの上部を設定
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
