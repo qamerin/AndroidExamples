@@ -3,7 +3,7 @@
     <string name="car_loaded_label">未積載のみ表示</string>
     <string name="item_add_label">+</string>
     <string name="camping_ground">キャンプ場</string>
-    <string name="camping_ground_input">キャンプ場名を入力または検索してください</string>
+    <string name="camping_ground_input">キャンプ場名を入力または検索</string>
     <string name="address">住所</string>
     <string name="address_input">住所を入力（検索時は自動で入力されます）</string>
     <string name="modify">更新</string>
@@ -25,5 +25,5 @@
     <string name="shopping_item_category_label">カテゴリー</string>
     <string name="camping_ground_name_description">キャンプ場の名前</string>
     <string name="date_description_label">日程が表示される</string>
-
+    <string name="campground_master_label">キャンプ場検索</string>
 </resources>

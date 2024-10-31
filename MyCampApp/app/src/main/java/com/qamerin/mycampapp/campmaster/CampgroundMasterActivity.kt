@@ -2,6 +2,7 @@ package com.qamerin.mycampapp.campmaster
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.SearchView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,8 @@ class CampgroundMasterActivity : AppCompatActivity() {
         }
         // ツールバーの表示
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        // ツールバーのタイトルを設定
+        supportActionBar?.title = getString(R.string.campground_master_label)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // ステータスバーの色を設定
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
@@ -50,6 +53,13 @@ class CampgroundMasterActivity : AppCompatActivity() {
         }
 
         val svProduct : SearchView = findViewById(R.id.svProduct)
+
+        // SearchViewのレイアウトが完全に初期化された後に子ビューを取得
+        svProduct.post {
+            val searchEditText = svProduct.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+            searchEditText?.setTextAppearance(R.style.SearchViewTextStyle)
+        }
+
         svProduct.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -58,8 +68,10 @@ class CampgroundMasterActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val realmResults = realm.where(CampgroundMasterModel::class.java)
                     .contains("campgroundName",newText)
+                    .or()
+                    .contains("address", newText)
                     .findAll()
-                    .sort("campgroundId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+                    .sort("dispSeq", Sort.ASCENDING)
 
                 recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
                 recyclerAdapter = CampgroundMasterRecyclerAdapter(
@@ -83,7 +95,8 @@ class CampgroundMasterActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val realmResults = realm.where(CampgroundMasterModel::class.java)
-            .findAll().sort("campgroundId", Sort.DESCENDING)//上の数字が大くてだんだん小さくなる（上に追加する）
+            .findAll()
+            .sort("dispSeq", Sort.ASCENDING)
 
         recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = CampgroundMasterRecyclerAdapter(

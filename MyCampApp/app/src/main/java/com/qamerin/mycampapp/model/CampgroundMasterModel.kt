@@ -11,4 +11,5 @@ open class CampgroundMasterModel: RealmObject() {
     var address: String = ""
     var lattitude: Double=0.0
     var longitude: Double=0.0
+    var dispSeq : Long = 0
 }

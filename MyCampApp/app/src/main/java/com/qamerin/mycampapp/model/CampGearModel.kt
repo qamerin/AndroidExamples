@@ -11,6 +11,8 @@ open class CampGearModel: RealmObject() {
     var gearCategoryId: Long=0
     var isCarLoaded : Boolean=false
     var campId : Long=0
+    var dispSeq : Long = 0
+
 
     override fun toString(): String {
         return campGearName
