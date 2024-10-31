@@ -58,6 +58,7 @@ class ShoppingItemListAdapter(
                     it.isItemBought = !it.isItemBought
                 }
             }
+            notifyDataSetChanged() // データセットの変更を通知してリフレッシュ
         }
     }
     fun updateList(newItems: RealmResults<ShoppingItemModel>) {

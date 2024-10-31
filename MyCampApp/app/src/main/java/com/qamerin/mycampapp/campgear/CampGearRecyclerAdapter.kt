@@ -58,6 +58,7 @@ class CampGearRecyclerAdapter(realmResults:RealmResults<CampGearModel>):Recycler
                     it.isCarLoaded = !it.isCarLoaded
                 }
             }
+            notifyDataSetChanged() // データセットの変更を通知してリフレッシュ
         }
     }
 
