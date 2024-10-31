@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Smart Camper</string>
+    <string name="app_name">Smart Camp</string>
     <string name="car_loaded_label">未積載のみ表示</string>
     <string name="item_add_label">+</string>
     <string name="camping_ground">キャンプ場</string>
