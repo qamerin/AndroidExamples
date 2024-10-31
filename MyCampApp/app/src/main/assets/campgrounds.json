@@ -8760,6 +8760,14 @@
         "dspSeq": 109500
     },
     {
+        "campgroundId": 2821,
+        "campgroundName": "八ヶ岳Air-ground",
+        "address": "山梨県北杜市高根町村山東割２４７５−４",
+        "latitude": 35.690395,
+        "longitude": 139.7661275,
+        "dspSeq": 109501
+    },
+    {
         "campgroundId": 1096,
         "campgroundName": "ノースランドキャンパーズビレッジ",
         "address": "山梨県甲斐市上芦沢１３５２",
