@@ -10,5 +10,5 @@ open class ShoppingItemModel: RealmObject() {
     var shoppingCategoryId: Long=0
     var isItemBought : Boolean = false
     var campId : Long = 0
-    var dispSeq : Long = 0
+    var dspSeq : Long = 0
 }

@@ -71,7 +71,7 @@ class CampgroundMasterActivity : AppCompatActivity() {
                     .or()
                     .contains("address", newText)
                     .findAll()
-                    .sort("dispSeq", Sort.ASCENDING)
+                    .sort("dspSeq", Sort.ASCENDING)
 
                 recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
                 recyclerAdapter = CampgroundMasterRecyclerAdapter(
@@ -96,7 +96,7 @@ class CampgroundMasterActivity : AppCompatActivity() {
         super.onStart()
         val realmResults = realm.where(CampgroundMasterModel::class.java)
             .findAll()
-            .sort("dispSeq", Sort.ASCENDING)
+            .sort("dspSeq", Sort.ASCENDING)
 
         recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
         recyclerAdapter = CampgroundMasterRecyclerAdapter(
