@@ -1,6 +1,7 @@
 package com.qamerin.mycampapp.camp
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -38,6 +39,10 @@ class CampEditActivity : AppCompatActivity() {
     private var endDbDate:LocalDate = LocalDate.now()
     private lateinit var selectedDate: TextView
     private lateinit var datePicker: Button
+    private var campName:String = ""
+    private var address:String = ""
+    private lateinit var etStartDate: TextView
+    private lateinit var etEndDate: TextView
 
     @SuppressLint("SetTextI18n", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +70,9 @@ class CampEditActivity : AppCompatActivity() {
         val etAddress : TextView = findViewById(R.id.etAddress)
         val btnSave : Button = findViewById(R.id.btnSave)
         val btnDel : Button = findViewById(R.id.btnDel)
-        val etStartDate : TextView = findViewById(R.id.etStartDate)
+        etStartDate  = findViewById(R.id.etStartDate)
         val tvFromTo : TextView = findViewById(R.id.tvStartEnd)
-        val etEndDate : TextView = findViewById(R.id.etEndDate)
+        etEndDate  = findViewById(R.id.etEndDate)
         val btnCampGroundSearch : ImageView = findViewById(R.id.btnCampGroundSearch)
 
         realm = Realm.getDefaultInstance()
@@ -114,11 +119,7 @@ class CampEditActivity : AppCompatActivity() {
             etAddress.text = campgroundAddress
         }
 
-
-
         btnSave.setOnClickListener {
-            var campName:String = ""
-            var address:String = ""
             if(!etCampName.text.isNullOrEmpty()){
                 campName = etCampName.text.toString()
             }
@@ -126,68 +127,14 @@ class CampEditActivity : AppCompatActivity() {
                 address = etAddress.text.toString()
             }
 
-            if(campId == 0L){
-                // Add New Camp Record
-                realm.executeTransaction {
-                    val currentId = realm.where<CampModel>().max("campId")
-                    val nextCampId = (currentId?.toLong()?:0L) + 1L
-                    val campModel = realm.createObject<CampModel>(nextCampId)
-                    campModel.campName = campName
-                    campModel.address = address
-                    val listStartDate = etStartDate.text.toString().split("/")
-                    campModel.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
-                    val listEndDate = etEndDate.text.toString().split("/")
-                    campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
-
-                    // Add Camp Gear Record from Camp Default Gear
-                    if(currentId == null){
-                        // Add Camp Gear Record from Camp Default Gear
-                        val campGearDefaultResult = realm.where(/* clazz = */ CampGearDefaultModel::class.java)
-                            .findAll().sort("defaultCampGearId", Sort.ASCENDING)//
-                        val defaultCampGearList = ArrayList<CampGearDefaultModel>()
-                        defaultCampGearList.addAll(realm.copyFromRealm(campGearDefaultResult));
-                        defaultCampGearList.forEach { defaultGearModel ->
-                            val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
-                            val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
-                            val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
-                            newCampGearModel.campGearName = defaultGearModel.campGearName
-                            newCampGearModel.gearCategoryId = defaultGearModel.gearCategoryId
-                            newCampGearModel.campId = nextCampId
-                        }
-                    }else{
-                        // ２件目以上のキャンプ情報の登録
-                        val campGearModelResults = realm.where<CampGearModel>().equalTo("campId",
-                            currentId.toLong()
-                        ).findAll()
-                            .sort("campGearId", Sort.ASCENDING)//
-                        campGearModelResults.forEach{
-                            val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
-                            val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
-                            val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
-                            newCampGearModel.campGearName = it.campGearName
-                            newCampGearModel.gearCategoryId = it.gearCategoryId
-                            newCampGearModel.campId = nextCampId
-                        }
-                    }
-                }
-            }else{
-                realm.executeTransaction{
-                    val campModel = realm.where<CampModel>()
-                        .equalTo("campId",campId).findFirst()
-                    campModel?.campName = campName
-                    campModel?.address = address
-                    val listStartDate = etStartDate.text.toString().split("/")
-                    campModel?.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
-                    val listEndDate = etEndDate.text.toString().split("/")
-                    campModel?.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
-                }
-
-
-
+            // 入力チェック
+            if (validateInputs()) {
+                // 登録処理を実施
+                saveCampDetails()
+            } else {
+                // ダイアログを表示
+                showValidationDialog()
             }
-
-            Toast.makeText(applicationContext,"保存しました",Toast.LENGTH_SHORT).show()
-            finish()
         }
 
         btnDel.setOnClickListener {
@@ -265,6 +212,85 @@ class CampEditActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveCampDetails() {
+        // 登録処理の実装
+        val campId = MyApp.getInstance().campId
+        if(campId == 0L){
+            // Add New Camp Record
+            realm.executeTransaction {
+                val currentId = realm.where<CampModel>().max("campId")
+                val nextCampId = (currentId?.toLong()?:0L) + 1L
+                val campModel = realm.createObject<CampModel>(nextCampId)
+                campModel.campName = campName
+                campModel.address = address
+                val listStartDate = etStartDate.text.toString().split("/")
+                campModel.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
+                val listEndDate = etEndDate.text.toString().split("/")
+                campModel.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
+
+                // Add Camp Gear Record from Camp Default Gear
+                if(currentId == null){
+                    // Add Camp Gear Record from Camp Default Gear
+                    val campGearDefaultResult = realm.where(/* clazz = */ CampGearDefaultModel::class.java)
+                        .findAll().sort("defaultCampGearId", Sort.ASCENDING)//
+                    val defaultCampGearList = ArrayList<CampGearDefaultModel>()
+                    defaultCampGearList.addAll(realm.copyFromRealm(campGearDefaultResult));
+                    defaultCampGearList.forEach { defaultGearModel ->
+                        val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
+                        val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
+                        val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
+                        newCampGearModel.campGearName = defaultGearModel.campGearName
+                        newCampGearModel.gearCategoryId = defaultGearModel.gearCategoryId
+                        newCampGearModel.campId = nextCampId
+                    }
+                }else{
+                    // ２件目以上のキャンプ情報の登録
+                    val campGearModelResults = realm.where<CampGearModel>().equalTo("campId",
+                        currentId.toLong()
+                    ).findAll()
+                        .sort("campGearId", Sort.ASCENDING)//
+                    campGearModelResults.forEach{
+                        val currentCampGearId = realm.where<CampGearModel>().max("campGearId")
+                        val nextCampGearId = (currentCampGearId?.toLong()?:0L) + 1L
+                        val newCampGearModel = realm.createObject<CampGearModel>(nextCampGearId)
+                        newCampGearModel.campGearName = it.campGearName
+                        newCampGearModel.gearCategoryId = it.gearCategoryId
+                        newCampGearModel.campId = nextCampId
+                    }
+                }
+            }
+        }else{
+            realm.executeTransaction{
+                val campModel = realm.where<CampModel>()
+                    .equalTo("campId",campId).findFirst()
+                campModel?.campName = campName
+                campModel?.address = address
+                val listStartDate = etStartDate.text.toString().split("/")
+                campModel?.startDate =LocalDate.parse(listStartDate[0] +"-"  +listStartDate[1].padStart(2,'0') + "-" +  listStartDate[2].padStart(2,'0'))
+                val listEndDate = etEndDate.text.toString().split("/")
+                campModel?.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
+            }
+        }
+        Toast.makeText(applicationContext,"保存しました",Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun validateInputs(): Boolean {
+        return campName.isNotEmpty()
+                && address.isNotEmpty()
+                && etStartDate.text.isNotEmpty()
+                && etEndDate.text.isNotEmpty()
+    }
+
+    private fun showValidationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("未入力の項目があります。")
+            .setMessage("すべての項目を入力してください。")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
