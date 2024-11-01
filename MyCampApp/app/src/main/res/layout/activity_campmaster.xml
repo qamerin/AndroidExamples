@@ -17,17 +17,25 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
 
-    <SearchView
-        android:id="@+id/svProduct"
+    <EditText
+        android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:layout_marginTop="0dp"
-        android:queryHint="キャンプ場の名前で検索する"
-        android:textColor="@color/black"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@null"
+        android:drawablePadding="8dp"
+        android:hint="@string/campground_search_hint"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/editTextColor"
+        android:textColorHint="@color/hintTextColor"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
-    </SearchView>
+        tools:ignore="MissingConstraints" />
 
     <View
         android:id="@+id/dvLine"
@@ -36,7 +44,7 @@
         android:background="@color/dividerColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svProduct"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text"
         tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView

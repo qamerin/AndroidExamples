@@ -21,4 +21,8 @@
     <color name="blue">#0288D1</color>
     <color name="blue_dark">#005B9F</color>
     <color name="blue_light">#81D4FA</color>
+
+    <color name="editTextColor">#000000</color> <!-- 例: 黒色 -->
+    <color name="hintTextColor">#808080</color>
+
 </resources>

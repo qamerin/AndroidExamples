@@ -1,6 +1,8 @@
 package com.qamerin.mycampapp.campmaster
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.SearchView
@@ -15,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.qamerin.mycampapp.R
 import com.qamerin.mycampapp.master.gear.CampgroundMasterRecyclerAdapter
 import com.qamerin.mycampapp.model.CampgroundMasterModel
+import io.realm.Case
 import io.realm.Realm
 import io.realm.Sort
+import io.realm.kotlin.where
 
 class CampgroundMasterActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -52,39 +56,32 @@ class CampgroundMasterActivity : AppCompatActivity() {
             endDate = it.toString()
         }
 
-        val svProduct : SearchView = findViewById(R.id.svProduct)
+        val editText: EditText = findViewById(R.id.edit_text)
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        // SearchViewのレイアウトが完全に初期化された後に子ビューを取得
-        svProduct.post {
-            val searchEditText = svProduct.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-            searchEditText?.setTextAppearance(R.style.SearchViewTextStyle)
-        }
-
-        svProduct.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterList(s.toString())
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                val realmResults = realm.where(CampgroundMasterModel::class.java)
-                    .contains("campgroundName",newText)
-                    .or()
-                    .contains("address", newText)
-                    .findAll()
-                    .sort("dspSeq", Sort.ASCENDING)
-
-                recyclerView = findViewById(R.id.rvProduct)//ここでまずは中身recyclerViewにを入れる
-                recyclerAdapter = CampgroundMasterRecyclerAdapter(
-                    startDate,
-                    endDate,
-                    realmResults)
-                recyclerView.adapter = recyclerAdapter
-                recyclerView.layoutManager = layoutManager
-
-                return true
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
+
     }
+
+    private fun filterList(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            realm.where<CampgroundMasterModel>().findAll()
+        } else {
+            realm.where<CampgroundMasterModel>()
+                .contains("campgroundName", query, Case.INSENSITIVE)
+                .or()
+                .contains("address", query, Case.INSENSITIVE)
+                .findAll()
+        }
+        recyclerAdapter.updateList(filteredList)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
