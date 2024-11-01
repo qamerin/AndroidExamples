@@ -138,15 +138,10 @@ class CampEditActivity : AppCompatActivity() {
         }
 
         btnDel.setOnClickListener {
-            realm.executeTransaction{
-               realm.where<CampModel>()
-                    .equalTo("campId",campId).findFirst()?.deleteFromRealm()
-            }
-            Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
-            finish()
-            val intent = Intent(this, CampMainActivity::class.java)
-            startActivity(intent)
+            // 確認ダイアログを表示
+            showDeleteConfirmationDialog()
         }
+        
         btnCampGroundSearch.setOnClickListener {
             val intent = Intent(this, CampgroundMasterActivity::class.java)
             intent.putExtra("etStartDate",etStartDate.text)
@@ -287,6 +282,34 @@ class CampEditActivity : AppCompatActivity() {
             .setTitle("未入力の項目があります。")
             .setMessage("すべての項目を入力してください。")
             .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun deleteCampDetails() {
+        // 削除処理の実装
+        val campId = MyApp.getInstance().campId
+        realm.executeTransaction{
+               realm.where<CampModel>()
+                    .equalTo("campId",campId).findFirst()?.deleteFromRealm()
+            }
+            Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
+            finish()
+            val intent = Intent(this, CampMainActivity::class.java)
+            startActivity(intent)
+    }
+
+    private fun showDeleteConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("削除の確認")
+            .setMessage("本当に削除しますか？")
+            .setPositiveButton("はい") { dialog, _ ->
+                // 削除処理を実行
+                deleteCampDetails()
+                dialog.dismiss()
+            }
+            .setNegativeButton("いいえ") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
