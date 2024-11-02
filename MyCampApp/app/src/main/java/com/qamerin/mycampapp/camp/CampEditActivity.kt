@@ -184,7 +184,7 @@ class CampEditActivity : AppCompatActivity() {
 
             // Setting up the event for when cancelled is clicked
              datePicker.addOnNegativeButtonClickListener {
-                 Toast.makeText(this, "${datePicker.headerText} is cancelled", Toast.LENGTH_LONG).show()
+//                 Toast.makeText(this, "${datePicker.headerText} is cancelled", Toast.LENGTH_LONG).show()
              }
             datePicker.addOnPositiveButtonClickListener {  dateRange ->
                 val startDate = dateRange.first
@@ -194,7 +194,7 @@ class CampEditActivity : AppCompatActivity() {
                 val startDateString = dateFormat.format(Date(startDate))
                 val endDateString = dateFormat.format(Date(endDate))
 
-                Toast.makeText(this, "Selected: From $startDateString To $endDateString", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Selected: From $startDateString To $endDateString", Toast.LENGTH_LONG).show()
 
                 etStartDate.text = startDateString
                 etEndDate.text = endDateString
@@ -202,7 +202,7 @@ class CampEditActivity : AppCompatActivity() {
             }
             // Setting up the event for when back button is pressed
             datePicker.addOnCancelListener {
-                Toast.makeText(this, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -266,7 +266,7 @@ class CampEditActivity : AppCompatActivity() {
                 campModel?.endDate =LocalDate.parse(listEndDate[0] +"-"  +listEndDate[1].padStart(2,'0') + "-" +  listEndDate[2].padStart(2,'0'))
             }
         }
-        Toast.makeText(applicationContext,"保存しました",Toast.LENGTH_SHORT).show()
+//        Toast.makeText(applicationContext,"保存しました",Toast.LENGTH_SHORT).show()
         finish()
     }
 
@@ -294,7 +294,7 @@ class CampEditActivity : AppCompatActivity() {
                realm.where<CampModel>()
                     .equalTo("campId",campId).findFirst()?.deleteFromRealm()
             }
-            Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext,"削除しました",Toast.LENGTH_SHORT).show()
             finish()
             val intent = Intent(this, CampMainActivity::class.java)
             startActivity(intent)
