@@ -12,4 +12,5 @@ open class CampgroundMasterModel: RealmObject() {
     var lattitude: Double=0.0
     var longitude: Double=0.0
     var dspSeq : Long = 0
+    var prefectureId : Long = 0
 }
