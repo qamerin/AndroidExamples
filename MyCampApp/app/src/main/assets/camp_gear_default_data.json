@@ -108,10 +108,5 @@
     "defaultCampGearId":22,
     "campGearName": "薪割り道具",
     "gearCategoryId": 10
-  },
-  {
-    "defaultCampGearId":23,
-    "campGearName": "ポータブル電源",
-    "gearCategoryId": 11
   }
 ]
