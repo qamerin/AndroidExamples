@@ -4,8 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.model.GearCategoryModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.model.GearCategoryModel
 
 class GearCategoryAdapter(
     private val context: Context,

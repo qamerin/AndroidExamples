@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.camp
+package com.qame.smartcamp.camp
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -16,12 +16,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.campmaster.CampgroundMasterActivity
-import com.qamerin.mycampapp.common.MyApp
-import com.qamerin.mycampapp.model.CampGearDefaultModel
-import com.qamerin.mycampapp.model.CampGearModel
-import com.qamerin.mycampapp.model.CampModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.campmaster.CampgroundMasterActivity
+import com.qame.smartcamp.common.MyApp
+import com.qame.smartcamp.model.CampGearDefaultModel
+import com.qame.smartcamp.model.CampGearModel
+import com.qame.smartcamp.model.CampModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.createObject

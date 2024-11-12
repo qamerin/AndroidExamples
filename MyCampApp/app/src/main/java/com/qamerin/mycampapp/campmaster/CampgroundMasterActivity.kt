@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.campmaster
+package com.qame.smartcamp.campmaster
 
 import android.os.Bundle
 import android.text.Editable
@@ -14,9 +14,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.master.gear.CampgroundMasterRecyclerAdapter
-import com.qamerin.mycampapp.model.CampgroundMasterModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.master.gear.CampgroundMasterRecyclerAdapter
+import com.qame.smartcamp.model.CampgroundMasterModel
 import io.realm.Case
 import io.realm.Realm
 import io.realm.Sort

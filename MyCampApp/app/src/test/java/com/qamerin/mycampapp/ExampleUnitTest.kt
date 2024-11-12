@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp
+package com.qame.smartcamp
 
 import org.junit.Test
 

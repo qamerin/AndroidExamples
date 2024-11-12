@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.campgear
+package com.qame.smartcamp.campgear
 
 import GearCategoryAdapter
 import android.content.Intent
@@ -16,10 +16,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.common.MyApp
-import com.qamerin.mycampapp.model.CampGearModel
-import com.qamerin.mycampapp.model.GearCategoryModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.common.MyApp
+import com.qame.smartcamp.model.CampGearModel
+import com.qame.smartcamp.model.GearCategoryModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where

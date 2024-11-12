@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.common
+package com.qame.smartcamp.common
 
 import android.app.Application
 

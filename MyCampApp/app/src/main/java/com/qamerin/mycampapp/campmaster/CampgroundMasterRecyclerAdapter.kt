@@ -1,12 +1,12 @@
-package com.qamerin.mycampapp.master.gear
+package com.qame.smartcamp.master.gear
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.camp.CampEditActivity
-import com.qamerin.mycampapp.model.CampgroundMasterModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.camp.CampEditActivity
+import com.qame.smartcamp.model.CampgroundMasterModel
 import io.realm.RealmResults
 
 class CampgroundMasterRecyclerAdapter(

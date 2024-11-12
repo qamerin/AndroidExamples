@@ -1,12 +1,12 @@
-package com.qamerin.mycampapp.shopping
+package com.qame.smartcamp.shopping
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.model.ShoppingCategoryModel
-import com.qamerin.mycampapp.model.ShoppingItemModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.model.ShoppingCategoryModel
+import com.qame.smartcamp.model.ShoppingItemModel
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where

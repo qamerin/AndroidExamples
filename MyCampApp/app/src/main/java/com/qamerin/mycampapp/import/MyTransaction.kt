@@ -1,10 +1,10 @@
-package com.qamerin.mycampapp.import
+package com.qame.smartcamp.import
 
-import com.qamerin.mycampapp.common.CustomApplication
-import com.qamerin.mycampapp.model.CampGearDefaultModel
-import com.qamerin.mycampapp.model.CampgroundMasterModel
-import com.qamerin.mycampapp.model.GearCategoryModel
-import com.qamerin.mycampapp.model.ShoppingCategoryModel
+import com.qame.smartcamp.common.CustomApplication
+import com.qame.smartcamp.model.CampGearDefaultModel
+import com.qame.smartcamp.model.CampgroundMasterModel
+import com.qame.smartcamp.model.GearCategoryModel
+import com.qame.smartcamp.model.ShoppingCategoryModel
 import io.realm.Realm
 
 class MyTransaction : Realm.Transaction {

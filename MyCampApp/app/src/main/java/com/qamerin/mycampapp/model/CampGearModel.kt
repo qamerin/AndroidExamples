@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.model
+package com.qame.smartcamp.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

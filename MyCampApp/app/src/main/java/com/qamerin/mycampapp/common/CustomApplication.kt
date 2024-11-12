@@ -1,7 +1,7 @@
-package com.qamerin.mycampapp.common
+package com.qame.smartcamp.common
 
 import android.app.Application
-import com.qamerin.mycampapp.import.MyTransaction
+import com.qame.smartcamp.import.MyTransaction
 import io.realm.Realm
 import io.realm.RealmConfiguration
 

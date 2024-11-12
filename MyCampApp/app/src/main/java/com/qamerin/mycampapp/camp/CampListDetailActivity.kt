@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.camp
+package com.qame.smartcamp.camp
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,15 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.campgear.CampGearDetailListActivity
-import com.qamerin.mycampapp.common.MyApp
-//import com.qamerin.mycampapp.campgear.CampGearDetailListActivity
-//import com.qamerin.mycampapp.master.gear.GearMasterActivity
-//import com.qamerin.mycampapp.mygear.MyGearListActivity
-import com.qamerin.mycampapp.model.CampModel
-import com.qamerin.mycampapp.shopping.ShoppingItemListActivity
-//import com.qamerin.mycampapp.regulargear.RegularGearDetailListActivity
+import com.qame.smartcamp.R
+import com.qame.smartcamp.campgear.CampGearDetailListActivity
+import com.qame.smartcamp.common.MyApp
+//import com.qame.smartcamp.campgear.CampGearDetailListActivity
+//import com.qame.smartcamp.master.gear.GearMasterActivity
+//import com.qame.smartcamp.mygear.MyGearListActivity
+import com.qame.smartcamp.model.CampModel
+import com.qame.smartcamp.shopping.ShoppingItemListActivity
+//import com.qame.smartcamp.regulargear.RegularGearDetailListActivity
 import io.realm.Realm
 import io.realm.kotlin.where
 

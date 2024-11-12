@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.camp
+package com.qame.smartcamp.camp
 
 import DividerItemDecoration
 import android.content.Intent
@@ -9,9 +9,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.common.MyApp
-import com.qamerin.mycampapp.model.CampModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.common.MyApp
+import com.qame.smartcamp.model.CampModel
 import io.realm.Realm
 import io.realm.Sort
 

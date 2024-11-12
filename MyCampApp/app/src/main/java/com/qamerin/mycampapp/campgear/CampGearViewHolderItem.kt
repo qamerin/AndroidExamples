@@ -1,10 +1,10 @@
-package com.qamerin.mycampapp.campgear
+package com.qame.smartcamp.campgear
 
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.qamerin.mycampapp.R
+import com.qame.smartcamp.R
 
 class CampGearViewHolderItem(v:View) :RecyclerView.ViewHolder(v){
     var oneTvCampGearName: TextView = v.findViewById(R.id.oneTvCampGearName)

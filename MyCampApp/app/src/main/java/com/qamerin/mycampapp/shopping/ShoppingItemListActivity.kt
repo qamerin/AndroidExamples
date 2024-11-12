@@ -1,4 +1,4 @@
-package com.qamerin.mycampapp.shopping
+package com.qame.smartcamp.shopping
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.common.MyApp
-import com.qamerin.mycampapp.model.ShoppingItemModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.common.MyApp
+import com.qame.smartcamp.model.ShoppingItemModel
 import io.realm.Realm
 import io.realm.Sort
 import io.realm.kotlin.where

@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.qamerin.mycampapp"
+    namespace = "com.qame.smartcamp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.qamerin.mycampapp"
+        applicationId = "com.qame.smartcamp"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.01"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

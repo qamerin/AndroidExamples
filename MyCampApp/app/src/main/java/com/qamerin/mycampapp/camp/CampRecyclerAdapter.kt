@@ -1,12 +1,12 @@
-package com.qamerin.mycampapp.camp
+package com.qame.smartcamp.camp
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.qamerin.mycampapp.R
-import com.qamerin.mycampapp.common.MyApp
-import com.qamerin.mycampapp.model.CampModel
+import com.qame.smartcamp.R
+import com.qame.smartcamp.common.MyApp
+import com.qame.smartcamp.model.CampModel
 import io.realm.RealmResults
 import java.text.SimpleDateFormat
 import java.time.LocalDate
